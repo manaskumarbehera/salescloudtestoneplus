@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration>
+    <appender name="appender-file" class="ch.qos.logback.core.FileAppender">
+        <file>/opt/tomcat/logs/works.log</file>
+        <append>false</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>UTF-8</charset>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="dk.jyskit.waf" level="WARN"/>
+    <logger name="dk.jyskit.salescloud" level="INFO"/>
+
+    <logger name="ch"  level="WARN"/>
+    <logger name="de"  level="WARN"/>
+    <logger name="com" level="WARN"/>
+    <logger name="eu"  level="WARN"/>
+    <logger name="net" level="WARN"/>
+    <logger name="org" level="WARN"/>
+
+	<logger name="org.apache.wicket.core.util.resource.locator.ResourceStreamLocator" level="WARN"/>
+
+    <root level="info">
+        <appender-ref ref="appender-file"/>
+    </root>
+</configuration>

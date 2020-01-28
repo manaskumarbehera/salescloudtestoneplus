@@ -1,0 +1,588 @@
+<html>
+<head>
+<style type="text/css">
+	/* Inspiration: https://github.com/zopyx/zopyx.smartprintng.plone/tree/cb1252601617324cf5513f65686dd4eb1e4b90a4/zopyx/smartprintng/plone/resources_default */
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	html {
+		margin: 0;
+		padding: 0;
+	}
+	
+	body {
+		font-size: 11px;
+		font-family: "ArialUnicode", Verdana, Arial, sans-serif;
+		line-height: 1.5em;
+		margin: 0;
+		padding: 0;
+	}
+
+	div.header {
+		display: block;
+		text-align: center;
+		position: running(header);
+	}
+	
+	div.footer {
+		display: block;
+		text-align: center;
+		position: running(footer);
+	}
+	
+	div.breakBefore {
+		page-break-before: always;
+	}
+	
+	div.breakAfter {
+		page-break-after: always;
+	}
+	
+	h1 {
+		font-size: 200%;
+		margin-top: 0;
+		padding-bottom: 0px;
+		line-height: 1.2em;
+	}
+	
+	h2 {
+		font-size: 133%;
+		padding-bottom: 0px;
+		line-height: 1.2em;
+	}
+	
+	h3 {
+		font-size: 115%;
+		padding-top: 10px;
+		padding-bottom: 0px;
+		margin-bottom: 0px;
+		line-height: 1.2em;
+	}
+	
+	h4, h5, h6 {
+		font-size: 100%;
+		line-height: 1.2em;
+	}
+	
+	.bold {
+	    font-weight: bold;
+	}
+
+	p {
+		line-height: 1.77em;
+	}
+	
+	table {
+		empty-cells: show; 
+		border-collapse: collapse; 
+	}
+	
+	table.dark {
+		background-color: #F2F5F5;
+	}
+	
+	tr.total {
+		font-weight: bold;
+	} 
+	
+	td {
+		border: thin solid #F2F5F5;
+	}	
+	
+	table.noborder td.border {
+		border: thin solid black;
+	}
+	
+	td.noborder {
+		border: none;
+	}	
+	
+	table.noborder td {
+		border: none;
+	}	
+	
+	.extraLineHeight {
+		line-height: 2.4em;
+	}
+	
+	pre {
+		font-size: 0.775em;
+		background-color: #eeeeee;
+		color: black;
+		white-space: pre-wrap;
+		margin-left: 1em;
+		margin-right: 1em;
+		padding: 0.5em;
+		font-family: "Courier New";
+		border: thin solid black;
+		border-radius: 8px;
+		padding: 0.4em;
+	}
+	
+	.border {
+		border: thin solid black;
+	}
+	
+	tt {
+		font-family: Courier;
+		background: #dddddd;
+	}	
+
+	.row {
+		margin-left: 0px;
+		margin-right: 0px;
+		padding: 0px;
+		width: 100%;
+		clear: both;
+		display: inline-block;
+	}
+	
+	.row-nobreak {
+		margin-left: 0px;
+		margin-right: 0px;
+		padding: 0px;
+		width: 100%;
+	}
+
+	.col-sm-1 { width: 8.3333%; }
+	.col-sm-2 { width: 16.6666%; }	
+	.col-sm-3 { width: 25%; }
+	.col-sm-4 { width: 33.3333%; }
+	.col-sm-5 { width: 41.6666%; }	
+	.col-sm-6 { width: 50%; }
+	.col-sm-7 { width: 58.3333%; }	
+	.col-sm-8 { width: 66.6666%; }
+	.col-sm-9 { width: 75%; }	
+	.col-sm-10 { width: 83.3333%; }	
+	.col-sm-11 { width: 91.6666%; }	
+	.col-sm-12 { width: 100%; }
+	
+	.col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11,.col-sm-12
+		{
+		min-height: 1px;
+		float: left;
+		padding: 0px;
+	}
+	
+	.lm-10 { margin-left: 10px; }
+	.lm-20 { margin-left: 20px; }
+	.lm-30 { margin-left: 30px; }
+	.rm-10 { margin-right: 10px; }
+	.rm-20 { margin-right: 20px; }
+	.rm-30 { margin-right: 30px; }
+	
+	.mt-10 { margin-top: 10px; }
+	.mt-20 { margin-top: 20px; }
+	.mt-30 { margin-top: 30px; }
+
+	@page {
+		size: A4 portrait;
+		margin-top: 2.54cm;
+		margin-bottom: 2.54cm;
+		margin-left: 1.27cm;
+		margin-right: 1.27cm;
+		@top-center { 
+			content:element(header)
+		}
+	}
+	
+	@page { 
+		@bottom-right { 
+			content:element(footer);
+		}
+	}
+	
+	#pagenumber:before {
+		content: counter(page);
+	}
+	
+	#pagecount:before {
+		content: counter(pages);
+	}
+	
+	.media {
+		margin-left: 20px;
+		margin-right: 0px;
+		padding-bottom: 10px;
+		width: 90%;
+		align: right;
+	}
+
+	.aig {
+		margin-left: 0px;
+		margin-right: 0px;
+		min-height: 100px;
+		width: 100%;
+		align: right;
+	}
+
+	.right {
+		text-align: right;
+	}
+	
+	.pull-right {
+		float: right !important;
+	}
+	
+	.doubleUnderline {
+	    text-decoration:underline;
+	    border-bottom: 1px solid #000;
+	}
+
+	.aig-footer {
+		color: #666666;
+		font-size: 8px;
+	}
+
+	.aig-text {
+		margin-left: 70px;
+	}
+
+	div.small p {
+		font-size: 8px;
+	}
+</style>
+</head>
+
+<body>
+	<div class="panel-heading header">
+		<h2>{$document_header:}</h2>
+	</div>
+	
+	<div class="panel-footer footer">
+		{$date:}   -   {$document_footer:}   -   Side <span id="pagenumber"></span> af <span id="pagecount"></span>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-8">
+			<p>Mellem</p>
+			
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td>{$partner_companyName}</td>
+			  </tr>
+			  <tr>
+			    <td>{$partner_address}</td>
+			  </tr>
+			  <tr>
+			    <td>{$partner_zipCode} {$partner_city}</td>
+			  </tr>
+			</table>
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td width="10%">CVR:</td>
+			    <td>{$partner_company_id}</td>
+			  </tr>
+			</table>
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td>Herefter benævnt TDC Erhvervscenter</td>
+			  </tr>
+			</table>
+			
+			<p>Og</p>
+			
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td>{$customer_companyName}</td>
+			  </tr>
+			  <tr>
+			    <td>{$customer_address}</td>
+			  </tr>
+			  <tr>
+			    <td>{$customer_zipCode} {$customer_city}</td>
+			  </tr>
+			</table>
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td width="10%">CVR:</td>
+			    <td>{$customer_company_id}</td>
+			  </tr>
+			</table>
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td>Herefter benævnt Kunden</td>
+			  </tr>
+			</table>
+			
+			<h3>{$date:}</h3>
+			
+			<p class="bold">Er der indgået en TDC Erhvervscenter udstyrsaftale ("Aftalen")</p>
+
+			<p>Aftalen omfatter rente- og gebyrfri rate betaling af hardware i udstyrsaftale.</p>
+
+			<p class="bold mt-30">Specifikation af hardware  i udstyrsaftale</p>
+
+			<table width="100%" border="0">
+			  <tr>
+			    <td width="10%" class="border bold">Antal</td>
+			    <td width="90%" class="border bold">Beskrivelse</td>
+			  </tr>
+				{.loop in $hardwareLines as $line}
+				  <tr>
+				    <td class="border">{$line.count}</td>
+				    <td class="border">{$line.text}</td>
+				  </tr>
+				{.onEmpty}
+				{/loop}
+			</table>
+
+			<table width="100%" border="0">
+				{.loop in $hardwareRemarks as $remark}
+				  <tr>
+				    <td>{$remark.stars} {$remark.text}</td>
+				  </tr>
+				{.onEmpty}
+				{/loop}
+			</table>
+
+			<p class="bold mt-30">Pris</p>
+
+			<table width="100%" border="0">
+			  <tr>
+			    <td>Sum udstyrsaftale pr. måned</td>
+			    <td> </td>
+			    <td class="right"><span class="doubleUnderline">{$hardwareTotalRecurring}</span></td>
+			  </tr>
+			  <tr>
+			    <td colspan="3">Månedsprisen indgår i den samlede rate betaling.</td>
+			  </tr>
+			</table>
+
+			<p class="bold mt-30">Bytteret/service</p>
+			<p>Produktet leveres med bytteret ved defekt. Bytteret giver mulighed for
+1 ombytning pr. aftaleår. Eventuelle ombytninger er ikke bundet til
+kalenderåret. Mere end én ombytning kan derfor godt finde sted i samme
+aftaleår. Bytteret udbydes og serviceres af TDC Erhvervscenter.
+Denne aftale løber over <span>{$support_months}</span> måneder.</p>
+
+			<p class="bold mt-30">Udvidet garanti</p>
+			<p>Udvidet garanti dækker over forlængelse af reklamationsfristen til at
+omfatte den ovenfor nævnte periode.</p>
+
+			<p class="bold mt-30">Smartphone bundling</p>
+			<p>Smartphone bundling omfatter smartphone, cover, beskyttelsesglas samt All Risk forsikring.</p>
+
+			<p class="bold mt-30">Aftalens varighed</p>
+			<p>Rate aftalen løber i 36 måneder.<br/>
+			Aftalen faktureres fra datoen for udlevering af hardwaren.<br/>
+			Aftalen er betinget af positiv kreditvurdering.</p>
+
+{.if ($is_pbs == TRUE) }
+			<p>Ved manglende tilmelding til PBS, tillægges et fakturagebyr på kr. 50,-</p>
+			<p>Alle priser er oplyst ekskl. moms.</p>
+			
+			<p>PBS-tilmelding</p>
+			<table class="noborder" width="100%" border="0">
+			  <tr class="extraLineHeight">
+			    <td width="20%">Reg.</td>
+			    <td width="80%" class="border"> </td>
+			  </tr>
+			  <tr class="extraLineHeight">
+			    <td>Konto</td>
+			    <td class="border"> </td>
+			  </tr>
+			</table>
+			
+			<p>Ved angivelse af PBS oplysninger i denne kontrakt, accepteres det samtidig, at TDC Erhvervscenter tilmelder abonnement til Nets.</p>
+{.else}			
+			<p>Ved fysisk fremsendelse af faktura tillægges et fakturagebyr på kr. 50,-</p>
+			<p>Alle priser er oplyst ekskl. moms.</p>
+			
+			<p>Email fakturering</p>
+			<table class="noborder" width="100%" border="0">
+			  <tr class="extraLineHeight">
+			    <td width="20%">Email</td>
+			    <td width="80%" class="border"> </td>
+			  </tr>
+			  <tr class="extraLineHeight">
+			    <td>Navn</td>
+			    <td class="border"> </td>
+			  </tr>
+			</table>
+			
+			<p>Ved angivelse af email oplysninger i denne kontrakt, opkræves der ikke fakturagebyr for elektronisk fremsendelse af faktura.</p>
+{/if}
+			<br/>
+			
+			<table class="noborder" width="100%" border="0">
+			  <tr>
+			    <td width="80%" >Total sum af udstyr til rate betaling</td>
+			    <td>kr.</td>
+			    <td  class="right" style="border-bottom: 1px solid #000">{$total_hardware_value}</td>
+			  </tr>
+			  <tr class="bold">
+			    <td width="50%" ><strong>Pris pr. måned - rate betaling</strong></td>
+			    <td><strong>kr.</strong></td>
+			    <td class="right" style="border-bottom: 2px double #000"><strong>{$hardware_monthly}</strong></td>
+			  </tr>
+			</table>
+			
+			<br/>
+			
+{.if ($show_up_front_payment == TRUE) }
+			<table width="100%" border="0">
+			  <tr>
+			    <td class="noborder" width="82%">Ved indgåelse af aftale om rate betaling opkræves der, i forbindelse med den første ydelse, et 1. gangs afdrag på:</td>
+			    <td class="bold noborder" style="valign:bottom">kr.</td>
+			    <td class="right bold noborder" style="valign:bottom">{$up_front_payment}</td>
+			  </tr>
+			</table>
+{/if}
+			
+			<br/>
+			
+			<table width="100%" border="0">
+			  <tr>
+			    <td class="noborder" width="50%">Dato:</td>
+			    <td class="noborder" width="50%">Dato:</td>
+			  </tr>
+			  
+			  <tr class="extraLineHeight">
+			    <td class="noborder"></td>
+			    <td class="noborder"></td>
+			  </tr>
+			  <tr class="extraLineHeight">
+			    <td class="noborder line"><div style="border-bottom: 1px solid #000; height: 40px; width: 190px"></div></td>
+			    <td class="noborder line"><div style="border-bottom: 1px solid #000; height: 40px; width: 190px"></div></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="noborder">{$customer_name:}</td>
+			    <td class="noborder">{$seller_name:}</td>
+			  </tr>
+			  <tr>
+			    <td class="noborder">{$customer_companyName:}</td>
+			    <td class="noborder">{$seller_companyName:}</td>
+			  </tr>
+			</table> 
+		</div>
+		<div class="col-sm-4">
+			<div class="media" data-src="{$main_image:}"/>
+		</div>
+	</div>
+
+{.if ($include_aig == TRUE) }
+	<div class="breakAfter"></div>
+
+	<div class="panel-heading header">
+		<h2></h2>
+	</div>
+
+	<div class="panel-footer footer aig-footer">
+		AIG Europe, dansk filial af AIG Europe S.A., Luxembourg, Osvald Helmuths vej 4, 2000 Frederiksberg. CVR-nr. 39475723 | Tlf: (+45) 91375300 | Fax (+45) 33732400 <br/>
+		AIG Europe S.A. er et forsikringsselskab med R.C.S. Luxembourg nummer B 218806. AIG Europe S.A. har hovedkontor på adressen 35 D Avenue J.F. Kennedy, L-1855, Luxembourg.
+	</div>
+
+	<div class="row">
+		<div class="col-sm-8">
+			<h1>3 Step IT Forsikring</h1>
+			<h1>af IT udstyr</h1>
+			<h2>Forsikringsbetingelser ver. 1.0 gældende fra 01.08.2019</h2>
+			<br/>
+		</div>
+		<div class="col-sm-4">
+			<div class="media" data-src="{$aig_image:}"/>
+		</div>
+	</div>
+	<div class="row-nobreak small">
+		<div class="col-sm-12">
+			<h2>1. Hvad er omfattet af forsikringen</h2>
+			<p class="aig-text">Forsikringen dækker IT udstyr (forsikrede genstande) inkl. evt. medfølgende tilbehør, samt tilkøbt tilbehør såfremt dette har en nyværdi på 300 DKK eller mere, leaset eller indkøbt via 3 Step IT A/S.</p>
+			<p class="aig-text">Forsikrede genstande fremgår af leasing- eller købsaftalen. </p>
+
+			<h2>2. Forsikringsaftalens Parter</h2>
+			<p class="aig-text">Forsikringsselskab: AIG Europe, dansk filial af AIG Europe S.A., Luxembourg Osvald Helmuths vej 4 2000 Frederiksberg CVR-nr. 39475723</p>
+            <p class="aig-text">AIG Europe S.A., er registreret ved R.C.S. Luxembourg under nummer B 218 806. AIG Europe S.A. har hovedkontor på adressen 35D Avenue John F. Kennedy, L-1855, Luxembourg.</p>
+            <p class="aig-text">AIG Europe S.A. er underlagt tilsyn af Luxembourgs tilsynsmyndighed Commissariat aux Assurances og den danske filial er underlagt tilsyn af det danske Finanstilsyn.</p>
+            <p class="aig-text"><strong>Forsikringstager</strong>:<br/> 3 Step IT A/S <br/>Vandtårnsvej 62A <br/>DK-2860 Søborg <br/>CVR. nr. 26106427</p>
+            <p class="aig-text"><strong>Sikrede</strong>: Leasingtagere/kontantkunder hos 3 Step IT, der af 3 Step IT indtegnes under 3 Step IT’s forsikringsaftale i overensstemmelse med indtegningskriterierne.</p>
+            <p class="aig-text"><strong>Formidling </strong>Salg og administration af forsikringen varetages af forsikringsagenturet AffiNordic ApS, Blokken 15, 3460 Birkerød, CVR nr. 37570990 og 3 Step IT A/S, der herfor modtager en provision af AIG.</p>
+            <p class="aig-text">3 Step IT A/S yder ikke rådgivning i forbindelse med formidling af denne forsikring og tilbyder udelukkende denne forsikring på vegne af AIG Europe S.A., dansk filial.</p>
+            <p class="aig-text">Spørgsmål vedr. forsikringens indhold og dækning kan rettes til AffiNordic på:</p>
+            <p class="aig-text">Telefon: 45 90 73 30 eller e-mail: info@affinordic.com</p>
+
+			<h2>2. Dækningsperiode</h2>
+			<p class="aig-text">Forsikringen dækker, for leaset udstyr fra tidspunktet for betaling af første leasingydelse, og for udstyr der er købt kontant fra den forsikrede genstands leveringstidspunkt, og i op til 60 måneder frem, afhængigt af produkttypen.</p>
+			<p class="aig-text">Dækningsperioden for den aktuelle forsikring, fremgår af leasing- eller købsaftalen.</p>
+
+			<h2>3. Forsikringens omfang og undtagelser</h2>
+			<p class="aig-text">Forsikringens omfang fremgår af leasing- eller købsaftalen og omfatter følgende dækninger såfremt de fremgår deraf:</p>
+			<p class="aig-text"><strong>Garantiforlængelse</strong>Elektrisk eller mekanisk funktionsfejl og nedbrud på en forsikret genstand, efter udløb af produktgarantien, som gør en forsikret genstand uanvendelig eller medfører væsentlig forringelse af dens funktion. Forsikringen træder i kraft efter udløb af den oprindeligt medfølgende garantiperiode og løber i op til 48 måneder derefter, som angivet i leasing- eller købsaftalen.</p>
+			<p class="aig-text"><strong>Pludselig udefrakommende skade</strong> Hændelig, uforudset og udefrakommende skade på en forsikret genstand, herunder tab, slag/stød eller skade som følge af væske eller fugt, som gør en forsikret genstand uanvendelig eller medfører væsentlig forringelse af dens funktion. Forsikringen træder i kraft ved leasingstart eller leveringstidspunkt jf. pkt. 2 og løber i op til 60 måneder derefter, som angivet i leasing- eller købsaftalen.</p>
+			<p class="aig-text"><strong>Indbrudstyveri og ran</strong> Tyveri af en forsikret genstand i forbindelse med indbrud i aflåst bygning, lokale, motorkøretøj eller andet aflåst opbevaringssted samt ran. Forsikringen træder i kraft ved leasingstart eller leveringstidspunkt jf. pkt. 2 og løber i op til 60 måneder derefter, som angivet i leasing- eller købsaftalen.</p>
+			<p class="aig-text"><strong>Returoption</strong> Dækning af de resterende leasingydelser/månedlige betalinger for en forsikret genstand i forbindelse med fratrædelse af medarbejdere, når den forsikrede enhed er bekræftet leveret retur til 3 Step IT. Dækningen er begrænset til 10% af de i den oprindelige kontrakt oplistede forsikrede genstande og dækker ikke ved opsigelser eller ophør af ansættelsesforhold forårsaget ved: - Orlov - Arbejdsmarkedskonflikter - Dødsfald - Efterløn eller pension - Krig, militære hændelser, terrorisme, naturkatastrofer, myndighedskrav, strejke, lockout,
+                                blokader – eller lignende - Massefyringer defineret som afskedigelser, som foretages af en arbejdsgiver af en eller flere grunde, som ikke kan tilregnes lønmodtageren selv, når antallet af afskedigelser inden for et tidsrum af 30 dage udgør:</p>
+            <p class="aig-text">a) Mindst 10 afskedigelser i virksomheder, som normalt beskæftiger over 20 og færre end 100 lønmodtagere.<br/>
+			b) Mindst 10 pct. af antallet af lønmodtagere i virksomheder, som normalt beskæftiger mindst 100 og under 300 lønmodtagere.<br/>
+			c) Mindst 30 afskedigelser i virksomheder, som normalt beskæftiger mindst 300 lønmodtagere. Ved opgørelsen af antallet af afskedigelser medregnes andre ophør af ansættelsesforhold, som ikke kan tilregnes lønmodtageren, herunder lønmodtagerens egen opsigelse, når opsigelsen er foranlediget af særlige, gunstige fratrædelsesvilkår, forudsat at antallet af afskedigelser udgør mindst 5.</p>
+			<p class="aig-text">Returoptionen udløses først, når leasingtager/arbejdsgiver ikke længere udbetaler løn eller anden kompensation til medarbejderen.</p>
+			<p class="aig-text">Dækningen træder i kraft ved leasingstart eller leveringstidspunkt jf. pkt. 2 og løber i op til 60 måneder derefter, som angivet i leasing- eller købsaftalen.</p>
+			<p class="aig-text">Forsikringen gælder overalt i Verden undtagen i lande, der er omfattet af økonomiske sanktioner, se forsikringsbetingelsernes pkt. 11, dog kan reparation eller ombytning af forsikrede genstande udenfor Danmark kun foregå ved registrering og håndtering af skaden/fejlen hos AffiNordic (se pkt. 5).</p>
+			<h2>4. Sikkerhedsforskrifter og undtagelser</h2>
+			<p class="aig-text">Sikkerhedsforskrifter Såfremt en forsikret genstand opbevares i et omklædningslokale skal denne opbevares i et aflåst skab. Såfremt en forsikret genstand opbevares i et uovervåget køretøj skal denne opbevares ude af syne og køretøjet skal være forsvarligt aflåst. Er ovennævnte sikkerhedsforskrifter ikke opfyldt kan erstatningen helt eller delvist bortfalde.</p>
+			<p class="aig-text">Forsikringen dækker ikke:
+			<ul>
+			<li>Tilkøbt tilbehør til en værdi af mindre end 300 DKK</li>
+			<li>Simpelt tyveri og bortkomst af enhver art</li>
+			<li>Indbrudstyveri fra omklædningslokaler, medmindre den forsikrede genstand har været opbevaret i et aflåst skab, som der er blevet brudt ind i med vold, og forudsat at dette indbrud kan dokumenteres</li>
+			<li>Indbrudstyveri fra et uovervåget motorkøretøj, medmindre den forsikrede genstand har været placeret ude af syne i et forsvarligt aflåst køretøj, som der er blevet brudt ind i med vold, og forudsat at dette indbrud kan dokumenteres</li>
+			<li>Indbrudstyveri af den forsikrede genstand, mens den er i tredjemands varetægt eller kontrol</li>
+			<li>Omkostninger til nyt sim-kort</li>
+			<li>Skade på forsikrede enhed før du har modtaget den (eks. i forbindelse med levering)</li>
+			<li>Skader, som er dækket af produkt- eller fabriksgarantier, eller hvor forhandleren bærer ansvaret i henhold til bestemmelserne i dansk forbrugerlovgivning</li>
+			<li>Skade som følge af virus, hackerangreb eller lignende, eller software installeret på enheden</li>
+			<li>Følgeskader på andre enheder end den forsikrede genstand, mistede data, software eller lignende</li>
+			<li>Skader på den forsikrede genstand som er begået forsætligt, eller ved grov uagtsomhed</li>
+			<li>Skader som følge af fejlbetjening, eller som følge af at sælgers eller producentens vejledning om genstandens brug ikke er fulgt</li>
+			<li>Udvendig slitage og kosmetiske skader som eksempelvis ridser, buler, pletter, blegning eller lignende som ikke hindrer genstanden i at fungere</li>
+			<li>I tilfælde af skade der måtte opstå som følge af atomudslip, krig, krigslignende tilstande, borgerkrig, terrorisme, revolution eller oprør eller som følge af indgreb og konfiskation fra myndighederne, strejke, lockout eller blokade eller lignede</li>
+			</ul>
+			</p>
+			<p class="aig-text">Skader og funktionsfejl skal anmeldes hurtigst muligt efter den er opstået eller konstateret, og uden ugrundet ophold, via www.affinordic.com/skader.</p>
+			<p class="aig-text">I tilfælde af indbrudstyveri skal en politirapport vedlægges skadeanmeldelsen, eller journalnummer fra politianmeldelsen oplyses.</p>
+			<h2>6. Hvordan dækker forsikringen?</h2>
+			<p class="aig-text">Ved skade på forsikrede genstand forbeholder Forsikringsselskabet (AIG) sig ret til at få den forsikrede genstand repareret.</p>
+			<p class="aig-text">Såfremt genstanden ikke kan repareres eller reparationsudgifterne overstiger genstandens oprindelige købspris, erstattes genstanden med et tilsvarende produkt, så vidt det er muligt af samme mærke, type og farve, og som minimum af samme kvalitet og tekniske specifikationer.</p>
+			<p class="aig-text">Enhver sådan erstatningsenhed, der leveres i henhold til denne police, kan være enten ny eller istandsat.</p>
+			<p class="aig-text">Det bemærkes at forsikringsydelsen kun kan bestå i enten reparation af den forsikrede enhed eller erstatning i form af en anden tilsvarende, ny eller istandsat enhed - aldrig kontant betaling.</p>
+			<p class="aig-text">Såfremt ingen funktionsfejl eller skade på en forsikret genstand indleveret til reparation kan konstateres, forbeholder forsikringsselskabet sig ret til at anmelder opkræves faktiske omkostninger til dækning af værkstedets undersøgelses- og evt. forsendelsesomkostninger, dog maks. 500 DKK.</p>
+			<h2>7. Krav mod 3. mand</h2>
+			<p class="aig-text">Såfremt Sikrede kan gøre krav gældende mod 3. mand, indtræder AIG i sikredes sted og kan gøre krav gældende mod 3. mand.</p>
+			<h2>8. Klager</h2>
+			<p class="aig-text">Hvis Sikrede ikke føler at have fået den ydelse, der er aftalt eller er krav på, eller hvis Sikrede på anden vis er utilfreds med formidlingen eller sagsbehandlingen har Sikrede ret til at klage.</p>
+			<p class="aig-text">Dette kan ske ved at ringe eller skrive til AffiNordic på telefon: 45 90 73 30 eller e-mail: info@affinordic.com</p>
+			<h2>9. Behandling af personlige oplysninger</h2>
+			<p class="aig-text">AIG Europe S.A. bestræber os på at beskytte personoplysninger tilhørende kunder, kravstillere og forretningsforbindelser.</p>
+			<p class="aig-text">”Personoplysninger” identificerer enkeltpersoner (f.eks. Sikrede og Sikredes familiemedlemmer). Hvis sikrede giver personoplysninger om en anden enkeltperson, skal sikrede (medmindre vi aftaler andet) informere enkeltpersonen om indholdet af denne erklæring og vores persondatapolitik og indhente deres tilladelse (hvis det er muligt) til deling af deres personoplysninger med os.</p>
+			<p class="aig-text">De typer af personoplysninger, som vi kan indsamle, og hvorfor – Afhængigt af vores forhold til sikrede kan indsamlede personoplysninger omfatte: kontaktoplysninger, finansielle oplysninger og kontooplysninger, kreditreference- og kreditscoreoplysninger, følsomme oplysninger om helbred eller sygdomme (indsamlet med sikredes samtykke, hvor påkrævet ved gældende lov) samt andre personoplysninger givet af Sikrede eller som vi indhenter i forbindelse med vores forhold til sikrede. Personoplysninger kan bruges til følgende formål:
+				<ul>
+					<li>Forsikringsadministration, f.eks. kommunikation, håndtering af skader og betaling</li>
+					<li>Vurderinger og beslutninger om ydelse af forsikring og forsikringsvilkår samt afvikling af krav</li>
+					<li>Assistance og rådgivning om helbreds- og rejseforhold</li>
+					<li>Styring af vores forretningsaktiviteter og IT-infrastruktur</li>
+					<li>Forebyggelse, opdagelse og undersøgelse af kriminalitet, f.eks. svig og hvidvaskning af penge</li>
+					<li>Etablering og forsvar af juridiske rettigheder</li>
+					<li>Overholdelse af lovkrav (herunder overholdelse af love og forskrifter uden for dit bopælsland)</li>
+					<li>Optagelse og kontrol af telefonopkald til kvalitets-, uddannelses- og sikkerhedsformål</li>
+					<li>Markedsføring, markedsundersøgelse og analyse</li>
+				</ul>
+			</p>
+			<p class="aig-text">Deling af personoplysninger – Til ovenstående formål kan personoplysninger deles med vores koncernselskaber og tredjeparter (såsom mæglere og andre forsikringsdistributionsparter, forsikringsselskaber og genforsikringsselskaber, kreditreferencebureauer, sundhedspersonale og andre tjenesteudbydere). Personoplysninger deles med andre tredjeparter (herunder offentlige myndigheder), hvis det kræves i henhold til love eller forskrifter. Personoplysninger kan deles med (potentielle) købere og overføres ved salg af vores virksomhed eller overførsel af forretningsaktiver.</p>
+			<p class="aig-text">International overførsel – På grund af vores virksomheds globale karakter kan personoplysninger overføres til parter i andre lande (herunder USA, Kina, Mexico Malaysia, Filippinerne, Bermuda og andre lande, der muligvis har en databeskyttelsesregulering, der er forskellig fra den, der findes i sikredes bopælsland). Når vi foretager disse overførsler, vil vi tage skridt for at sikre, at sikredes personoplysninger beskyttes tilstrækkeligt og overføres i overensstemmelse med kravene i persondataloven. Yderligere oplysninger om internationale overførsler er angivet i vores persondatapolitik (se nedenfor).</p>
+			<p class="aig-text">Sikkerhed af personoplysninger – Relevante tekniske og fysiske sikkerhedsforanstaltninger anvendes for at holde sikredes personoplysninger sikre. Når vi leverer personoplysninger til en tredjepart (herunder vores tjenesteudbydere) eller beder en tredjepart til at indsamle personoplysninger på vores vegne, udvælges tredjeparten nøje og påkræves at anvende passende sikkerhedsforanstaltninger.</p>
+			<p class="aig-text">Sikredes rettigheder – Sikrede har en række rettigheder i henhold til persondatabeskyttelseslovgivningen i forbindelse med vores brug af personoplysninger. Disse rettigheder gælder muligvis kun under visse omstændigheder og er underlagt visse undtagelser. Disse rettigheder kan omfatte adgang til Sikredes personoplysninger, ret til at få korrigeret urigtige oplysninger, ret til at få slettet oplysninger eller indstille vores brug af oplysninger. Disse rettigheder kan også omfatte adgang til at overføre Sikredes oplysninger til en anden organisation, ret til at gøre indsigelse mod vores brug af Sikredes personoplysninger, ret til at anmode om, at visse automatiserede beslutninger, som vi tager, har menneskelig involvering, ret til at trække samtykke tilbage og ret til at klage til Datatilsynet. Yderligere oplysninger om Sikredes rettigheder, og hvordan sikrede kan udøve dem, er beskrevet fuldt ud i vores persondatapolitik (se nedenfor).</p>
+			<p class="aig-text">Persondatapolitik – Flere oplysninger om Sikredes rettigheder, og hvordan vi indsamler, bruger og videregiver sikredes personoplysninger, findes i vores fuldstændige persondatapolitik på: http://www.aig.dk/privacy-policy eller sikrede, kan anmode om en kopi ved at skrive til: Databeskyttelsesofficer, AIG Danmark, Osvald Helmuths Vej 4, DK-2000 Frederiksberg eller via e- mail på: databeskyttelse.dk@aig.com.</p>
+			<h2>10. Lovvalg</h2>
+			<p class="aig-text">Forsikringen er underlagt dansk ret.</p>
+			<h2>11. Sanktionerede lande og personer</h2>
+			<p class="aig-text">Forsikringsselskabet er ikke forpligtet til at yde dækning eller gennemføre udbetalinger, hvis dette er en overtrædelse af sanktionslovgivning eller -regler som kan medføre at Forsikringsselskabet, Forsikringsselskabets moderselskab eller andre kontrollerende enheder kan blive straffet under en sådan lovgivning eller sådanne regler.</p>
+		</div>
+	</div>
+{/if}
+
+</body>
+</html>
+

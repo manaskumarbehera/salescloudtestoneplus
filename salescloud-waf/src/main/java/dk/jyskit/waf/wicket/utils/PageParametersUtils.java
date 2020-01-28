@@ -1,0 +1,111 @@
+/* Copyright (c) 2011-2013 Pushing Inertia
+ * All rights reserved.  http://pushinginertia.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package dk.jyskit.waf.wicket.utils;
+
+import java.util.List;
+import java.util.Set;
+
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.util.string.StringValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Some common logic when working with page parameters.
+ */
+public final class PageParametersUtils {
+	public static final Logger LOG = LoggerFactory.getLogger(PageParametersUtils.class);
+
+	/**
+	 * Copies a {@link PageParameters} instance, pruning the key-value pairs for keys not given as parameters. In other
+	 * words, the copy will contain only key-value pairs where the key is specified as input to this method and the
+	 * key exists in the instance to copy.
+	 * @param pp instance to copy
+	 * @param keys list of keys to copy
+	 * @return a new instance containing a subset of the key-value pairs in the instance to copy
+	 */
+	public static PageParameters copySubset(final PageParameters pp, final String... keys) {
+		ValidateAs.notNull(pp, "pp");
+
+		final PageParameters ppCopy = new PageParameters();
+		final Set<String> ppKeys = pp.getNamedKeys();
+		for (final String key: keys) {
+			if (ppKeys.contains(key)) {
+				final List<StringValue> valueList = pp.getValues(key);
+				for (final StringValue value: valueList) {
+					ppCopy.add(key, value.toString());
+				}
+			}
+		}
+		return ppCopy;
+	}
+
+	/**
+	 * Retrieves an integer value from given page parameters, returning a default value if the name doesn't exist in the
+	 * parameters or the value cannot be parsed into an integer.
+	 * @param pp parameters to load the value from
+	 * @param name name to look up
+	 * @param defaultValue default value if one cannot be parsed
+	 * @return parsed value
+	 */
+	public static int getInt(final PageParameters pp, final String name, final int defaultValue) {
+		ValidateAs.notEmpty(name, "name");
+
+		final StringValue value = pp.get(name);
+		if (value.isEmpty()) {
+			return defaultValue;
+		}
+		try {
+			return Integer.parseInt(value.toString());
+		} catch (final NumberFormatException e) {
+			LOG.info("Page parameter value [{}] from name [{}] could not be parsed into an integer.", value, name);
+			return defaultValue;
+		}
+	}
+
+	/**
+	 * Retrieves a string value from given page parameters and identifies the matching enum value for that string. All
+	 * enumerations must be uppercased and the input is uppercased for the comparison operation. A default value is
+	 * returned if no value is given or it doesn't match any of the enumerations.
+	 * @param pp parameters to load the value from
+	 * @param name name to look up
+	 * @param enumClass enum type
+	 * @param defaultValue default value if one cannot be parsed
+	 * @param <E> enum type
+	 * @return parsed value
+	 */
+	public static <E extends Enum> E getEnum(
+			final PageParameters pp, final String name, final Class<E> enumClass, final E defaultValue) {
+		ValidateAs.notEmpty(name, "name");
+
+		final StringValue value = pp.get(name);
+		if (value.isEmpty()) {
+			return defaultValue;
+		}
+
+		final String upperValue = value.toString().toUpperCase();
+
+		for (final E enumValue: enumClass.getEnumConstants()) {
+			if (enumValue.name().equals(upperValue)) {
+				return enumValue;
+			}
+		}
+
+		return defaultValue;
+	}
+
+	private PageParametersUtils() {}
+}

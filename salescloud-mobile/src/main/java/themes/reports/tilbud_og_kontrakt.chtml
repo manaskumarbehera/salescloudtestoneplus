@@ -1,0 +1,1963 @@
+<html>
+<head>
+<style type="text/css">
+	/* Inspiration: https://github.com/zopyx/zopyx.smartprintng.plone/tree/cb1252601617324cf5513f65686dd4eb1e4b90a4/zopyx/smartprintng/plone/resources_default */
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	body {
+		font-size: 11px;
+		font-family: "ArialUnicode", Verdana, Arial, sans-serif;
+		line-height: 1.5em;
+	}
+
+	div.header {
+		display: block;
+		text-align: center;
+		position: running(header);
+	}
+	
+	div.footer {
+		display: block;
+		text-align: center;
+		position: running(footer);
+	}
+	
+	div.breakBefore {
+		page-break-before: always;
+		clear: both;
+	}
+	
+	div.breakAfter {
+		page-break-after: always;
+	}
+	
+	h1 {
+		font-size: 200%;
+		margin-top: 0;
+		padding-bottom: 0px;
+		line-height: 1.2em;
+	}
+	
+	h2 {
+		font-size: 133%;
+		padding-bottom: 0px;
+		line-height: 1.2em;
+	}
+	
+	h3 {
+		font-size: 115%;
+		padding-top: 10px;
+		padding-bottom: 0px;
+		margin-bottom: 0px;
+		line-height: 1.2em;
+	}
+	
+	h4, h5, h6 {
+		font-size: 100%;
+		line-height: 1.2em;
+	}
+
+	p {
+		line-height: 1.77em;
+	}
+	
+	tr.total {
+		font-weight: bold;
+	} 
+	
+	pre {
+		font-size: 0.775em;
+		background-color: #eeeeee;
+		color: black;
+		white-space: pre-wrap;
+		margin-left: 1em;
+		margin-right: 1em;
+		padding: 0.5em;
+		font-family: "Courier New";
+		border: thin solid black;
+		border-radius: 8px;
+		padding: 0.4em;
+	}
+	
+	tt {
+		font-family: Courier;
+		background: #dddddd;
+	}	
+
+	table.bordered {
+	    border-collapse: collapse;
+	}
+	
+	table.bordered, table.bordered th, table.bordered td {
+	    border: 1px solid black;
+	}
+	
+	.row {
+		margin-left: 0px;
+		margin-right: 0px;
+		padding: 0px;
+		width: 100%;
+		clear: both;
+		display: inline-block;
+	}
+	
+	.col-sm-1 { width: 8.3333%; }	
+	.col-sm-2 { width: 16.6666%; }	
+	.col-sm-3 { width: 25%; }
+	.col-sm-4 { width: 33.3333%; }
+	.col-sm-5 { width: 41.6666%; }	
+	.col-sm-6 { width: 50%; }
+	.col-sm-7 { width: 58.3333%; }	
+	.col-sm-8 { width: 66.6666%; }
+	.col-sm-9 { width: 75%; }	
+	.col-sm-10 { width: 83.3333%; }	
+	.col-sm-11 { width: 91.6666%; }	
+	.col-sm-12 { width: 100%; }
+	
+	.col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11,.col-sm-12
+		{
+		min-height: 1px;
+		float: left;
+		padding: 0px;
+	}
+	
+	.lm-10 { margin-left: 10px; }
+	.lm-20 { margin-left: 20px; }
+	.lm-30 { margin-left: 30px; }
+	.rm-10 { margin-right: 10px; }
+	.rm-20 { margin-right: 20px; }
+	.rm-30 { margin-right: 30px; }
+	
+	@page {
+		size: A4 portrait;
+		margin-top: 2.54cm;
+		margin-bottom: 2.54cm;
+		margin-left: 1.20cm;
+		margin-right: 1.20cm;
+	}
+	
+	@page { 
+		margin: 80px 45px 45px;
+		@top-center { 
+			content:element(header)
+		}
+	}
+	
+	@page { 
+		@bottom-right { 
+			content:element(footer);
+		}
+	}
+	
+	#pagenumber:before {
+		content: counter(page);
+	}
+	
+	#pagecount:before {
+		content: counter(pages);
+	}
+	
+	.reportlisting {
+		list-style: none;
+	}
+	
+	img.reportImage{
+		width: 100%;
+	}
+	
+	.right {
+		text-align: right;
+	}
+	
+	/*
+	* Tables with class "turntable" will be displayed in landscapeformat
+	*/
+	@page big_table {
+		size: A4 landscape
+	}
+	
+	table.turntable {
+		page: big_table
+	}
+	
+	.vilkaar {
+		font-size: 9px;
+	}
+	
+	.vilkaar-lille {
+		font-size: 7px;
+		line-height: 140%;
+	}
+	
+	.med_smaat {
+		font-size: 8px;
+	}
+	
+	.med_smaat t3, .med_smaat td {
+		height: 6px;
+		line-height: 60%;
+	}
+	
+	table td, table td * {
+    	vertical-align: top;
+    	text-align: left;
+	}	
+	
+	.size10 {
+		font-size: 10px;
+	}
+		
+</style>
+</head>
+
+<body>
+	<div class="panel-heading header">
+		<h2>{$document_header:}</h2>
+	</div>
+	
+	<div class="panel-footer footer">
+		{$date:}   -   {$document_footer:}   -   Side <span id="pagenumber"></span> af <span id="pagecount"></span>
+	</div>
+
+{.if ($is_offer == TRUE) }
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>{$document_title:}</h1>
+			<div class="lm-20 rm-20">
+				{$customer_companyName}<br/>
+				{$customer_name}<br/>
+				{$customer_address}<br/>
+				{$customer_zipCode} {$customer_city}<br/>
+				<br/>
+				{$intro_text}
+				<br/>
+				{$seller_companyName}<br/>
+				{$seller_name}<br/>
+				{$seller_phone}<br/>
+				<br/>
+				{$campaign_info}
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+	
+	<div class="breakBefore"></div>
+{/if}
+
+{.if ($is_one_plus == TRUE) }
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>{$document_title:}</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $oneTimeFeeLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $installationFeeLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $recurringLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+{/if}
+
+
+{.if ($is_mobile_voice == TRUE) }
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>{$document_title:}</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $nonRecurringLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+
+	<div class="breakBefore"></div>
+{/if}
+
+{.if ($is_switchboard == TRUE) }
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>{$document_title:}</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $oneTimeFeeLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+
+	<div class="breakBefore"></div>
+
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>{$document_title:}</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $installationFeeLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+
+	<div class="breakBefore"></div>
+{/if}
+
+{.if ($is_works == TRUE) }
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>{$document_title:}</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $oneTimeFeeLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+						
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+	
+	<div class="breakBefore"></div>
+	
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>{$document_title:}</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $installationFeeLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+	
+	<div class="breakBefore"></div>
+{/if}
+	
+{.if ($is_reduce_page_count == TRUE) }
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>{$document_title:}</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $oneTimeFeeLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+						
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+
+{.if ($is_skip_installation == TRUE) }
+{.else}
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $installationFeeLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+{/if}
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $recurringLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == discount) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == single_column) }
+							<tr><td colspan="3">{$line.label}</td></tr>
+						{.elseIf ($line.type == campaign_comment) }
+							<tr><td colspan="3" style="font-style: normal;">{$line.label}</td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+	
+{/if}
+	
+{.if ($is_offer == TRUE) }
+{.if ($is_fiber == TRUE) }
+{.else}
+	<div class="breakBefore"></div>
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<h2>Accept af tilbud</h2>
+			<hr style="margin-bottom:0px"/>
+			<div class="row" style="margin:0px">
+				<div class="col-sm-6">
+					<h3 style="margin:2px 0 6px 0">Kunde</h3>
+					{$customer_companyName}<br/>
+					{$customer_address}<br/>
+					{$customer_zipCode} {$customer_city}<br/>
+					CVR {$customer_company_id}<br/>
+					Kontaktperson:<br/>
+					{$customer_name}
+				</div>
+				<div class="col-sm-6">
+					<h3 style="margin:2px 0 6px 0">Leverandør</h3>
+					{$seller_companyName}<br/>
+					{$seller_address}<br/>
+					{$seller_zipCode} {$seller_city}<br/>
+					CVR {$seller_company_id}<br/>
+					Kontaktperson:<br/>
+					{$seller_name}
+				</div>
+			</div>
+			<hr style="margin-top:2px"/>
+			<p>{$customer_companyName} og TDC aftaler hermed levering af ydelser som beskrevet i tilbud af {$date}.</p>  
+			<table style="width: 100%">
+				<thead><tr><td width="75%"></td><td width="8%"></td><td width="17%"></td></tr></thead>
+				
+				{.loop in $summaryLines as $line}
+					{.if ($line.type == header) }
+						<tr><td colspan="3">{$line.label}</td></tr>
+					{.elseIf ($line.type == header_indent) }
+						<tr><td colspan="3" style="padding-left:20px">{$line.label}</td></tr>
+					{.elseIf ($line.type == amount) }
+						<tr><td>{$line.label}</td><td>DKK</td><td class="right">{$line.amount}</td></tr>
+					{.elseIf ($line.type == amount_indent) }
+						<tr><td style="padding-left:20px">{$line.label}</td><td>DKK</td><td class="right">{$line.amount}</td></tr>
+					{.elseIf ($line.type == space) }
+						<tr><td colspan="3" style="min-height:1em"> </td></tr>
+					{/if}
+				{.onEmpty}
+				{/loop}
+			</table>
+{.if ($is_one_plus == TRUE) }
+			<p>En TDC Erhverv One+ løsning er sammensat af en række produkter fra TDC Erhverv, som hver især er omfattet af et sæt vilkår:</p>
+ 			<ul>
+			<li>Telefoniløsningen - se vilkårsbrochure for TDC Erhverv One+</li>
+			<li>Internetløsningen - se vilkårsbrochure for TDC Erhverv Netværk. Se derudover præcisering af forhold vedr. Fiberleverance i appendix til denne aftale</li>
+ 			</ul>
+
+			<p>TDC Erhverv One forudsætter løbende dialog mellem virksomheden og TDC Erhverv. Undertegnede afgiver herved følgende permission til TDC Erhverv.</p>
+			<p>Afgivet permission:</p>
+			<p>Få tips og nyheder til min TDC Erhverv One-løsning</p>
+			<p><div class="media" data-src="{$checkbox_image:}" style="width: 14px; display: inline-block; margin: 0px;"/> Ja tak, jeg vil gerne modtage nyheder, rådgivning og tilbud om telefoni-, tv- og bredbåndsydelser fra TDC på email og sms. TDC må gerne bruge regnings- og forbrugsoplysninger til at give mig relevante tilbud. Jeg kan altid ombestemme mig.</p>
+			<p>OBS: Det er vigtigt, at den indmeldte email adresse tilhører den daglige One administrator, da nyheder også vil omfatte information om forbrug på data- og talepuljen.</p>
+{.else}
+{.if ($is_partnerinstallation == TRUE) }
+			<p>Ovennævnte oprettelsesomkostninger er ekskl. installation udført af partner.</p>
+{/if}
+			<p>{$business_area} løsningen er omfattet af følgende vilkår, som kan findes på tdc.dk/vilkaar:</p>
+			<ul>
+				<li>Generelle vilkår for levering af drift af TDC's tjenester (Erhvervskunder)</li>
+{.if ($is_mobile_voice == TRUE) }
+				<li>Tillægsvilkår for TDC og TDC Mobilpakker</li>
+{/if}
+{.if ($is_switchboard == TRUE) }
+				<li>Vilkår for TDC Omstilling</li>
+{/if}
+{.if ($is_works == TRUE) }
+				<li>Tillægsvilkår for TDC Erhverv Works</li>
+{/if}
+			</ul>
+{/if}
+
+{.if ($is_office == TRUE) }
+			<p>I tillæg til ovenstående vilkår er Office in the Cloud omfattet af en række forudsætninger og forbehold, anført sidst i dette tilbud. Med din underskrift bekræfter du at have modtaget og gjort dig kendt med disse.</p> 
+{.else}
+	{.if ($is_one_plus == TRUE) }
+	{.else}
+			<p>Vilkår kan findes på: tdc.dk/vilkaar</p>
+			<p>Udover ovennævnte kan der også være tale om leverancer omfattet af vilkår for TDC Hosting A/S og
+				NetDesign A/S. Med din underskrift bekræfter du at have modtaget og gjort dig kendt med disse.</p>
+			<p><b>Få tilbud og nyheder til min {$business_area}-løsning</b></p>
+			<p><div class="media" data-src="{$checkbox_image:}" style="width: 14px; display: inline-block; margin: 0px;"/> Ja tak. Jeg vil gerne modtage nyheder, rådgivning og tilbud om telefoni- og bredbåndsydelser fra TDC på email.</p>
+			<p>Følgende email-konti er omfattet af permission:</p>
+
+			<table style="width: 100%">
+				<thead><tr><td width="50%"></td><td width="50%"></td></tr></thead>
+				<tr><td>Navn:</td><td>Email:</td></tr>
+				<tr><td>Navn:</td><td>Email:</td></tr>
+			</table>
+	{/if}
+{/if}
+{/if}
+
+{.if ($is_switchboard == TRUE) }
+			<p>Tilbuddet er gældende i 30 dage og forudsætter samtidig indgåelse/gentegning af {$contract_length:}-årig kontrakt.</p>
+{.else}
+	{.if ($is_office == TRUE) }
+					<p>Tilbuddet er gældende i 30 dage og først bindende efter kontakt og teknisk sign-off med TDCs implementeringskonsulent. Løsningen er ikke omfattet af binding.</p>
+	{.else}
+		{.if ($is_one_plus == TRUE) }
+					<p>Tilbuddet er gældende i 30 dage og priserne er afrundet til nærmeste krone.{$contract_info_one:}{$contract_info_network:}</p>
+		{.else}
+			{.if ($is_works == TRUE) }
+						<p>Tilbuddet er gældende i 30 dage og forudsætter samtidig indgåelse/gentegning af {$contract_length:}-årig kontrakt.</p>
+			{.else}
+						<p>Tilbuddet er gældende i 30 dage og forudsætter samtidig indgåelse/gentegning af kontrakt.</p>
+			{/if}
+		{/if}
+	{/if}
+{/if}
+			<table style="width: 100%">
+				<thead><tr><td width="50%"></td><td width="50%"></td></tr></thead>
+				<tr><td>Dato:</td><td>Dato: {$contract_date:}</td></tr>
+				<tr><td>For kunden:</td><td>For leverandøren:</td></tr>
+				<tr><td> </td><td> </td></tr>
+	{.if ($is_office == TRUE) }
+	{.else}
+				<tr><td> </td><td> </td></tr>
+	{/if}
+				<tr><td> </td><td> </td></tr>
+				<tr><td>____________________________________________</td><td>____________________________________________</td></tr>
+				<tr><td style="padding-left:20px">{$customer_name:}</td><td style="padding-left:20px">{$seller_name:}</td></tr>
+			</table>
+		</div>
+	</div>
+{/if}
+
+
+{.if ($has_any_locations == TRUE) }
+	<div class="breakBefore"></div>
+
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>Oversigt over lokationer</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $locationLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+{/if}
+
+{.if ($has_feature_wifi == TRUE) }
+	<div class="breakBefore"></div>
+
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>Oversigt over lokationer</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $wifiLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+{/if}
+
+{.if ($has_feature_fiber == TRUE) }
+	<div class="breakBefore"></div>
+
+	<div class="row">
+		<div class="col-sm-7">
+			<h1>Oversigt over lokationer</h1>
+			<div class="lm-20 rm-20">
+				<table style="width: 100%">
+					<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+					{.loop in $fiberLines as $line}
+						{.if ($line.type == header) }
+							<tr><td colspan="3"><h3>{$line.label}</h3></td></tr>
+						{.elseIf ($line.type == space) }
+							<tr><td colspan="3" style="min-height:1em"> </td></tr>
+						{.elseIf ($line.type == total) }
+							<tr class="total"><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{.else}
+							<tr><td>{$line.count}</td><td>{$line.label}</td><td class="right">{$line.amount}</td></tr>
+						{/if}
+					{.onEmpty}
+					{/loop}
+				</table>
+			</div>
+			<div class="lm-20 rm-20">
+				{$footnotes}
+			</div>
+		</div>
+		<div class="col-sm-5">
+			<div class="media" data-src="{$main_image:}" style="width: 100%;"/>
+		</div>
+	</div>
+{/if}
+
+
+
+{.if ($is_works == TRUE) || ($is_one_plus == TRUE) }
+{.elseIf ($is_office == TRUE) }
+	<br/>
+	<table style="width: 100%" class="vilkaar-lille">
+		<tr>
+			<td width="34%">
+			
+<strong>Hardware</strong><br/>
+TDC henviser til Microsoft’s forbehold. Se venligst <a href="https://products.office.com/en-us/office-system-requirements#Office2016-suites-section">https://products.office.com/en-us/office-system-requirements#Office2016-suites-section</a> under "Office Standard 2016 and Office Professional Plus 2016"<br/>
+<br/>
+Software – Operativ System<br/>
+TDC forudsætter som minimum Windows 8.1 eller Windows 10, og fuldt opdateret OS via Windows Update.<br/>
+<br/>
+Software – Klient<br/>
+Office 365 er designet til at fungere med de nyeste browsere og Office-versioner. Hvis du bruger ældre browsere og ældre Office-versioner, der ikke er underlagt generel support:
+<ul>
+<li>Microsoft vil ikke forsætligt forhindre dig i at oprette forbindelse til tjenesten, men kvaliteten af din Office 365-oplevelse vil blive forringet med tiden.</li>
+<li>Microsoft leverer ikke koderettelser for at løse problemer, der ikke er sikkerhedsrelaterede.</li>
+</ul>
+Office 365 understøtter ikke interoperabilitet med software, som ikke understøttes af dets producent.<br/>
+<br/>
+Software – Browser<br/>
+Ift. Browsere gør følgende sig gældende:<br/>
+<br/>
+<strong>Safari, Chrome og Firefox</strong><br/>
+Office 365 er designet til at fungere med de aktuelle versioner af Safari-, Chrome- og Firefox-browsere.<br/>
+<br/>
+<strong>Microsoft Edge</strong><br/>
+Office 365er designet til at fungere med den nyeste version af Microsoft Edge-browseren. Opdateringer til Microsoft Edge-browseren er tilgængelige via <a href="https://www.microsoft.com/en-us/microsoft-365/blog/2015/01/30/windows-10-for-enterprise-more-secure-and-up-to-date">Windows Servicing-grenene</a> (på engelsk). Windows Office 365 fungerer muligvis fortsat med versioner af Edge-browseren, som er ældre end den seneste pakke, men Office 365 kan ikke garantere for det.			
+			</td>
+			<td width="33%">
+<strong>Internet Explorer</strong><br/>
+Office 365 er designet til at fungere med den nyeste version af Internet Explorer 11. Vi anbefaler, at du <a href="https://support.microsoft.com/en-us/help/18520/download-internet-explorer-11-offline-installer">opgraderer til Internet Explorer 11</a>, hvis du bruger en ældre version. Office 365 fungerer muligvis fortsat med versioner af Internet Explorer der er ældre end Internet Explorer 11, men Office 365 kan ikke garantere for det.
+
+Hvis organisationen er afhængig af ældre versioner af Internet Explorer for at få adgang til ældre webapps og tjenester, kan du overveje at opgradere til Internet Explorer 11. 
+
+Du bør også overveje Enterprise Mode til Internet Explorer 11. Denne opdatering giver bedre bagudkompatibilitet for ældre webapps. Se artiklen <a href="https://support.microsoft.com/en-us/help/17454/lifecycle-faq-internet-explorer">support</a> til for flere oplysninger.<br/>
+<br/>
+<strong>Adgang</strong><br/>
+<br/>
+<strong>Under onboarding:</strong><br/>
+Det er en forudsætning, at TDC kan få adgang til kundens eksisterende mailløsning, for at kunne flytte data til Office 365. Såfremt vi ikke kan få adgang, er det ikke muligt at lave en datamigrering.<br/>
+<br/>
+<strong>Under support:</strong><br/>
+Ønsker du support, forudsætter det, at TDC får adgang som delegeret administratorbruger via TDC’s partnerportal, for at support er i stand til at fejlsøge og udbedre udfordringer.<br/>
+<br/>
+<strong>Datatab</strong><br/>
+Det er ikke muligt at migrere al data 1:1 fra eksisterende løsning til Office 365, men vi tilstræber at få mest muligt med. Hvis den nuværende løsning indeholder korrupte filer, mails der er større end 150 MB, eller tegnsæt der er ugenkendeligt i en Microsoft infrastruktur, vil dette data ikke komme med over i Office 365.<br/>
+<br/>
+<strong>Rådgiveransvar</strong><br/>
+TDC Erhverv er alene rådgiver i forhold til migrering af løsninger. Kendskabet til eksisterende miljø er baseret på de oplysninger der er tilvejebragt af kunden, og TDC
+			</td>
+			<td width="33%">
+hæfter ikke for evt. datatab eller afledte omkostninger påført kunden af tredjepart.<br/>
+<br/>
+<strong>Microsoft</strong><br/>
+TDC henviser altid til Microsofts terms of use, samt generelle forbehold. Disse findes og opdateres her: <a href="https://www.microsoft.com/en-us/licensing/product-licensing/products.aspx">https://www.microsoft.com/en-us/licensing/product-licensing/products.aspx</a><br/>
+<br/>
+<strong>On-boarding</strong><br/>
+TDC forbeholder sig retten til udelukkende at udføre datamigration fra eksisterende email løsning til Office 365, og forholder sig ikke til eventuelle eksisterende filløsninger. Ydermere forbeholder TDC sig retten til kun at udføre email migreringer fra eksisterende løsninger, der enten er Exchange 2010+, Google Gsuite, eller POP3/IMAP*.
+*Hvis der er tale om en POP3/IMAP migrering, vil det kun være muligt at migrere emails, og ikke kalenderaftaler/kontaktpersoner. <br/>
+<br/>
+<strong>Post-onboarding</strong><br/>
+Efter endt on-boarding, og såfremt kunden godkender at den aftalte onboarding ydelse er leveret, forbeholder TDC sig retten til at opkræve betaling for udførte tilpasninger/support.
+TDC kan ikke gøres ansvarlige for eventuelle nedbrud i Microsofts platform, da dette alene er en sag mellem Microsoft og kunden. Der er ingen yderligere kompensation ved nedetid, end den definerede kompensation i Microsofts SLA - udbetaling af kompensation er alene et forhold mellem kunden og Microsoft.<br/>
+<br/>
+<strong>Tillægsydelser</strong><br/>
+Support afregnes enten på medgået tid á 1.250 DKK pr. time pr. påbegyndt kvarter, eller via en af de skitserede supportaftaler.			
+			</td>
+		</tr>
+	</table>
+{.elseIf ($is_fiber == TRUE) }
+{.else}
+
+	<div class="breakBefore"></div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<h1>Kontrakt</h1>
+			<h2>1. Kontraktens parter</h2>
+			Der er mellem
+			<br/>
+			<br/>
+			<div style="clear: both">
+				<div style="display:inline-block">
+					{$customer_companyName}<br/>
+					{$customer_address}<br/>
+					{$customer_zipCode} {$customer_city}<br/>
+					CVR {$customer_company_id}<br/>
+				</div>
+				<div style="display:inline-block; margin: 0 30px; vertical-align: top;">
+				og
+				</div>
+				<div style="display:inline-block">
+					{$seller_companyName}<br/>
+					{$seller_address}<br/>
+					{$seller_zipCode} {$seller_city}<br/>
+					CVR {$seller_company_id}<br/>
+				</div>
+			</div>
+			<br/>
+			indgået nærværende kontrakt.
+
+			<h2>2. Kontraktgrundlag</h2>
+			Det samlede kontraktgrundlag for Fordelsaftalen består af følgende dokumenter:<br/>
+			<ul>
+				<li>Nærværende kontrakt</li>
+				<li>Vilkår for TDC Erhverv Fordelsaftale (ver. Februar 2016)</li>
+			</ul>
+			"Vilkår for TDC Erhverv Fordelsaftale" gælder i tillæg til "Generelle Vilkår for levering og drift af TDC’s tjenester" med supplerende tjenestespecifikke abonnementsvilkår og tillægsvilkår for de tjenester og produkter, som aftalen om "TDC Erhverv Fordelsaftale" omfatter. Ved modstrid mellem vilkårene går "Vilkår for TDC Erhverv Fordelsaftale" forud.<br/>
+			
+			<h2>3. Ikrafttræden</h2>
+			Denne kontrakt træder i kraft den: {$contract_start_date}<br/>
+			Kontrakten indgås for en periode af {$contract_length} år. Bindingsperioden for 2-års og 3-års kontrakter er kontraktperioden, og for 4-års kontrakter er bindingsperioden de første 3 år. Kunden kan opsige aftalen ved at betale et udtrædelsesbeløb jf. vilkårene.<br/>
+			
+			<h2>4. Leverance</h2>
+			Kontrakten indeholder følgende leverancer:<br/>
+			
+{.if ($mobile_show == TRUE) }
+			<p><b>TDC Erhverv Fordelsaftale Mobiltelefoni og mobilt bredbånd, incl. Scale mobil abonnementer</b></p>
+			<p>Kontraktsum årligt: DKK {$contract_sum_mobile}
+{.if ($mobile_discount_show == TRUE) }
+			<br/>Rabatsats Abonnement: {$mobile_discount_indland}%, Indland: {$mobile_discount_indland}%, Udland: {$mobile_discount_udland}%
+{/if}
+			</p>
+{/if}
+
+{.if ($fastnet_show == TRUE) }
+			<p><b>TDC Erhverv Fordelsaftale Fastnet (Telerabat), incl. Scale trafik</b></p>			 
+			<p>Kontraktsum årligt: DKK {$contract_sum_fastnet}
+{.if ($fastnet_discount_show == TRUE) }
+			<br/>Rabatsats Fastnet Indland: {$fastnet_discount_fastnet_til_fastnet}%, Udland: {$fastnet_discount_fastnet_til_udland}%, Fastnet til Mobil: {$fastnet_discount_fastnet_til_mobil}%
+{/if}
+			</p>
+			<p>Aftalen indeholder:</p>
+			<ul>
+				<li>Fast operatørvalg hvilket indebærer, at TDC kan overtage forbindelser med fast operatørvalg.</li>
+				<li>Gratis TeleSikring, som kræver kundens skriftlige accept ved ændring til anden operatør.</li>
+			</ul> 
+{/if}
+
+{.if ($broadband_show == TRUE) }
+			<p><b>TDC Erhverv Fordelsaftale Bredbånd ADSL/VDSL</b></p>			 
+			<p>Kontraktsum årligt: DKK {$contract_sum_broadband}
+{.if ($broadband_discount_show == TRUE) }
+			<br/>Rabatsats Abonnement: {$broadband_discount}%
+{/if}
+			</p>
+{/if}
+
+			<h2>5. Underskrifter</h2>
+			<p>Kontraktens indgåelse bekræftes ved ovenstående underskrifter.</p>
+		</div>
+	</div>
+
+	<div class="breakBefore"></div>
+
+	<div class="row vilkaar">
+		<div class="col-sm-12">
+			
+			<h2>Vilkår for TDC Erhverv Fordelsaftale</h2>
+			<p>Februar 2016</p>
+			
+			<h4>1. Omfang</h4>
+			<p>
+			”Vilkår for TDC Erhverv Fordelsaftale” gælder for Kontrakt indgået med ”TDC Erhverv Fordelsaftale”. 
+			</p>
+			<p>
+			”Vilkår for TDC Erhverv Fordelsaftale” gælder i tillæg til ”Generelle Vilkår for levering og drift af TDC’s tjenester” med supplerende tjenestespecifikke abonnementsvilkår og tillægsvilkår for de tjenester og produkter, som aftalen om ”TDC Erhverv Fordelsaftale” omfatter. Ved modstrid mellem vilkårene går ”Vilkår for TDC Erhverv Fordelsaftale” forud. 
+			</p>
+
+			<h4>2. Definitioner</h4>
+			<p>
+			Kontraktsum: Årlig omsætning ekskl. moms og før rabat fra produkter, der er indgået kontrakt om. Den årlige kontraktsum skal være min. 1.000 kr. pr. tjeneste. 
+			</p>
+
+			<p>
+			Kontraktperiode: Perioden som kontrakten mellem kunden og TDC er indgået for. Kontraktperioden er 2, 3 eller 4 år. 
+			</p>
+
+			<p>
+			Bindingsperiode: Perioden hvor kunden er bundet af aftalen med TDC om "TDC Erhverv Fordelsaftale". Kunden kan dog opsige aftalen i bindingsperioden ved at betale et udtrædelsesbeløb, jf. afsnit 9.1. Bindingsperioden for 2-års og 3-års kontrakter er kontraktperioden. For 4-års kontrakter er bindingsperioden de første 3 år. 
+			</p>
+
+			<p>
+			Faktisk omsætning: Kundens årlige omsætning ekskl. moms og før rabat fra produkter, som parterne har indgået kontrakt om. 
+			</p>
+
+			<p>
+			Tjenester: Overordnet produktområder som f.eks. mobil telefoni, fastnettelefoni og bredbånd ADSL/VDSL, hvori produkterne indgår. 
+			</p>
+
+			<p>
+			Produkter: Abonnementer, forbindelser, tillægsprodukter samt indlands og udlands forbrug.
+			</p>
+
+			<h4>3. Forudsætninger for rabat og ikrafttrædelse</h4>
+			<p>
+			Rabat gives kun, såfremt kunden og TDC har indgået en kontrakt, hvori ”TDC Erhverv Fordelsaftale” indgår. 
+			</p>
+
+			<p>
+			Rabatten gives kun for de valgte forbindelser, jf. i pkt. 4 i nærværende vilkår og omfatter kun de produkter fra TDC Erhverv, som er nævnt i nærværende vilkår, punkt 10.
+			</p>
+
+			<p>
+			Aftale om ”TDC Erhverv Fordelsaftale” træder i kraft samtidig med selve kontraktforholdet med kunden, og løber således fra kontraktens ikrafttrædelsestidspunkt og frem til udløbet af fordelsaftalens aftaleperiode. 
+			</p>
+
+			<p>
+			Den underskrevne kontrakt skal være TDC i hænde senest den 15. i måneden før, at selve fordelsrabatten træder i kraft. For mobiltjenester vil fordelsrabatten dog have virkning fra den efterfølgende regningsperiode. Rabatten ydes til udløb af kontraktperioden, og kunden opnår således ikke nødvendigvis fordelsrabat i hele den valgte aftaleperiode.
+			</p>
+
+			<h4>4. Omfattede forbindelser</h4>
+			<p>
+			Rabatten omfatter alle kundens forbindelser knyttet til kontrakten. 
+			</p>
+
+			<p>
+			Kunden kan endvidere vælge, at fordelsrabatten skal omfatte forbindelser hos tredjemand, hvis kunden og tredjemand udgør en koncern i henhold til årsregnskabsloven, eller er organiseret således, at de tilsammen opfylder årsregnskabslovens definitioner for at være en koncern, eller som er kontrolleret af samme ejerkreds, der tilsammen kan udøve bestemmende indflydelse. 
+			</p>
+
+			<p>
+			Hvis fordelsrabatten skal omfatte tredjemandsforbindelser, jf. ovenfor, skal kunden skriftligt oplyse navn og adresse på denne tredjemand samt dennes forbindelser. 
+			</p>
+
+			<p>
+			Hvis kunden senere ønsker yderligere forbindelser omfattet af rabatten, skal kunden rette skriftlig henvendelse til TDC. Forbindelserne indgår i rabatten som beskrevet i afsnit 3. 
+			</p>
+
+			<p>
+			Hvis betingelserne for en eller flere forbindelser, som kan være omfattet af rabatten, ophører, f.eks. som følge af at betingelserne i nærværende punkt ikke længere opfyldes, skal kunden straks give TDC meddelelse herom. De pågældende forbindelser vil ikke være omfattet af fordelsrabatten med virkning fra det tidspunkt, hvor betingelserne for at være omfattet ikke længere er opfyldt.
+			</p>
+
+			<h4>5. Rabat</h4>
+			<p>
+			Kundens rabat er bestemt af følgende forhold:
+			</p>
+			<ul>
+			<li>Produkt</li>
+			<li>Kontraktperiode</li>
+			</ul>
+
+			<p>
+			Rabatten gives på TDC’s til enhver tid gældende listepriser, idet priserne for de valgte tjenester og produkter følger TDC’s til enhver tid gældende listepriser. 
+			</p>
+
+			<p>
+			TDC’s mulighed for ændring af hvilke produkter, som er rabatgivende og rabatsatser, følger de generelle vilkår, jf. pkt. 17 og 19 i de generelle vilkår. 
+			</p>
+
+			<p>
+			Når ”TDC Erhverv Fordelsaftale” ophører – uanset årsag – overgår kunden til TDC's almindelige vilkår og listepriser uden foregående varsel. 
+			</p>
+
+			<p>
+			Efter udløb af en beregningsperiode beregnes kundens rabat. Medmindre andet aftales, afregnes rabatten på den almindelige kvartalsregning.
+			</p>
+
+			<h4>6. Bindingsperiode</h4>
+
+			<p> 	
+			"TDC Erhverv Fordelsaftale” er fra kontraktens ikrafttrædelse bindende for kunden i 2 år ved 2-års kontrakter, og bindende i 3 år for ved 3- og 4-års kontrakter.
+			</p>
+
+			<h4>7. Ændring i valg af tjenester og kontraktperiode</h4>
+			<h4>7.1 Ændring af antal tjenester</h4>
+			<p> 	
+			Såfremt kunden i kontraktperioden ønsker at opnå fordelsrabat på yderligere tjenester end de, som indgår i den nuværende kontrakt, skal der indgås en selvstændig kontrakt for de yderligere tjenester. 
+			</p>
+
+			<p> 	
+			Såfremt kunden i kontraktperioden ønsker at reducere antal tjenester omfattet af den nuværende aftale om fordelsrabat, anses aftalen som opsagt for de aktuelle tjenester, og der skal betales et udtrædelsesbeløb i henhold til pkt. 9 for de tjenester, som ikke længere ønskes omfattet af fordelsrabatten. Aftalen løber videre for de resterende tjenester. 
+			</p>
+
+			<p> 	
+			En tjeneste anses for udgået af ”TDC Erhverv Fordelsaftale”, såfremt kunden ikke længere ønsker tjenesten knyttet til ”TDC Erhverv Fordelsaftale”, eller når der ikke er flere rabatgivende abonnementer knyttet til tjenesten, jf. pkt. 10. 
+			</p>
+
+			<h4>7.2 Ændring af aftaleperiode</h4>
+			<p> 	
+			Kunden kan i kontraktperioden forlænge aftaleperioden for fordelsrabatten. Såfremt forlængelsen berettiger til en højere rabat, vil der ske en regulering heraf for den resterende aftaleperiode. 
+			</p>
+
+			<p> 	
+			Såfremt kunden ønsker at reducere aftaleperioden for fordelsrabatten, anses kontrakten for opsagt, og der vil skulle betales et udtrædelsesbeløb i henhold til pkt. 9. 
+			</p>
+
+			<h4>8. Kundens ændring af og manglende overholdelse af kontraktsum</h4>
+			<p> 	
+			Kontraktsummen kan genforhandles én gang årligt for de efterfølgende år ved, at kunden kontakter TDC 30 dage før/efter årsdagen for kontraktens ikrafttræden.
+			</p>
+
+			<p> 	
+			Såfremt kunden i kontraktperioden ikke opfylder kontraktsummen for de enkelte tjenester således, at den faktiske omsætning pr. tjeneste er under 90 % af den årlige kontraktsum pr. tjeneste, kan TDC kræve betaling på 7% af den årlige kontraktsum for de aktuelle tjenester.
+			</p>
+
+			<p> 	
+			Den faktiske omsætning opgøres én gang årligt.
+			</p>
+
+			<h4>9. Opsigelse og betaling af udtrædelsesbeløb</h4>
+			<p> 	
+			TDC kan til enhver tid opsige ”TDC Erhverv Fordelsaftale” med et varsel på 3 måneder. 
+			</p>
+
+			<p> 	
+			Kunden kan til enhver tid opsige ”TDC Erhverv Fordelsaftale” med 3 måneders varsel til udgangen af et kvartal. Ved opsigelse betaler kunden følgende udtrædelsesbeløb:
+			</p>
+
+			<h4>9.1 Hel eller delvis opsigelse i bindingsperioden</h4>
+			<p> 	
+			Såfremt kunden i bindingsperioden opsiger ”TDC Erhverv Fordelsaftale”, eller hvis kunden opsiger alle tjenester, anser TDC det som en opsigelse af hele aftalen ”TDC Erhverv Fordelsaftale”. 
+			</p>
+
+			<p> 	
+			Såfremt kunden i bindingsperioden opsiger en eller flere, men ikke alle de valgte tjenester, eller opsiger et antal produkter således, at kunden ikke længere opfylder kontraktsummen for en tjeneste med mindst 90%, anser TDC det som en delvis opsigelse af aftalen. Aftalen løber videre for de resterende tjenester. 
+			</p>
+
+			<p> 	
+			I begge ovenstående tilfælde kan TDC kræve rabatten for de opsagte tjenester i perioden fra kontraktindgåelse til opsigelsestidspunktet tilbage. Ydermere kan TDC kræve fuld kompensation for 90% af den aftalte årlige kontraktsum for de opsagte tjenester i den resterende bindingsperiode, som ikke er opfyldt på opsigelsestidspunktet.
+			</p>
+
+			<h4>9.2 Hel eller delvis opsigelse efter udløb af bindings- men i aftaleperioden</h4>
+			<p> 				
+			For 4-års kontrakter gælder, at såfremt kunden efter udløb af bindingsperioden, men i aftaleperioden, opsiger ”TDC Erhverv Fordelsaftale”, eller hvis kunden opsiger alle tjenester, anser TDC det som en opsigelse af hele aftalen ”TDC Erhverv Fordelsaftale”. 
+			</p>
+
+			<p> 	
+			Såfremt kunden efter udløb af bindingsperioden, men i aftaleperioden, opsiger en eller flere, men ikke alle, de valgte tjenester, eller opsiger et antal produkter således, at kunden ikke længere opfylder kontraktsummen for en tjeneste med mindst 90%, anser TDC det som en delvis opsigelse af aftalen. Aftalen løber videre for de resterende tjenester.
+			</p>
+
+			<p> 	
+			I begge ovenstående tilfælde kan TDC kræve betaling af 10% af den årlige kontraktsum pr. opsagt tjeneste for den resterende kontraktperiode.
+			</p>
+
+			<h4>10. Rabatgivende produkter</h4>
+			<h4>10.1 Mobiltelefoni, -data og mobilt bredbånd, herunder Scale mobil abonnementer</h4>
+			<p> 	
+			Kunden får gennem ”TDC Erhverv Fordelsaftale” rabat på abonnement og forbrug som omfattet af nedenstående (der gives ikke rabat på Scale mobil trafik efter nærværende afsnit). 
+			</p>
+
+			<p> 	
+			”TDC Erhverv Fordelsaftale” omfatter alle typer indenlandske samtaler. Omfattet er således samtaler fra mobiltelefon til fastnettelefon, til mobiltelefon, Short Message Service (sms) i Danmark, samt Multi Media Service (MMS/Billed-beskeder). Omfattet er endvidere afsendelse af fax og data i Danmark via mobiltelefon. Der ydes ikke rabat på opkald og samtaler til frikaldsnumre, særtjenestenumre, diverse tillægs- og indholdstakserede tjenester. 
+			</p>
+
+			<p> 	
+			”TDC Erhverv Fordelsaftale” omfatter visse typer udlandstrafik. Omfattet er således samtaler fra mobiltelefon i Danmark til fastnettelefon i udlandet, til mobiltelefon i udlandet, Short Message Service (sms) opkald fra Danmark til udlandet samt Multi Media Service (MMS/Billedbeskeder) fra Danmark til udlandet. Omfattet er endvidere afsendelse af fax og data fra Danmark via mobiltelefonen til udlandet. 
+			</p>
+
+			<p> 	
+			Der ydes ikke rabat på opkald foretaget i udlandet, opkald til udenlandske frikaldsnumre, udenlandske særtjenestenumre eller til andre udenlandske tillægstjenester. 
+			</p>
+
+			<p> 	
+			Der ydes ikke rabat på indenlandsk eller udenlandsk forbrug på de abonnementer, som ikke er rabatberettigede, jf. nedenstående oversigt over abonnementer og tillægsprodukter.
+			</p>
+
+			<p> 	
+			Produkter, der medregnes i kontraktsummen, og som er rabatberettigede:
+			</p>
+
+			<p> 	
+			Abonnementer:
+			</p>
+			
+			<ul><li>TDC Erhverv MobilPakke Forbrugsafregnet 
+			</li><li>TDC Erhverv MobilPakke Basis 
+			</li><li>TDC Erhverv MobilPakke Medium
+			</li><li>TDC Erhverv MobilPakke Ekstra 
+			</li><li>TDC Erhverv MobilPakke Ekstra Udland
+			</li><li>TDC Erhverv MobilMix
+			</li><li>TDC Erhverv Mobil 
+			</li><li>MobilFlex Connect Plus
+			</li><li>MobilFlex Data
+			</li><li>TDC Mobilt Bredbånd Pro 6 Mbit
+			</li><li>TDC Erhverv Mobilt Bredbånd Basis
+			</li><li>TDC Erhverv Mobilt Bredbånd Medio
+			</li><li>TDC Erhverv Mobilt Bredbånd Medio 4G
+			</li><li>TDC Erhverv Mobilt Bredbånd Ekstra, 12+24 mdr.
+			</li><li>TDC Erhverv Mobilt Bredbånd Ekstra 4G, 12+24 mdr. 
+			</li><li>TDC Mobil 
+			</li><li>TDC MobilMix 
+			</li><li>TDC Mobilpakke Basis
+			</li><li>TDC Mobilpakke Medium</li></ul>
+			<p>
+			Tillægsprodukter til TDC Erhverv MobilMix og TDC MobilMix:
+			</p>
+			<ul><li>App Plus
+			</li><li>BudgetPakke (for kunder oprettet før 01.12.2014)
+			</li><li>Datadeling 1
+			</li><li>Datadeling 2
+			</li><li>Datadeling 3
+			</li><li>Fri Intern Tale
+			</li><li>Fri SMS/MMS
+			</li><li>Fri SMS/MMS DK + EU
+			</li><li>TDC Erhverv MobilSikkerhed
+			</li><li>5 Timer
+			</li><li>10 Timer
+			</li><li>20 Timer
+			</li><li>500 MB
+			</li><li>2 GB
+			</li><li>6 GB
+			</li><li>12 GB
+			</li><li>50GB
+			</li><li>100MB EU data
+			</li><li>500MB EU data
+			</li><li>100MB Verden data
+			</li><li>500MB Verden data
+			</li><li>Europa Hjemmezone data
+			</li><li>Verden Partner Hjemmezone data
+			</li><li>DK Hjemmezone
+			</li><li>Europa Hjemmezone
+			</li><li>Europa Hjemmezone+
+			</li><li>Verden Hjemmezone</li></ul>
+			
+			<p>Tillægsprodukter til TDC Erhverv Mobil Ekstra og Ekstra Mobil:</p>
+			<ul><li>Verden Partner Hjemmezone data</li></ul>
+			
+			<p>Tillægsprodukter til TDC Erhverv Mobil:</p>
+			<ul><li>2 timer + ubegrænset sms/mms
+			</li><li>5 timer + ubegrænset sms/mms
+			</li><li>10 timer + ubegrænset sms/mms
+			</li><li>20 timer + ubegrænset sms/mms
+			</li><li>Fri tale + ubegrænset sms/mms
+			</li><li>100 MB data
+			</li><li>500 MB data
+			</li><li>2 GB data
+			</li><li>4 GB data
+			</li><li>12 GB data
+			</li><li>Verden Partner Hjemmezone data</li></ul>
+
+			<p>Øvrige tillægsprodukter:</p>
+
+			<ul><li>Flexdata Large 
+			</li><li>Flexdata Premium
+			</li><li>Flexdata Max
+			</li><li>Flexteam
+			</li><li>Flexteam Total
+			</li><li>Flexteam Basic
+			</li><li>Flexteam Total Basic
+			</li><li>Prioriteret kø
+			</li><li>SMS Pakke
+			</li><li>TDC Flex Talk
+			</li><li>TDC Redundans Mobil Plus, tilkøb af ekstra 30 GB
+			</li><li>TDC Redundans Mobil Plus, tilkøb af ekstra 200 GB</li></ul>
+
+			<p>Produkter, som medregnes i den estimerede kontraktsum, men som ikke er rabatberettigede:</p>
+ 
+			<ul><li>BlackBerry
+			</li><li>EU dagspakke 25MB
+			</li><li>EU dagspakke 100MB
+			</li><li>EU dagspakke 200MB
+			</li><li>EU månedspakke 200MB
+			</li><li>EU månedspakke 500MB
+			</li><li>Øvrige verden dagspakke 25MB
+			</li><li>Øvrige verden dagspakke 100MB
+			</li><li>Øvrige verden månedspakke 50MB
+			</li><li>Mobil Direkte
+			</li><li>Spærringer
+			</li><li>Pro abonnementer
+			</li><li>TDC Flex Talk Plus
+			</li><li>Flexsms
+			</li><li>Scale Flex Talk</li></ul>
+
+			<h4>10.2 Bredbånd ADSL/VDSL</h4>
+			<p>
+			Kunden får gennem ”TDC Erhverv Fordelsaftale” rabat på abonnementer, som er omfattet af nedenstående: 
+			</p>
+			<ul><li>TDC Business Bredbånd, herunder BizBase, MultiBase, ExtraBase og MyBase herunder BizBase op til 5 mbit/s, 10mbit/s, 15 mbit/s og 20mbit/s (20mbit/s er rabatberettiget fra 30.04.2014) 
+			</li><li>TDC Bredbånd Professionel (ekskl. G.SHDSL) 
+			</li><li>TDC VPN MPLS xDSL (ekskl. G.SHDSL)</li></ul>
+
+			<h4>10.3 Fastnettelefoni, herunder Scale trafik</h4>
+			<p>
+			Kunden får gennem ”TDC Erhverv Fordelsaftale” rabat på nationale og internationale kald, samt opkald fra fastnettet mod mobilnettet. Kunden får ikke rabat på abonnementer. 
+			</p>
+			<p>
+			Rabatgivende kategorier: 
+			</p>
+			<p>
+			Fastnet til udland: 
+			</p>
+ 
+			<ul><li>International trafik (PSTN/ISDN). 
+			</li><li>IRGN (International Ring Gratis Nummer). 
+			</li><li>UIRGN (Universelt International Ring Gratis Nummer). 
+			</li><li>Opkaldsafgifter i forbindelse med rabatgivende opkald.
+			</li></ul> 
+
+			<br/>
+			
+			<p>
+			Fastnet til fastnet: 
+			</p>
+			<ul><li>National trafik (PSTN/ISDN). 
+			</li><li>Virksomhedens andel af ankommende fastnettrafik til virksomhedens 80-numre. 
+			</li><li>Opkaldsafgifter i forbindelse med rabatgivende opkald. 
+			</li></ul>
+
+			<br/>
+			
+			<p>
+			Fastnet til mobil: 
+			</p>
+			<ul><li>Opkald fra fastnettet til mobilnet i Danmark. 
+			</li><li>Virksomhedens andel af ankommende mobiltrafik til virksomhedens 80-numre. 
+			</li><li>Opkaldsafgifter i forbindelse med rabatgivende opkald. 
+			</li></ul> 
+
+			<br/>
+			
+			<p>
+			Scale trafik: 
+			</p>
+			<ul><li>Scale trafik. 
+			</li></ul> 
+
+			<h4>11. Rabatsatser</h4>
+			
+			<table class="bordered" style="width:50%">
+				<tr><td colspan="4"><b>Mobiltelefoni, -data og mobilt bredbånd, herunder Scale mobil abonnementer</b></td></tr>
+				<tr><td colspan="4">Abonnement og indlands trafik:</td></tr>
+				<tr><td>Kontraktperiode</td><td>2 år</td><td>3 år</td><td>4 år</td></tr>
+				<tr><td>Rabat</td><td>25%</td><td>27%</td><td>29%</td></tr>
+				<tr><td colspan="4">Udlands trafik:</td></tr>
+				<tr><td>Kontraktperiode</td><td>2 år</td><td>3 år</td><td>4 år</td></tr>
+				<tr><td>Rabat</td><td>22%</td><td>22%</td><td>22%</td></tr>
+			</table>
+			<br/>
+			<table class="bordered" style="width:50%">
+				<tr><td colspan="4"><b>Bredbånd ADSL/VDSL</b></td></tr>
+				<tr><td colspan="4">Abonnement:</td></tr>
+				<tr><td>Kontraktperiode</td><td>2 år</td><td>3 år</td><td>4 år</td></tr>
+				<tr><td>Rabat</td><td>4%</td><td>6%</td><td>8%</td></tr>
+			</table>
+			<br/>
+			<table class="bordered" style="width:50%">
+				<tr><td colspan="4"><b>Fastnet, herunder Scale trafik</b></td></tr>
+				<tr><td colspan="4">Trafik, fastnet til fastnet:</td></tr>
+				<tr><td>Kontraktperiode</td><td>2 år</td><td>3 år</td><td>4 år</td></tr>
+				<tr><td>Rabat</td><td>25%</td><td>30%</td><td>30%</td></tr>
+				<tr><td colspan="4">Trafik, fastnet til udland:</td></tr>
+				<tr><td>Kontraktperiode</td><td>2 år</td><td>3 år</td><td>4 år</td></tr>
+				<tr><td>Rabat</td><td>25%</td><td>30%</td><td>30%</td></tr>
+				<tr><td colspan="4">Trafik, fastnet til mobil:</td></tr>
+				<tr><td>Kontraktperiode</td><td>2 år</td><td>3 år</td><td>4 år</td></tr>
+				<tr><td>Rabat</td><td>5%</td><td>5%</td><td>5%</td></tr>
+			</table>
+		</div>
+	</div>
+	
+{/if}
+
+{.if ($is_fiber_erhverv_rabataftale == TRUE) }
+	<div class="breakBefore"></div>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<h1>TDC ERHVERV RABATAFTALE</h1>
+			<p>Der er mellem</p>
+			
+			<div class="lm-20 rm-20">
+				{$customer_companyName}<br/>
+				{$customer_name}<br/>
+				{$customer_address}<br/>
+				{$customer_zipCode} {$customer_city}<br/>
+				CVR-nr.: {$customer_company_id}<br/>
+			</div>
+			
+			<br/>
+			
+			<div class="lm-20 rm-20">
+				{$seller_companyName}<br/>
+				{$seller_address}<br/>
+				{$seller_zipCode} {$seller_city}<br/>
+				CVR-nr. {$seller_company_id}<br/>
+			</div>
+			
+			<p>Herefter benævnt ”TDC”</p>
+			<p>Hver for sig benævnt Part og samlet benævnt Parterne</p>
+			<p>Indgået nærværende TDC Erhverv Rabataftale (”Aftalen”) vedrørende rabat for de af Aftalen omfattede produkter.</p>
+			<p>For denne Aftale gælder nærværende vilkår og betingelser.</p>
+			<p>Aftalens indgåelse bekræftes ved Parternes ovenstående underskrifter og træder i kraft i overensstemmelse med Aftalens pkt. 11.</p>
+		</div>
+	</div>
+	
+	<hr/>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<p class="bold">TDC Erhverv Rabataftale</p>
+			<p>Marts 2017</p>
+		</div>
+	</div>
+	
+	<div class="med_smaat">
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">1. Aftalens omfang</p>
+				<p>TDC Erhverv Rabataftale (”Aftalen”) gælder i tillæg til den mellem TDC Erhverv og Kunden indgåede kontrakt for levering af de denne aftale omfattede Produkter.</p>
+				<p>Aftalen gælder desuden i tillæg til de Generelle Vilkår for levering og drift af TDC’s tjenester samt supplerende tjenestespecifikke abonnements- og tillægsvilkår for de tjenester og produkter, som Aftalen måtte omfatte (”Produkterne”).</p>
+				<p>Ved modstrid mellem de Generelle Vilkår, tjenestespecifikke abonnements- og tillægsvilkår og Aftalen går nærværende Aftale forud.</p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">2. Definitioner</p>
+				<p><span class="underline">Kontraktsum</span>: med kontraktsum skal forstås den årlige omsætning ekskl. moms og før rabat for de Produkter, der er indgået aftale om. Den årlige kontraktsum, der giver Kunden adgang til en bestemt rabatsats, fremgår af det Produktspecifikke Bilag. Rabatsatserne, som anført i de Produktspecifikke Bilag, gives på Produkternes listepriser. Det er ikke muligt at opnå rabat på Produkter, som er omfattet af en kampagne eller på anden måde allerede har nedsatte priser. Kampagneprodukter og produkter til ikke-listepriser vil dog tælle med i Kontraktsummen, jf. pkt. 3, og vil være omfattet af denne Aftales bestemmelser.</p>
+				<p><span class="underline">Bindingsperiode</span>: Den periode som rabataftalen mellem Kunden og TDC er indgået for. Bindingsperioden kan være enten 1, 2 eller 3 år. Den mellem Kunden og TDC aftalte Bindingsperiode fremgår af det Produktspecifikke Bilag. Bindingsperioden løber fra Aftalens ikrafttrædelsestidspunkt, jf. Aftalens pkt. 11, med mindre andet fremgår af det Produktspecifikke Bilag. Bindingsperioden omfatter alene Kundens forpligtelse til at aftage Produkter til en bestemt Kontraktsum i den mellem Parterne aftalte Bindingsperiode, jf. pkt. 3. Bindingsperioden i nærværende Aftale omfatter ikke de underliggende abonnementsaftaler, som er uopsigelige i overensstemmelse med pkt. 17 i Generelle Vilkår for levering og drift af TDC’s tjenester.</p>
+				<p><span class="underline">Faktisk Omsætning</span>: Kundens årlige reelle omsætning ekskl. moms og før rabat for de Produkter, som Parterne har indgået aftale om og som giver adgang til TDC Erhverv Rabataftale. Den Faktiske Omsætning danner grundlag for en vurdering af, om Kunden har opfyldt kravene til Kontraktsum.</p>
+				<p><span class="underline">Rabatgivende Produkter</span>: De Produkter, som fremgår af det Produktspecifikke Bilag til Aftalen, og som er en forudsætning at Kunden aftager for at få adgang til rabat. De Rabatgivende Produkter kan omfatte abonnementer, forbindelser, tillægsprodukter samt indlandsforbrug, hvilket vil fremgå af det produktspecifikke bilag.</p>
+				<p><span class="underline">Produktspecifikke Bilag</span>: Er det dokument, der indgår som et bilag til Aftalen, og som bl.a. specificerer under hvilke betingelser og for hvilke Produkter Kunden kan opnå rabat, forudsætningerne for rabatten, rabatsatsen, Kontraktsum mv.</p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">3. Forudsætninger for TDC Erhverv Rabataftale</p>
+				<p>Rabatten gives alene, såfremt Kunden og TDC har indgået aftale om en bestemt Kontraktsum. Den mellem Parterne aftalte Kontraktsum fremgår af det Produktspecifikke Bilag.</p>
+				<p>Der gives kun rabat for de Produkter fra TDC, som fremgår af det Produktspecifikke Bilag. Det er ikke muligt at indgå nærværende Rabataftale, såfremt Kunden har indgået en kundespecifk aftale med TDC.</p>
+				<p>Størrelsen af rabatten afhænger af Kontraktsummen og Bindingsperiode. Rabatsatserne samt niveauerne for Kontraktsum, fremgår af de Produktspecifikke Bilag.</p>
+				<p>Det er en forudsætning for at opnå rabat, at Kunden opfylder kravene til Kontraktsum hvert år af Aftalens løbetid.</p>
+				<p>Rabatsatserne, som anført i de Produktspecifikke Bilag, gives på Produkternes listepriser. Det er ikke muligt at kombinere rabatter på samme Produkt eller indenfor samme produktkategori, som denne Aftale er gældende for, fx i forbindelse med en kampagne eller anden form for nedsatte priser. Kampagneprodukter og produkter til ikke-listepriser kan dog tælle med i Kontraktsummen. Disse produkter, som ikke berettiger til rabat efter denne Aftale, vil også fremgå af det Produktspecifikke Bilag.</p>
+				<p>Hvis der efter indgåelsen af Aftalen sker en generel nedsættelse af TDC’s priser på Produkterne omfattet af Aftalen, kan Kunden kræve kontraktsummen for året forholdsmæssigt nedsat (med samme procent). Rabatsatsen i det Produktspecifikke Bilag fastlægges da efter den nedsatte Kontraktsum for året.</p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">4. Rabatgivende Produkter</p>
+				<p>De af Aftalen omfattede Produkter fremgår af et selvstændigt Produktspecifikt Bilag, som udgør en integreret del af nærværende Aftale. Forudsætningerne for at opnå rabat samt satserne herfor, vil fremgå af det Produktspecifikke Bilag.</p>
+				<p>Der vil være særskilte Produktspecifikke Bilag for hvert af de overordnede produktområder, Kunden aftager.</p>
+				<p>Produkterne vil være omfattet af Aftalens vilkår fra det tidspunkt, hvor der er indgået aftale herom mellem Parterne. Dette tidspunkt kan foreligge enten i forbindelse med opdatering af et eksisterende Produktspecifikt Bilag, eller ved indgåelsen af et nyt Produktspecifikt Bilag for et nyt produktområde, som Kunden ikke tidligere har aftaget rabatgivende Produktet indenfor.</p>
+				<p>Kunden er i Aftalens løbetid berettiget til den rabatsats, der fremgår af det Produktspecifikke Bilag, og som Kunden indplaceres på i forbindelse med indgåelse af Aftalen baseret på størrelsen af Kontraktsum og Bindingsperiode. Rabatsatsen er gældende i Bindingsperioden, med mindre andet måtte følge nedenfor eller af det mellem Parterne aftalte.</p>
+				<p>Bestilles der i aftaleperioden nye rabatgivende Produkter, indgår disse ikke som udgangspunkt i den mellem Parterne aftalte Kontraktsum, hvorfor omsætningen på Produkterne ikke får betydning for indplacering i rabatskalaen, medmindre der sker en genforhandling af Kontraktsummen. </p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">5. Bindingsperiode</p>
+				<p>I forbindelse med indgåelsen af nærværende Aftale, fastlægger Kunden og TDC en Bindingsperiode, som angiver den periode Aftalen vil være uopsigelig for Kunden. Bindingsperioden vil fremgå af det Produktspecifikke Bilag og kan variere afhængigt af, hvilke Produkter Aftalen omfatter og det mellem Parterne aftalte.</p>
+				<p>Bindingsperioden kan løbe fra tidspunktet for Aftalens ikrafttrædelse eller efterfølgende, såfremt der mellem Parterne indgås nye Produktspecifikke Bilag til Aftalen, og Parterne for disse efterfølgende Produkter har aftalt en selvstændig Bindingsperiode herfor.</p>
+				<p>Kunden har mulighed for at opsige Aftalen eller et Produktspecifikt Bilag i Bindingsperioden mod betaling af et udtrædelsesbeløb, jf. pkt. 7.</p>
+				<p>Opsiger Kunden sit engagement og de underliggende abonnementsaftaler med TDC, vil dette samtidig medføre opsigelse af nærværende Aftale og tilhørende Produktspecifikke Bilag. Sker denne opsigelse i denne Aftales Bindingsperiode, vil Kunden tilsvarende være forpligtet til at betale et udtrædelsesbeløb, jf. pkt. 7.</p>
+				<p>Ved Aftalens udløb bortfalder rabatterne, medmindre Kunden inden Aftalens udløb indgår aftale om forlængelse af Aftalen. </p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">6. Afregning af rabat </p>
+				<p>Rabatterne omfattet af Aftalen opgøres i henhold til den mellem Partnerne aftalte faktureringsperiode. Rabatten afregnes som udgangspunkt i forbindelse med den almindelige kvartalsregning.</p>
+				<p>Forbrugsintervaller, der i medfør af det Produktspecifikke Bilag berettiger Kunden til rabat, kan være opgjort pr. måned. De rabatsatser, der er anført i det Produktspecifikke Bilag, ydes for samtlige af Kundens omfattede abonnementer for et givent Produkt samt det samlede rabatgivende forbrug i faktureringsperioden. </p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">7. Ændring i Produkter, Bindingsperiode og Kontraktsum</p>
+				<p>Såfremt Kunden i Bindingsperioden ønsker at opnå rabat på yderligere Rabatgivende Produkter end de, som allerede er omfattet af Kundens Aftale, skal der indgås aftale om dette i et selvstændigt Produktspecifikt Bilag for disse Produkter.</p>
+				<p>Såfremt Kunden i Bindingsperioden ønsker at aftage flere Rabatgivende Produkter eller Kunden har et forbrug, der giver en højere Faktisk Kontraktsum, således at Kundens samlede Kontraktsum forøges, skal Kunden være berettiget til at anmode om en genforhandling af Aftalen med henblik på at indtræde i en højere rabatsats, hvis Kontraktsummen berettiger hertil.</p>
+				<p>Såfremt Kunden i Bindingsperioden ønsker at reducere antal Produkter omfattet af den nuværende Aftale, således at Kundens Kontraktsum for det pågældende Produktspecifikke Bilag reduceres til 90 % eller mindre af den aftalte Kontraktsum, anser TDC Aftalen for opsagt for de relevante Produkter, og Kunden er forpligtet til at betale et udtrædelsesbeløb i henhold til nedenstående for de Produkter, som ikke længere ønskes omfattet af Aftalen.</p>
+				<p>Såfremt Kunden ikke i Bindingsperioden opfylder kravene til Kontraktsum, jf. ovenfor, anses Aftalen for misligholdt og TDC er berettiget til at ophæve Aftalen helt eller delvist, herunder kan TDC vælge alene at ophæve de enkelte Produktspecifikke Bilag, som ikke opfylder kravene til Kontraktsum. Såfremt TDC vælger at ophæve hele eller dele af Aftalen, er TDC desuden berettiget til at opkræve 75 % af den tilbageværende Kontraktsum opgjort netto efter rabat for det/de Produktspecifikke Bilag, som har udløst Kundens misligholdelse af Kontraktsummen.</p>
+				<p>Såfremt Kunden i Bindingsperioden opsiger Aftalen, eller hvis Kunden opsiger alle de underliggende Produkter og abonnementsaftaler, der giver adgang til rabat, anser TDC tilsvarende dette for en opsigelse af Aftalen, hvilket berettiger TDC til at kræve et udtrædelsesbeløb svarende til 75 % af den resterende Kontraktsum opgjort netto efter rabat for den/de Produktspecifikke Bilag med 1 og 2-årige Bindingsperioder.</p>
+				<p>TDC er ikke berettiget til at opkræve tilbagebetaling af allerede givet rabat i forbindelse med Kundens misligholdelse af Kontraktsum eller Kundens opsigelse i Bindingsperiode.</p>
+				<p>Ønsker en Kunde med en 3-års Bindingsperiode at opsige Aftalen i Bindingsperioden, opfylder Kunden ikke kravene til Kontraktsum eller har Kunden opsagt de underliggende Produkter, vil TDC tilsvarende anse dette som en ophævelse af Aftalen, og vil efter en konkret vurdering fastsætte et passende tilbagebetalingsbeløb, der afhænger af Kundens Produkter og som aldrig vil overstige 70 % af den tilbageværende Kontraktsum opgjort efter rabat. </p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">8. TDC’s opsigelse</p>
+				<p>TDC kan til enhver tid - også i Bindingsperioden - opsige Aftalen med et varsel på 3 måneder. En opsigelse af Aftalen medfører samtidig, at alle underliggende Produktspecifikke Bilag opsiges med samme ophørstidspunkt som Aftalen.</p>
+				<p>TDC kan tilsvarende opsige de enkelte Produktspecifikke Bilag med et varsel på 3 måneder. </p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">9. Kundens opsigelse og betaling af udtrædelsesbeløb</p>
+				<p>Kunden kan til enhver tid opsige de Produktspecifikke Bilag med et 3-måneders varsel til udgangen af en Bindingsperiode. Kunden kan desuden i Bindingsperioden opsige den samlede Aftale eller enkelte af de Produktspecifikke Bilag med et 3-måneders varsel til udgangen af et kvartal mod betaling af det under pkt. 7 nævnte udtrædelsesbeløb.</p>
+				<p>Opsiger Kunden Aftalen, opsiges samtidig alle underliggende Produktspecifikke Bilag. Opsiges alene ét af Kundens Produktspecifikke Bilag, vil dette ikke berøre de af Kunden øvrige af Aftalen omfattede Produktspecifikke Bilag. </p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">10. Ændring af Rammeaftalen</p>
+				<p>TDC’s ændring af Aftalen og de Produktspecifikke Bilag sker i overensstemmelse med pkt. 19 i TDC’s Generelle Vilkår for levering og drift af TDC’s tjenester. Ændringer, der samlet set er til fordel for Kunden, kan gennemføres straks og uden forudgående varsel. Ændringer til ugunst for Kunden vil blive varslet med minimum 30 dage, før ændringen træder i kraft. </p>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">11. Ikrafttrædelse</p>
+				<p>Såfremt Aftalen er underskrevet senest den 10. i en måned, og modtaget inden dette tidspunkt hos TDC, vil Aftalen træde i kraft fra den efterfølgende 1. i måneden, fra hvilket tidspunkt rabatsatserne vil være effektive.</p>
+				<p>Aftalen løber indtil den opsiges af én af Parterne i overensstemmelse med vilkårene herfor eller med udgangen af Bindingsperiodens udløb. I forbindelse med Aftalens ikrafttræden erstattes alle tidligere indgåede rabataftaler mellem Parterne for de relevante produktområder, som vil være omfattet af nærværende Aftale. </p>
+			</div>
+		</div>
+
+		<hr style="margin-bottom:10px"/>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">Produktspecifikt bilag til TDC Erhverv Rabataftale for TDC Erhverv Netværk som omfatter produkterne TDC Erhverv Bredbånd, DSL, TDC Erhverv Bredbånd, Coax og TDC Erhverv Fiber</p>
+				<p class="bold">1. Kontraktdetaljer</p>
+				<p>Detaljer vedr. aftalen om rabat på TDC Erhverv Bredbånd, DSL, TDC Erhverv Bredbånd, Coax og TDC Erhverv Fiber</p>
+				<div class="rm-20">
+				<table class="bordered" style="width:60%" cellpadding="3">
+						<tr><td>Kontraktsum</td><td>{$rabataftale_kontraktsum_network} Kr.</td></tr>
+						<tr><td>Startdato</td><td>{$contract_start_date_network}</td></tr>
+						<tr><td>Bindingsperiode</td><td>{$contract_length_network} år</td></tr>
+						<tr><td>Udløbsdato</td><td>{$contract_end_date_network}</td></tr>
+						<tr><td>Rabat %</td><td>{$contract_discount_pct_network}</td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<p class="bold">2. Rabatsatser</p>
+				<p>For TDC Erhverv Bredbånd, DSL, TDC Erhverv Bredbånd, Coax og TDC Erhverv Fiber er følgende rabatsatser gældende:</p>
+				<div class="rm-20">
+					<table class="bordered" style="width:80%" cellpadding="3">
+						<thead>
+							<tr><td colspan="2" rowspan="2">Omsætning ex moms fra</td><td colspan="4">Aftaleperiode</td></tr>
+							<tr><td>1 år</td><td>2 år</td><td>3 år</td><td>Trin</td></tr>
+						</thead>
+						<tbody>
+							<tr><td>kr.</td><td>-</td>		<td>13%</td><td>25%</td><td>27%</td><td>1</td></tr>
+							<tr><td>kr.</td><td>40.000</td>	<td>14%</td><td>28%</td><td>30%</td><td>2</td></tr>
+							<tr><td>kr.</td><td>80.000</td>	<td>16%</td><td>31%</td><td>33%</td><td>3</td></tr>
+							<tr><td>kr.</td><td>180.000</td><td>17%</td><td>34%</td><td>36%</td><td>4</td></tr>
+							<tr><td>kr.</td><td>350.000</td><td>19%</td><td>37%</td><td>39%</td><td>5</td></tr>
+							<tr><td>kr.</td><td>700.000</td><td>20%</td><td>40%</td><td>42%</td><td>6</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row med_smaat">
+		<div class="col-sm-12">
+			<p class="bold">3. Rabatgivende produkter</p>
+			<p>Med TDC Erhverv Rabataftale opnås rabat på abonnement på følgende TDC Erhverv Bredbånd, DSL, TDC Erhverv Bredbånd, Coax og TDC Erhverv Fiber produkter:</p>
+
+
+				<table style="width:100%" cellpadding="0">
+					<tr>
+						<td>
+							<div style="margin-bottom:10px">
+								<strong>TDC Erhverv Bredbånd, DSL med hastighederne: </strong>
+							</div>
+							<div class="rm-10">
+								<table class="bordered" style="width:100%" cellpadding="3">
+									<tbody>
+										<tr><td>Produktnummer</td><td></td></tr>
+										<tr><td><strong>ADSL/VDSL</strong></td><td> </td></tr>
+										<tr><td>66 073 01</td><td>TDC Erhverv Bredbånd 160/128, DSL</td></tr>
+										<tr><td>66 073 02</td><td>TDC Erhverv Bredbånd 512/512, DSL</td></tr>
+										<tr><td>66 073 03</td><td>TDC Erhverv Bredbånd 2048/512, DSL</td></tr>
+										<tr><td>66 073 04</td><td>TDC Erhverv Bredbånd 5/1 Mbit, DSL</td></tr>
+										<tr><td>66 073 05</td><td>TDC Erhverv Bredbånd 8/1,3 Mbit, DSL</td></tr>
+										<tr><td>66 073 06</td><td>TDC Erhverv Bredbånd 10/1 Mbit, DSL</td></tr>
+										<tr><td>66 073 07</td><td>TDC Erhverv Bredbånd 20/2 Mbit, DSL</td></tr>
+										<tr><td>66 073 08</td><td>TDC Erhverv Bredbånd 20/2 Mbit, DSL</td></tr>
+										<tr><td>66 073 09</td><td>TDC Erhverv Bredbånd 22/3,5 Mbit, DSL</td></tr>
+										<tr><td>66 073 10</td><td>TDC Erhverv Bredbånd 30/5 Mbit, DSL</td></tr>
+										<tr><td>66 073 11</td><td>TDC Erhverv Bredbånd 40/10 Mbit, DSL</td></tr>
+										<tr><td>66 073 12</td><td>TDC Erhverv Bredbånd 50/10 Mbit,DSL</td></tr>
+										<tr><td>66 073 13</td><td>TDC Erhverv Bredbånd 75/20 Mbit, DSL</td></tr>
+										<tr><td>66 073 14</td><td>TDC Erhverv Bredbånd 100/30 Mbit, DSL</td></tr>
+										<tr><td>66 073 15</td><td>TDC Erhverv Bredbånd 150/50 Mbit, DSL</td></tr>
+										<tr><td>66 073 16</td><td>TDC Erhverv Bredbånd 10/10 Mbit, DSL</td></tr>
+										<tr><td>66 073 17</td><td>TDC Erhverv Bredbånd 15/15 Mbit, DSL</td></tr>
+									</tbody>
+								</table>
+							</div>
+						</td>
+						<td>
+							<div style="margin-bottom:10px">
+								<strong>TDC Erhverv Bredbånd, DSL med hastighederne:</strong>
+							</div>
+							<div class="rm-10">
+								<table class="bordered" style="width:100%" cellpadding="3">
+									<tbody>
+										<tr><td>Produktnummer</td><td></td></tr>
+										<tr><td>66 073 18</td><td>TDC Erhverv Bredbånd 20/20 Mbit, DSL</td></tr>
+										<tr><td>66 073 19</td><td>TDC Erhverv Bredbånd 30/30 Mbit, DSL</td></tr>
+										<tr><td><strong>G.SHDSL</strong></td><td> </td></tr>
+										<tr><td>66 074 01</td><td>TDC Erhverv Bredbånd 1/1 Mbit, DSL</td></tr>
+										<tr><td>66 074 02</td><td>TDC Erhverv Bredbånd 2/2 Mbit, DSL</td></tr>
+										<tr><td>66 074 03</td><td>TDC Erhverv Bredbånd 3/3 Mbit, DSL</td></tr>
+										<tr><td>66 074 04</td><td>TDC Erhverv Bredbånd 5/5 Mbit, DSL</td></tr>
+										<tr><td>66 074 05</td><td>TDC Erhverv Bredbånd10/10 Mbit, DSL</td></tr>
+										<tr><td>66 074 06</td><td>TDC Erhverv Bredbånd15/15 Mbit, DSL</td></tr>
+										<tr><td>66 074 07</td><td>TDC Erhverv Bredbånd20/20 Mbit, DSL</td></tr>
+										<tr><td><strong>Coax</strong></td><td> </td></tr>
+										<tr><td>66 076 16 00</td><td>TDC Erhverv Bredbånd 20/2 Mbit, Coax</td></tr>
+										<tr><td>66 076 17 00</td><td>TDC Erhverv Bredbånd 25/25 Mbit, Coax</td></tr>
+										<tr><td>66 076 18 00</td><td>TDC Erhverv Bredbånd 30/5 Mbit, Coax</td></tr>
+										<tr><td>66 076 19 00</td><td>TDC Erhverv Bredbånd 40/10 Mbit, Coax</td></tr>
+										<tr><td>66 076 20 00</td><td>TDC Erhverv Bredbånd 50/10 Mbit, Coax</td></tr>
+										<tr><td>66 076 21 00</td><td>TDC Erhverv Bredbånd 50/50 Mbit, Coax</td></tr>
+										<tr><td>66 076 22 00</td><td>TDC Erhverv Bredbånd 75/20 Mbit, Coax</td></tr>
+									</tbody>
+								</table>
+							</div>
+						</td>
+						<td>
+							<div style="margin-bottom:10px">
+								<strong>TDC Erhverv Bredbånd, Coax med hastighederne:</strong>
+							</div>
+							<table class="bordered" style="width:100%" cellpadding="3">
+								<tbody>
+									<tr><td>Produktnummer</td><td></td></tr>
+									<tr><td>66 076 23 00</td><td>TDC Erhverv Bredbånd 100/30 Mbit, Coax</td></tr>
+									<tr><td>66 076 24 00</td><td>TDC Erhverv Bredbånd 100/100 Mbit, Coax</td></tr>
+									<tr><td>66 076 25 00</td><td>TDC Erhverv Bredbånd 250/60 Mbit, Coax</td></tr>
+									<tr><td>66 076 26 00</td><td>TDC Erhverv Bredbånd 250/250 Mbit, Coax</td></tr>
+									<tr><td>66 076 27 00</td><td>TDC Erhverv Bredbånd 500/60 Mbit, Coax</td></tr>
+									<tr><td>66 076 28 00</td><td>TDC Erhverv Bredbånd 500/500 Mbit, Coax</td></tr>
+									<tr><td>66 076 29 00</td><td>TDC Erhverv Bredbånd 1000/100 Mbit, Coax</td></tr>
+									<tr><td>66 076 30 00</td><td>TDC Erhverv Bredbånd 1000/500 Mbit, Coax</td></tr>
+								</tbody>
+							</table>
+							<br/>
+							
+							<div style="margin-bottom:10px">
+								<strong>TDC Erhverv Fiber med hastighederne:</strong>
+							</div>
+							<table class="bordered" style="width:100%" cellpadding="3">
+								<tbody>
+									<tr><td>Produktnummer</td><td></td></tr>
+									<tr><td><strong>Fiber</strong></td><td> </td></tr>
+									<tr><td>66 083 01 00</td><td>TDC Erhverv Fiber 25/25 Mbit</td></tr>
+									<tr><td>66 083 02 00</td><td>TDC Erhverv Fiber 50/50 Mbit</td></tr>
+									<tr><td>66 083 03 00</td><td>TDC Erhverv Fiber 100/100 Mbit</td></tr>
+									<tr><td>66 083 04 00</td><td>TDC Erhverv Fiber 250/250 Mbit</td></tr>
+									<tr><td>66 083 05 00</td><td>TDC Erhverv Fiber 500/500 Mbit</td></tr>
+									<tr><td>66 083 07 00</td><td>TDC Erhverv Fiber 1000/500 Mbit</td></tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</table>
+
+			<p>Det er ikke muligt at opnå rabat for produkter, der er købt til en i forvejen nedsat pris, fx i forbindelse med en kampagne.</p>
+		</div>
+	</div>
+{/if}
+
+{.if ($show_rabataftale_one == TRUE) }
+	<div class="breakBefore"></div>
+
+	<div class="row">
+		<div class="med_smaat">
+			<div class="col-sm-12">
+				<p class="bold">Produktspecifikt bilag for {$business_area} og Mobilt Bredbånd</p>
+				<p class="bold">1. Kontraktdetaljer</p>
+				<p>Detaljer vedr. aftalen om rabat på {$business_area} og Mobilt Bredbånd</p>
+				<div class="rm-20">
+				<table class="bordered" style="width:60%" cellpadding="3">
+						<tr><td>Kontraktsum</td><td>{$rabataftale_kontraktsum} Kr.</td></tr>
+						<tr><td>Startdato</td><td>{$contract_start_date}</td></tr>
+						<tr><td>Bindingsperiode</td><td>{$contract_length} år</td></tr>
+						<tr><td>Udløbsdato</td><td>{$contract_end_date}</td></tr>
+						<tr><td>Rabat %</td><td>{$contract_discount_pct}</td></tr>
+						<tr><td>Kunde</td><td>{$customer_companyName}</td></tr>
+						<tr><td>CVR</td><td>{$customer_cvr}</td></tr>
+						<tr><td>Prisaftale 1</td><td>{$prisaftale_1}</td></tr>
+						<tr><td>Prisaftale 2</td><td>{$prisaftale_2}</td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="med_smaat">
+			<div class="col-sm-12">
+				<p class="bold">2. Rabatsatser</p>
+				<p>For {$business_area} og Mobilt Bredbånd er følgende rabatsatser gældende:</p>
+				<div class="rm-20">
+					<table class="bordered" style="width:80%" cellpadding="3">
+						<thead>
+							<tr><td colspan="2" rowspan="2">12 mdr. omsætning ex moms fra</td><td colspan="4">Aftaleperiode</td></tr>
+							<tr><td>1 år</td><td>2 år</td><td>3 år</td><td>Trin</td></tr>
+						</thead>
+						<tbody>
+							<tr><td>kr.</td><td>-</td>		<td>13%</td><td>25%</td><td>27%</td><td>1</td></tr>
+							<tr><td>kr.</td><td>40.000</td>	<td>14%</td><td>28%</td><td>30%</td><td>2</td></tr>
+							<tr><td>kr.</td><td>80.000</td>	<td>16%</td><td>31%</td><td>33%</td><td>3</td></tr>
+							<tr><td>kr.</td><td>180.000</td><td>17%</td><td>34%</td><td>36%</td><td>4</td></tr>
+							<tr><td>kr.</td><td>350.000</td><td>19%</td><td>37%</td><td>39%</td><td>5</td></tr>
+							<tr><td>kr.</td><td>700.000</td><td>20%</td><td>40%</td><td>42%</td><td>6</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="med_smaat">
+			<div class="col-sm-12">
+				<p class="bold">3. Rabatgivende produkter</p>
+				<p>Rabatten gives på abonnement på følgende produkter:</p>
+				<div class="rm-20">
+					<table class="bordered" style="width:60%" cellpadding="3">
+						<tbody>
+							{.loop in $products_with_contract_discount as $product}
+								<tr><td>{$product}</td></tr>
+							{.onEmpty}
+							{/loop}
+							<tr><td>Mobilt Bredbånd 500MB</td></tr>
+							<tr><td>Mobilt Bredbånd 2GB</td></tr>
+							<tr><td>Mobilt Bredbånd 10GB</td></tr>
+							<tr><td>Mobilt Bredbånd 50GB</td></tr>
+							<tr><td>Mobilt Bredbånd 50GB 24 MD</td></tr>
+							<tr><td>Mobilt Bredbånd 200GB</td></tr>
+							<tr><td>Mobilt Bredbånd 500GB</td></tr>
+							<tr><td>Mobilt Bredbånd 1000GB</td></tr>
+						</tbody>
+					</table>
+				</div>
+				{.if ($is_products_with_campaign_discount == TRUE) }
+					<p>Det er ikke muligt at opnå rabat for produkter, der er købt til en i forvejen nedsat pris, fx i forbindelse med en kampagne.</p>
+				{/if}
+			</div>
+		</div>
+	</div>
+
+	{.if ($is_products_with_campaign_discount == TRUE) }
+		<div class="row">
+			<div class="med_smaat">
+				<div class="col-sm-12">
+					<p class="bold">4. Produkter til kampagnepris</p>
+
+					<p>Følgende produkter leveres i kontraktens løbetid tid til følgende kampagnepriser:</p>
+					<div class="rm-20">
+						<table class="bordered" style="width:100%" cellpadding="2">
+							<tbody>
+								{.loop in $products_with_campaign_discount as $product}
+									<tr><td>{$product.id:}</td><td>{$product.name:}</td><td>{$product.price:}</td></tr>
+								{.onEmpty}
+								{/loop}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	{/if}
+{/if}
+
+
+{.if ($show_rabataftale_network == TRUE) }
+	<div class="breakBefore"></div>
+
+	<div class="row">
+		<div class="med_smaat">
+			<div class="col-sm-12">
+				<p class="bold">Produktspecifikt bilag til TDC Erhverv Rabataftale for TDC Erhverv Netværk som omfatter produkterne TDC Erhverv Bredbånd, DSL, TDC Erhverv Bredbånd, Coax og TDC Erhverv Fiber</p>
+				<p class="bold">1. Kontraktdetaljer</p>
+				<p>Detaljer vedr. aftalen om rabat på TDC Erhverv Bredbånd, DSL, TDC Erhverv Bredbånd, Coax og TDC Erhverv Fiber</p>
+				<div class="rm-20">
+				<table class="bordered" style="width:60%" cellpadding="3">
+						<tr><td>Kontraktsum</td><td>{$rabataftale_kontraktsum_network} Kr.</td></tr>
+						<tr><td>Startdato</td><td>{$contract_start_date_network}</td></tr>
+						<tr><td>Bindingsperiode</td><td>{$contract_length_network} år</td></tr>
+						<tr><td>Udløbsdato</td><td>{$contract_end_date_network}</td></tr>
+						<tr><td>Rabat %</td><td>{$contract_discount_pct_network}</td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="med_smaat">
+			<div class="col-sm-12">
+				<p class="bold">2. Rabatsatser</p>
+				<p>For TDC Erhverv Bredbånd, DSL, TDC Erhverv Bredbånd, Coax og TDC Erhverv Fiber er følgende rabatsatser gældende:</p>
+				<div class="rm-20">
+					<table class="bordered" style="width:80%" cellpadding="3">
+						<thead>
+							<tr><td colspan="2" rowspan="2">Omsætning ex moms fra</td><td colspan="4">Aftaleperiode</td></tr>
+							<tr><td>1 år</td><td>2 år</td><td>3 år</td><td>Trin</td></tr>
+						</thead>
+						<tbody>
+							<tr><td>kr.</td><td>-</td>		<td>13%</td><td>25%</td><td>27%</td><td>1</td></tr>
+							<tr><td>kr.</td><td>40.000</td>	<td>14%</td><td>28%</td><td>30%</td><td>2</td></tr>
+							<tr><td>kr.</td><td>80.000</td>	<td>16%</td><td>31%</td><td>33%</td><td>3</td></tr>
+							<tr><td>kr.</td><td>180.000</td><td>17%</td><td>34%</td><td>36%</td><td>4</td></tr>
+							<tr><td>kr.</td><td>350.000</td><td>19%</td><td>37%</td><td>39%</td><td>5</td></tr>
+							<tr><td>kr.</td><td>700.000</td><td>20%</td><td>40%</td><td>42%</td><td>6</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="med_smaat">
+			<div class="col-sm-12">
+				<p class="bold">3. Rabatgivende produkter</p>
+				<p>Med TDC Erhverv Rabataftale opnås rabat på abonnement på følgende TDC Erhverv Bredbånd, DSL, TDC Erhverv Bredbånd, Coax og TDC Erhverv Fiber produkter:</p>
+
+				<table style="width:100%" cellpadding="0">
+					<tr>
+						<td>
+							<div style="margin-bottom:10px">
+								<strong>TDC Erhverv Bredbånd, DSL med hastighederne: </strong>
+							</div>
+							<div class="rm-10">
+								<table class="bordered" style="width:100%" cellpadding="3">
+									<tbody>
+										<tr><td>Produktnummer</td><td></td></tr>
+										<tr><td><strong>ADSL/VDSL</strong></td><td> </td></tr>
+										<tr><td>66 073 01</td><td>TDC Erhverv Bredbånd 160/128, DSL</td></tr>
+										<tr><td>66 073 02</td><td>TDC Erhverv Bredbånd 512/512, DSL</td></tr>
+										<tr><td>66 073 03</td><td>TDC Erhverv Bredbånd 2048/512, DSL</td></tr>
+										<tr><td>66 073 04</td><td>TDC Erhverv Bredbånd 5/1 Mbit, DSL</td></tr>
+										<tr><td>66 073 05</td><td>TDC Erhverv Bredbånd 8/1,3 Mbit, DSL</td></tr>
+										<tr><td>66 073 06</td><td>TDC Erhverv Bredbånd 10/1 Mbit, DSL</td></tr>
+										<tr><td>66 073 07</td><td>TDC Erhverv Bredbånd 20/2 Mbit, DSL</td></tr>
+										<tr><td>66 073 08</td><td>TDC Erhverv Bredbånd 20/2 Mbit, DSL</td></tr>
+										<tr><td>66 073 09</td><td>TDC Erhverv Bredbånd 22/3,5 Mbit, DSL</td></tr>
+										<tr><td>66 073 10</td><td>TDC Erhverv Bredbånd 30/5 Mbit, DSL</td></tr>
+										<tr><td>66 073 11</td><td>TDC Erhverv Bredbånd 40/10 Mbit, DSL</td></tr>
+										<tr><td>66 073 12</td><td>TDC Erhverv Bredbånd 50/10 Mbit,DSL</td></tr>
+										<tr><td>66 073 13</td><td>TDC Erhverv Bredbånd 75/20 Mbit, DSL</td></tr>
+										<tr><td>66 073 14</td><td>TDC Erhverv Bredbånd 100/30 Mbit, DSL</td></tr>
+										<tr><td>66 073 15</td><td>TDC Erhverv Bredbånd 150/50 Mbit, DSL</td></tr>
+										<tr><td>66 073 16</td><td>TDC Erhverv Bredbånd 10/10 Mbit, DSL</td></tr>
+										<tr><td>66 073 17</td><td>TDC Erhverv Bredbånd 15/15 Mbit, DSL</td></tr>
+									</tbody>
+								</table>
+							</div>
+						</td>
+						<td>
+							<div style="margin-bottom:10px">
+								<strong>TDC Erhverv Bredbånd, DSL med hastighederne:</strong>
+							</div>
+							<div class="rm-10">
+								<table class="bordered" style="width:100%" cellpadding="3">
+									<tbody>
+										<tr><td>Produktnummer</td><td></td></tr>
+										<tr><td>66 073 18</td><td>TDC Erhverv Bredbånd 20/20 Mbit, DSL</td></tr>
+										<tr><td>66 073 19</td><td>TDC Erhverv Bredbånd 30/30 Mbit, DSL</td></tr>
+										<tr><td><strong>G.SHDSL</strong></td><td> </td></tr>
+										<tr><td>66 074 01</td><td>TDC Erhverv Bredbånd 1/1 Mbit, DSL</td></tr>
+										<tr><td>66 074 02</td><td>TDC Erhverv Bredbånd 2/2 Mbit, DSL</td></tr>
+										<tr><td>66 074 03</td><td>TDC Erhverv Bredbånd 3/3 Mbit, DSL</td></tr>
+										<tr><td>66 074 04</td><td>TDC Erhverv Bredbånd 5/5 Mbit, DSL</td></tr>
+										<tr><td>66 074 05</td><td>TDC Erhverv Bredbånd10/10 Mbit, DSL</td></tr>
+										<tr><td>66 074 06</td><td>TDC Erhverv Bredbånd15/15 Mbit, DSL</td></tr>
+										<tr><td>66 074 07</td><td>TDC Erhverv Bredbånd20/20 Mbit, DSL</td></tr>
+										<tr><td><strong>Coax</strong></td><td> </td></tr>
+										<tr><td>66 076 16 00</td><td>TDC Erhverv Bredbånd 20/2 Mbit, Coax</td></tr>
+										<tr><td>66 076 17 00</td><td>TDC Erhverv Bredbånd 25/25 Mbit, Coax</td></tr>
+										<tr><td>66 076 18 00</td><td>TDC Erhverv Bredbånd 30/5 Mbit, Coax</td></tr>
+										<tr><td>66 076 19 00</td><td>TDC Erhverv Bredbånd 40/10 Mbit, Coax</td></tr>
+										<tr><td>66 076 20 00</td><td>TDC Erhverv Bredbånd 50/10 Mbit, Coax</td></tr>
+										<tr><td>66 076 21 00</td><td>TDC Erhverv Bredbånd 50/50 Mbit, Coax</td></tr>
+										<tr><td>66 076 22 00</td><td>TDC Erhverv Bredbånd 75/20 Mbit, Coax</td></tr>
+									</tbody>
+								</table>
+							</div>
+						</td>
+						<td>
+							<div style="margin-bottom:10px">
+								<strong>TDC Erhverv Bredbånd, Coax med hastighederne:</strong>
+							</div>
+							<table class="bordered" style="width:100%" cellpadding="3">
+								<tbody>
+									<tr><td>Produktnummer</td><td></td></tr>
+									<tr><td>66 076 23 00</td><td>TDC Erhverv Bredbånd 100/30 Mbit, Coax</td></tr>
+									<tr><td>66 076 24 00</td><td>TDC Erhverv Bredbånd 100/100 Mbit, Coax</td></tr>
+									<tr><td>66 076 25 00</td><td>TDC Erhverv Bredbånd 250/60 Mbit, Coax</td></tr>
+									<tr><td>66 076 26 00</td><td>TDC Erhverv Bredbånd 250/250 Mbit, Coax</td></tr>
+									<tr><td>66 076 27 00</td><td>TDC Erhverv Bredbånd 500/60 Mbit, Coax</td></tr>
+									<tr><td>66 076 28 00</td><td>TDC Erhverv Bredbånd 500/500 Mbit, Coax</td></tr>
+									<tr><td>66 076 29 00</td><td>TDC Erhverv Bredbånd 1000/100 Mbit, Coax</td></tr>
+									<tr><td>66 076 30 00</td><td>TDC Erhverv Bredbånd 1000/500 Mbit, Coax</td></tr>
+								</tbody>
+							</table>
+							<br/>
+
+							<div style="margin-bottom:10px">
+								<strong>TDC Erhverv Fiber med hastighederne:</strong>
+							</div>
+							<table class="bordered" style="width:100%" cellpadding="3">
+								<tbody>
+									<tr><td>Produktnummer</td><td></td></tr>
+									<tr><td><strong>Fiber</strong></td><td> </td></tr>
+									<tr><td>66 083 01 00</td><td>TDC Erhverv Fiber 25/25 Mbit</td></tr>
+									<tr><td>66 083 02 00</td><td>TDC Erhverv Fiber 50/50 Mbit</td></tr>
+									<tr><td>66 083 03 00</td><td>TDC Erhverv Fiber 100/100 Mbit</td></tr>
+									<tr><td>66 083 04 00</td><td>TDC Erhverv Fiber 250/250 Mbit</td></tr>
+									<tr><td>66 083 05 00</td><td>TDC Erhverv Fiber 500/500 Mbit</td></tr>
+									<tr><td>66 083 07 00</td><td>TDC Erhverv Fiber 1000/500 Mbit</td></tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</table>
+
+				<p>Det er ikke muligt at opnå rabat for produkter, der er købt til en i forvejen nedsat pris, fx i forbindelse med en kampagne.</p>
+			</div>
+		</div>
+	</div>
+{/if}
+
+
+
+</body>
+</html>
+

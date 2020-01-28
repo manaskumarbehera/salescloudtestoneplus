@@ -1,0 +1,19 @@
+<html xmlns:wicket="http://wicket.apache.org">
+    <body>
+        <wicket:panel>
+        	<div wicket:id="beforeWidget"></div>
+        	
+        	<div class="panel" wicket:id="widgetContainer">
+        		<div class="panel-heading">
+        			<div wicket:id="widgetHead">Head</div>
+        		</div>
+        		<div class="panel-body">
+        			<div wicket:id="widgetBody">Body</div>
+	                <wicket:child/>
+        		</div>
+        	</div>
+        	
+        	<div wicket:id="afterWidget"></div>
+        </wicket:panel>
+    </body>
+</html>

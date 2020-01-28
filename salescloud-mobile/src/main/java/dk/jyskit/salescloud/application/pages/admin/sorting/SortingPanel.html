@@ -1,0 +1,31 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<body>
+	<wicket:panel>
+		<div class="control-group">
+            <div class="form-group">
+	            <label class="control-label col-sm-5" for="sorting">Sortering</label>
+				<div class="col-sm-7 ">
+					<table id="sorting">
+						<tr wicket:id="list">
+							<td class="bookmark-item"><span wicket:id="name"></span></td>
+							<td>
+								<span class="bookmark-controls">
+									&nbsp; 
+									<a wicket:id="up"></a>  
+								</span>
+							</td>
+							<td>
+								<span class="bookmark-controls"> 
+									&nbsp; 
+									<a wicket:id="down"></a> 
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+            </div>
+        </div>
+	</wicket:panel>
+</body>
+</html>

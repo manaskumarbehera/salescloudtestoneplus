@@ -1,0 +1,64 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+
+<wicket:head>
+	<style type="text/css">
+		div.group label {
+			font-size: 13px;
+			font-weight: normal;
+			vertical-align: middle;
+		}
+		div.group input {
+			vertical-align: middle;
+		}
+	</style>
+</wicket:head>
+
+<body>
+	<wicket:panel>
+		<div class="row">
+			<div class="col-md-4 group" style="padding-left:7px; padding-right:7px; ">
+				<div class="panel panel-default">
+					<div class="panel-heading">Tale</div>
+					<div class="panel-body">
+						<span valign="top" wicket:id="speechTime">
+							<input type="radio">radio 1</input>
+							<input type="radio">radio 2</input>
+						</span>
+						<hr>
+						<div wicket:id="speechAddonCheckBoxes">
+							<input wicket:id="checkBox" type="checkbox"></input><label wicket:id="label"></label>
+						</div>
+					</div>
+				</div>			
+			</div>					
+			<div class="col-md-4 group" style="padding-left:7px; padding-right:7px; ">
+				<div class="panel panel-default">
+					<div class="panel-heading">Data</div>
+					<div class="panel-body">
+						<span valign="top" wicket:id="dataAmount">
+							<input type="radio">radio 1</input>
+							<input type="radio">radio 2</input>
+						</span>
+						<hr>
+						<div wicket:id="dataAddonCheckBoxes">
+							<input wicket:id="checkBox" type="checkbox"></input><label wicket:id="label"></label>
+						</div>
+					</div>
+				</div>			
+			</div>					
+			<div class="col-md-4 group" style="padding-left:7px; padding-right:7px; ">
+				<div class="panel panel-default">
+					<div class="panel-heading">Tilvalg</div>
+					<div class="panel-body">
+						<div wicket:id="addonCheckBoxes">
+							<input wicket:id="checkBox" type="checkbox"></input><label wicket:id="label"></label>
+						</div>
+					</div>
+				</div>			
+			</div>					
+		</div>					
+	</wicket:panel>
+</body>
+</html>

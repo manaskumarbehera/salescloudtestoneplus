@@ -1,0 +1,258 @@
+table.table {
+	clear: both;
+	margin-bottom: 6px !important;
+	max-width: none !important;
+}
+
+table.table thead th.wicket_orderNone { background: url('images/sort_both.png') no-repeat center right; }
+table.table thead th.wicket_orderUp { background: url('images/sort_asc.png') no-repeat center right; }
+table.table thead th.wicket_orderDown { background: url('images/sort_desc.png') no-repeat center right; }
+
+div.currentpageinfo {
+	padding-top: 8px;
+}
+div.dataTables_length select {
+	margin-bottom: 0px;
+}
+div.dataTables_filter input {
+	margin-bottom: 0px;
+}
+.dataTables_filter .input-group {
+	max-width: 250px;
+}
+
+form.filterForm {
+	margin: 0px;
+}
+
+select.noofrecords { width: 75px; }
+
+
+/***
+Responsive & Scrollable Tables (inspired by http://www.keenthemes.com/preview/metronic_admin/table_responsive.html)
+***/
+
+.table-scrollable {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid #dddddd;
+  margin: 10px 0 !important;
+}
+
+.table-scrollable .table {
+  width: 100% !important;
+  margin: 0 !important;
+  margin-bottom: 0;
+  background-color: #fff;
+}
+
+.table-scrollable .table > thead > tr > th,
+.table-scrollable .table > tbody > tr > th,
+.table-scrollable .table > tfoot > tr > th,
+.table-scrollable .table > thead > tr > td,
+.table-scrollable .table > tbody > tr > td,
+.table-scrollable .table > tfoot > tr > td {
+  white-space: nowrap;
+}
+
+.table-scrollable .table-bordered {
+  border: 0;
+}
+
+.table-scrollable .table-bordered > thead > tr > th:first-child,
+.table-scrollable .table-bordered > tbody > tr > th:first-child,
+.table-scrollable .table-bordered > tfoot > tr > th:first-child,
+.table-scrollable .table-bordered > thead > tr > td:first-child,
+.table-scrollable .table-bordered > tbody > tr > td:first-child,
+.table-scrollable .table-bordered > tfoot > tr > td:first-child {
+  border-left: 0;
+}
+
+.table-scrollable .table-bordered > thead > tr > th:last-child,
+.table-scrollable .table-bordered > tbody > tr > th:last-child,
+.table-scrollable .table-bordered > tfoot > tr > th:last-child,
+.table-scrollable .table-bordered > thead > tr > td:last-child,
+.table-scrollable .table-bordered > tbody > tr > td:last-child,
+.table-scrollable .table-bordered > tfoot > tr > td:last-child {
+  border-right: 0;
+}
+
+.table-scrollable .table-bordered > thead > tr:last-child > th,
+.table-scrollable .table-bordered > tbody > tr:last-child > th,
+.table-scrollable .table-bordered > tfoot > tr:last-child > th,
+.table-scrollable .table-bordered > thead > tr:last-child > td,
+.table-scrollable .table-bordered > tbody > tr:last-child > td,
+.table-scrollable .table-bordered > tfoot > tr:last-child > td {
+  border-bottom: 0;
+}
+
+/***
+Responsive Flip Scroll Tables
+***/
+
+.flip-scroll table { width: 100%; }
+
+@media only screen and (max-width: 800px) {
+  .flip-scroll .flip-content:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+  .flip-scroll * html .flip-content { zoom: 1; }
+  .flip-scroll *:first-child+html .flip-content { zoom: 1; }
+  
+  .flip-scroll table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+ 
+  .flip-scroll th,
+  .flip-scroll td { margin: 0; vertical-align: top; }
+  .flip-scroll th { 
+    text-align: left; 
+    border: 0 !important; 
+    border-bottom: 1px solid #ddd !important; 
+    border-right: 1px solid #ddd !important; 
+    font-size: 13px !important;
+    padding: 5px;
+    width: auto !important;
+  }
+  
+  .flip-scroll table { display: block; position: relative; width: 100%; }
+  .flip-scroll thead { 
+    display: block; 
+    float: left; 
+  }
+  .flip-scroll tbody { 
+    display: block; 
+    width: auto; 
+    position: relative; 
+    overflow-x: auto; 
+    white-space: nowrap;     
+  }
+  .flip-scroll thead tr { display: block; }
+  .flip-scroll th { display: block; text-align: right; }
+  .flip-scroll tbody tr { display: inline-block; vertical-align: top; margin-left: -5px; }
+  .flip-scroll td { display: block; min-height: 1.25em; text-align: left; border-top: 0 !important; border-left: 0 !important; border-right: 0 !important} 
+ 
+  /* sort out borders */
+ 
+  .flip-scroll th { border-bottom: 0; border-left: 0; }
+  .flip-scroll td { border-left: 0; border-right: 0; border-bottom: 0; }
+  .flip-scroll tbody tr { border-left: 1px solid #ddd; }
+  .flip-scroll th:last-child,
+  .flip-scroll td:last-child { border-bottom: 1px solid #ddd; }
+}
+
+.flip-scroll-full table { width: 100%; }
+
+.flip-scroll-full .flip-content:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+.flip-scroll-full * html .flip-content { zoom: 1; }
+.flip-scroll-full *:first-child+html .flip-content { zoom: 1; }
+
+.flip-scroll-full table { width: 100%; border-collapse: collapse; border-spacing: 0; }
+
+.flip-scroll-full th,
+.flip-scroll-full td { margin: 0; vertical-align: top; }
+.flip-scroll-full th { 
+  text-align: left; 
+  border: 0 !important; 
+  border-bottom: 1px solid #ddd !important; 
+  border-right: 1px solid #ddd !important; 
+  font-size: 13px !important;
+  padding: 5px;
+  width: auto !important;
+}
+
+.flip-scroll-full table { display: block; position: relative; width: 100%; }
+.flip-scroll-full thead { 
+  display: block; 
+  float: left; 
+}
+.flip-scroll-full tbody { 
+  display: block; 
+  width: auto; 
+  position: relative; 
+  overflow-x: auto; 
+  white-space: nowrap;     
+}
+.flip-scroll-full thead tr { display: block; }
+.flip-scroll-full th { display: block; text-align: right; }
+.flip-scroll-full tbody tr { display: inline-block; vertical-align: top; margin-left: -5px; }
+.flip-scroll-full td { display: block; min-height: 1.25em; text-align: left; border-top: 0 !important; border-left: 0 !important; border-right: 0 !important} 
+
+/* sort out borders */
+
+.flip-scroll-full th { border-bottom: 0; border-left: 0; }
+.flip-scroll-full td { border-left: 0; border-right: 0; border-bottom: 0; }
+.flip-scroll-full tbody tr { border-left: 1px solid #ddd; }
+.flip-scroll-full th:last-child,
+.flip-scroll-full td:last-child { border-bottom: 1px solid #ddd; }
+
+/***
+From Twitter Bootstrap but modified
+***/
+@media(max-width:767px){
+	.table-scrollbar{
+		width:100%;
+		margin-bottom:15px;
+		overflow-x:scroll;
+		overflow-y:hidden;
+		border:1px solid #ddd;
+		-ms-overflow-style:-ms-autohiding-scrollbar;
+		-webkit-overflow-scrolling:touch
+	}
+	
+	.table-scrollbar .table{
+		margin-bottom:0
+	}
+	
+	.table-scrollbar .table>thead>tr>th,.table-scrollbar>.table>tbody>tr>th,.table-scrollbar>.table>tfoot>tr>th,.table-scrollbar>.table>thead>tr>td,.table-scrollbar>.table>tbody>tr>td,.table-scrollbar>.table>tfoot>tr>td{
+		white-space:nowrap
+	}
+	
+	.table-scrollbar .table-bordered{
+		border:0
+	}
+	
+	.table-scrollbar .table-bordered>thead>tr>th:first-child,.table-scrollbar>.table-bordered>tbody>tr>th:first-child,.table-scrollbar>.table-bordered>tfoot>tr>th:first-child,.table-scrollbar>.table-bordered>thead>tr>td:first-child,.table-scrollbar>.table-bordered>tbody>tr>td:first-child,.table-scrollbar>.table-bordered>tfoot>tr>td:first-child{
+		border-left:0
+	}
+	
+	.table-scrollbar .table-bordered>thead>tr>th:last-child,.table-scrollbar>.table-bordered>tbody>tr>th:last-child,.table-scrollbar>.table-bordered>tfoot>tr>th:last-child,.table-scrollbar>.table-bordered>thead>tr>td:last-child,.table-scrollbar>.table-bordered>tbody>tr>td:last-child,.table-scrollbar>.table-bordered>tfoot>tr>td:last-child{
+		border-right:0
+	}
+	
+	.table-scrollbar .table-bordered>tbody>tr:last-child>th,.table-scrollbar>.table-bordered>tfoot>tr:last-child>th,.table-scrollbar>.table-bordered>tbody>tr:last-child>td,.table-scrollbar>.table-bordered>tfoot>tr:last-child>td{
+		border-bottom:0
+	}
+}
+
+.table-scrollbar-full{
+	width:100%;
+	margin-bottom:15px;
+	overflow-x:scroll;
+	overflow-y:hidden;
+	border:1px solid #ddd;
+	-ms-overflow-style:-ms-autohiding-scrollbar;
+	-webkit-overflow-scrolling:touch
+}
+
+.table-scrollbar-full .table{
+	margin-bottom:0
+}
+
+.table-scrollbar-full .table>thead>tr>th,.table-scrollbar-full>.table>tbody>tr>th,.table-scrollbar-full>.table>tfoot>tr>th,.table-scrollbar-full>.table>thead>tr>td,.table-scrollbar-full>.table>tbody>tr>td,.table-scrollbar-full>.table>tfoot>tr>td{
+	white-space:nowrap
+}
+
+.table-scrollbar-full .table-bordered{
+	border:0
+}
+
+.table-scrollbar-full .table-bordered>thead>tr>th:first-child,.table-scrollbar-full>.table-bordered>tbody>tr>th:first-child,.table-scrollbar-full>.table-bordered>tfoot>tr>th:first-child,.table-scrollbar-full>.table-bordered>thead>tr>td:first-child,.table-scrollbar-full>.table-bordered>tbody>tr>td:first-child,.table-scrollbar-full>.table-bordered>tfoot>tr>td:first-child{
+	border-left:0
+}
+
+.table-scrollbar-full .table-bordered>thead>tr>th:last-child,.table-scrollbar-full>.table-bordered>tbody>tr>th:last-child,.table-scrollbar-full>.table-bordered>tfoot>tr>th:last-child,.table-scrollbar-full>.table-bordered>thead>tr>td:last-child,.table-scrollbar-full>.table-bordered>tbody>tr>td:last-child,.table-scrollbar-full>.table-bordered>tfoot>tr>td:last-child{
+	border-right:0
+}
+
+.table-scrollbar-full .table-bordered>tbody>tr:last-child>th,.table-scrollbar-full>.table-bordered>tfoot>tr:last-child>th,.table-scrollbar-full>.table-bordered>tbody>tr:last-child>td,.table-scrollbar-full>.table-bordered>tfoot>tr:last-child>td{
+	border-bottom:0
+}
+

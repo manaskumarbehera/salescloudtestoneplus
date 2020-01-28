@@ -1,0 +1,61 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<body>
+	<wicket:extend>
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col-md-8"> -->
+<!-- 				<div wicket:id="introPanel"></div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-md-4"> -->
+<!-- 				<div wicket:id="miscPanel"></div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<div class="row"> -->
+<!-- 			<div wicket:id="withHelp"> -->
+<!-- 				<div class="col-md-8"> -->
+<!-- 					<div wicket:id="mainPanel1"></div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4"> -->
+<!-- 					<div wicket:id="helpPanel"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div wicket:id="withoutHelp"> -->
+<!-- 				<div class="col-md-12"> -->
+<!-- 					<div wicket:id="mainPanel2"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
+		
+
+		<div wicket:id="withHelp" class="row">
+			<div class="col-md-8">
+				<div wicket:id="introPanel"></div>
+				<div wicket:id="mainPanel"></div>
+			</div>
+			<div class="col-md-4">
+				<div wicket:id="miscPanel"></div>
+				<div wicket:id="helpPanel"></div>
+			</div>
+		</div>
+		
+		<div wicket:id="withoutHelp">
+			<div class="row">
+				<div class="col-md-8">
+					<div wicket:id="introPanel"></div>
+				</div>
+				<div class="col-md-4">
+					<div wicket:id="miscPanel"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div wicket:id="mainPanel"></div>
+				</div>
+			</div>
+		</div>
+
+	</wicket:extend>
+</body>
+</html>

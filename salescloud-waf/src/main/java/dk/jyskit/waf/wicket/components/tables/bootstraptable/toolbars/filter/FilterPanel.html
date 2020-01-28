@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+    <title></title>
+</head>
+<body>
+<wicket:panel>
+	<div class="row">
+		<div class="col-md-6">
+			<wicket:enclosure child="noOfRecords">
+				<div id="example_length" class="dataTables_length">
+					<label>
+						<select wicket:id="noOfRecords" size="1" class="noofrecords ">
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select> <wicket:message key="recordsPerPage">records per page</wicket:message></label>
+				</div>
+			</wicket:enclosure>
+		</div>
+		<div class="col-md-6">
+			<div class="dataTables_filter">
+				<form wicket:id="filterForm" class="pull-right form-inline" role="form">
+					<div class="form-group">
+						<select wicket:id="stateFilter" size="1" class="noofrecords form-control input-sm ">
+							<option value="50">50</option>
+							<option value="100">100</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<span class="input-group">
+							<input wicket:id="searchText" type="text" class="input-sm form-control">
+							<span class="input-group-btn">
+								<button wicket:id="filter" type="button" class="btn btn-sm btn-default">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</wicket:panel>
+</body>
+</html>

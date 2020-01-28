@@ -1,0 +1,81 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<body>
+	<wicket:extend>
+		<div wicket:id="nonLoginInfo">
+			<div wicket:id="updateContainer" class="mb10">
+				<a wicket:id="updateLink" target="_blank" class="btn btn-default">Gem / Check status</a>
+			</div>
+			
+			<div class="mb10">
+				<span wicket:id="status" class="label label-info"></span>
+			</div>
+			
+			<div wicket:id="acceptContainer" class="mb10">
+				<a wicket:id="acceptLink" target="_blank" class="btn btn-primary">Godkend data</a>
+			</div>
+			
+			<a wicket:id="downloadLink" target="_blank" class="btn btn-primary">Download data</a>
+			
+			<a wicket:id="nabs" target="_blank" class="btn btn-default mb10">Tastegrundlag (Nabs)</a>
+			<a wicket:id="kvik" target="_blank" class="btn btn-default mb10">Tastegrundlag (Kvik)</a>
+			
+			<!-- 
+			<br/>
+			<a wicket:id="leaveContract" class="btn btn-primary">Afslut kundesag (kan åbnes igen)</a>
+			 -->
+			
+			<div wicket:id="contractStatusContainer" class="form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-sm-3">Kontraktstatus</label>
+					<div class="col-sm-5">
+						<select wicket:id="contractStatus" class="form-control"></select>
+					</div> 
+				</div> 
+			</div>
+			
+			<wicket:enclosure child="informSeller">
+				<div class="well">
+					<strong>Når licenser er konfigureret</strong>
+					<div wicket:id="informSeller">
+						<ul style="margin-bottom: 0px">
+							<li>Sæt kontraktstatus til Implementeret</li>
+							<li>Husk at lukke sagen i Salesforce</li>
+							<li>Husk at registrere tid i Timelog</li>
+						</ul>
+					</div>
+				</div>
+			</wicket:enclosure>
+		</div>
+
+		<wicket:enclosure child="enableLoginContainer">
+			<div class="well">
+				<div wicket:id="enableLoginContainer" class="mb10">
+					<a wicket:id="enableLoginLink" target="_blank" class="btn btn-primary">Bed kunde om at indtaste data</a>
+				</div>
+			</div>
+		</wicket:enclosure>
+
+		<wicket:enclosure child="loginInfo">
+			<div class="well">
+				<strong>Kopier nedenstående information og send til kunde via mail</strong>
+				<div wicket:id="loginInfo" style="margin-top: 10px">
+					Login information for ekstern adgang til konfigurering.
+					<table>
+						<tr><td style="padding-left:15px;">URL</td><td style="padding-left:10px;"><span wicket:id="url"></span></td></tr>
+						<tr><td style="padding-left:15px;">Brugernavn</td><td style="padding-left:10px;"><span wicket:id="username"></span></td></tr>
+						<tr><td style="padding-left:15px;">Kodeord</td><td style="padding-left:10px;"><span wicket:id="password"></span></td></tr>
+					</table>
+				</div> 
+			</div>
+		</wicket:enclosure>
+		
+		<a wicket:id="logoutLink" target="_blank" class="btn btn-primary" style="float: left; margin-right: 10px;">Log ud</a>
+		
+<!-- 		<div wicket:id="backToSummaryContainer" class="mb10" style="float: left; margin-right: 10px;"> -->
+<!-- 			<a wicket:id="backToSummaryLink" target="_blank" class="btn btn-default">Tilbage til sammenfatning</a> -->
+<!-- 		</div> -->
+	</wicket:extend>
+</body>
+</html>

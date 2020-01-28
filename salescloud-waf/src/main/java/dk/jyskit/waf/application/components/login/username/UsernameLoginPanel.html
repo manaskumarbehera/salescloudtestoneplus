@@ -1,0 +1,48 @@
+<html xmlns:wicket="http://wicket.apache.org/">
+<head>
+	<wicket:head>
+		<style type="text/css">
+			#login-wrapper {
+				margin-top: 100px;
+			}
+			@media (max-width: 980px) {
+				#login-wrapper {
+					margin-top: 25px;
+				}
+			}
+		</style>
+	</wicket:head>
+</head>
+<body>
+	<wicket:panel>
+		<div class="row" id="login-wrapper">
+			<div class="col-md-4 col-md-offset-4">
+	    		<div class="panel panel-default">
+				  	<div class="panel-heading">
+				    	<h3 class="panel-title"><wicket:message key="login.header">Please sign in</wicket:message></h3>
+				 	</div>
+				  	<div class="panel-body">
+				    	<form wicket:id="loginForm" accept-charset="UTF-8" role="form">
+		                    <fieldset>
+								<div wicket:id="feedback"></div>
+								<input wicket:id="width" type="hidden">
+
+					    	  	<div class="form-group">
+					    		    <input wicket:id="username" class="form-control" placeholder="Brugernavn" name="username" type="text">
+					    		</div>
+					    		<div class="form-group">
+					    			<input wicket:id="password" class="form-control" placeholder="Kodeord" name="password" type="password" value="">
+					    		</div>
+					    		<input class="btn btn-lg btn-primary btn-block" type="submit" wicket:message="value:login">
+					    	</fieldset>
+				      	</form>
+				    </div>
+				</div>
+			</div>
+		</div>
+		<script>
+			document.getElementById("width").value = window.screen.width;
+		</script>
+	</wicket:panel>
+</body>
+</html>

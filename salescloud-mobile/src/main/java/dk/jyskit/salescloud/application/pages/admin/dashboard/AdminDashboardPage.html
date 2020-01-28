@@ -1,0 +1,60 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<head>
+	<wicket:head>
+		<style type="text/css">
+			.total-row {
+				background-color: #f0f0f9;
+				font-weight: bold;
+			}
+		</style>
+	</wicket:head>
+</head>
+<body>
+	<wicket:extend>
+		<div class="panel panel-default">
+        	<div class="panel-heading">
+            	<h3 class="panel-title">Indstillinger for statistik og rullende data</h3>
+        	</div>
+        	<div class="panel-body">
+            	<div wicket:id="settingsForm"></div>
+        	</div>
+       	</div>
+		
+		<div class="panel panel-default">
+        	<div class="panel-heading">
+            	<h3 class="panel-title">Statistik</h3>
+        	</div>
+        	<div wicket:id="chartContainer" class="panel-body">
+            	<div wicket:id="chart"></div>
+        	</div>
+       	</div>
+		
+		<div class="panel panel-default">
+        	<div class="panel-heading">
+            	<h3 class="panel-title">31 dages rullende data</h3>
+        	</div>
+        	<div class="panel-body">
+            	<div wicket:id="rollingData"></div>
+        	</div>
+       	</div>
+		
+		<div wicket:id="adminFeatures" class="panel panel-default">
+	        <div class="panel-heading">
+    	        <h3 class="panel-title">Admin funktioner</h3>
+        	</div>
+        	<div class="panel-body">
+	            <p>
+	            	<a wicket:id="contractsSpreadsheet" target="_blank" class="btn btn-primary">Download alle kontrakter</a>
+	            	<a wicket:id="productsSpreadsheet" target="_blank" class="btn btn-primary">Download alle produkter</a>
+	            	<a wicket:id="usersSpreadsheet" target="_blank" class="btn btn-primary">Download alle brugere</a>
+	            	<a wicket:id="fixInconsistencies" target="_blank" class="btn btn-primary">Korrigér problemer i gamle kontrakter</a>
+	            	<form wicket:id="maintenance"></form>
+	            </p>
+    	    </div>
+       	</div>
+        
+	</wicket:extend>
+</body>
+</html>

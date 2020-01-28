@@ -1,0 +1,1 @@
+delete from bundleproductrelationtag where not id in (select tag_id from ppr_tag);

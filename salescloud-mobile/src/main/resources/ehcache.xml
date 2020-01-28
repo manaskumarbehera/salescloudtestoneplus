@@ -1,0 +1,70 @@
+<ehcache>
+    <!--Default Cache configuration. These will applied to caches programmatically created through
+        the CacheManager.
+
+        The following attributes are required:
+
+        maxElementsInMemory            - Sets the maximum number of objects that will be created in memory
+        eternal                        - Sets whether elements are eternal. If eternal,  timeouts are ignored and the
+                                         element is never expired.
+        overflowToDisk                 - Sets whether elements can overflow to disk when the in-memory cache
+                                         has reached the maxInMemory limit.
+
+        The following attributes are optional:
+        timeToIdleSeconds              - Sets the time to idle for an element before it expires.
+                                         i.e. The maximum amount of time between accesses before an element expires
+                                         Is only used if the element is not eternal.
+                                         Optional attribute. A value of 0 means that an Element can idle for infinity.
+                                         The default value is 0.
+        timeToLiveSeconds              - Sets the time to live for an element before it expires.
+                                         i.e. The maximum time between creation time and when an element expires.
+                                         Is only used if the element is not eternal.
+                                         Optional attribute. A value of 0 means that and Element can live for infinity.
+                                         The default value is 0.
+        -->
+
+    <!-- The only acceptable use of Hibernate caching with ehcache in our cluster is
+        to read data that is rarely updated, and where a delay of an hour is acceptable.
+        These caches should be configured in the Hibernate-mapping as "read-only",
+        and a timeout is defined here.
+         If we upgrade to a cluster-wide transactional cache this might change
+         Perme 050927 -->
+
+    <diskStore path="user.dir/nariano"/> <!-- defined to avoid conflict with other ears. Disk should not be used -->
+
+    <defaultCache
+        maxElementsInMemory="10000"
+        eternal="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+        overflowToDisk="false"
+        />
+        
+ 	
+    <!--
+    Tracks the timestamps of the most recent updates to particular tables.
+    It is important that the cache timeout of the underlying cache implementation
+    be set to a higher value than the timeouts of any of the query caches.
+    In fact, we recommend that the the underlying cache
+    not be configured for expiry at all.
+    Note, in particular, that an LRU cache expiry policy is never appropriate.
+    -->
+    <cache name="org.hibernate.cache.UpdateTimestampsCache"
+        maxElementsInMemory="1000"
+        eternal="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+        overflowToDisk="false"
+            />
+    <!--
+    Config for unnamed query caching.
+    If you have serious use for query cache, please name and configure separately
+    -->
+    <cache name="org.hibernate.cache.StandardQueryCache"
+        maxElementsInMemory="100"
+        eternal="false"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="600"
+        overflowToDisk="false"
+            />
+</ehcache>

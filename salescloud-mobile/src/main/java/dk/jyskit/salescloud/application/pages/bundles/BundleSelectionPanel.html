@@ -1,0 +1,66 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<body>
+	<wicket:panel>
+		<form wicket:id="form">
+			<div>
+				<button wicket:id="prevButtonTop" class="btn btn-primary" type="button">Tilbage</button>
+				<button wicket:id="nextButtonTop" class="btn btn-primary" type="button">Videre</button>
+				<button wicket:id="otherBundlesButtonTop" class="btn btn-default" type="button"><span wicket:id="label"></span></button>
+			</div>
+			
+			<div class="row">
+				<div wicket:id="bundles" class="bundle-box mb20" >
+					<div class="bundle">
+						<div class="bundle-header">
+							<div class="bundle-name">
+								<input wicket:id="checkbox" type="checkbox"/>
+								<span wicket:id="name"></span>
+							</div>
+						</div>
+						
+						<div class="bundle-product bundle-product-primary-container">
+							<div wicket:id="primaryProducts" class="bundle-product-primary">
+								<span wicket:id="productName"></span>
+							</div>
+						</div>
+						
+						<div class="bundle-product bundle-product-secondary-container">
+							<div wicket:id="secondaryProducts" class="bundle-product-secondary">
+								<span wicket:id="productName"></span>
+							</div>
+							<div wicket:id="tertiaryProducts" class="bundle-product bundle-product-tertiary">
+								<span wicket:id="productName"></span>
+							</div>
+						</div>
+						
+						<div wicket:id="optionalProductsContainer" class="bundle-product bundle-product-optional-container">
+							<div wicket:id="optionalProducts" class="bundle-product-optional">
+								<span wicket:id="productName"></span>
+							</div>
+						</div>
+						
+						<div wicket:id="nonoptionalProductsContainer" class="bundle-product bundle-product-nonoptional-container">
+							<div wicket:id="nonoptionalProducts" class="bundle-product-nonoptional">
+								<span wicket:id="productName"></span>
+							</div>
+						</div>
+					</div>
+					
+					<input wicket:id="countNew" 		type="number" class="form-control"/>
+					<input wicket:id="countExisting" 	type="number" class="form-control"/>
+
+					<div wicket:id="addonsForm"></div>
+				</div>
+			</div>
+			
+			<div>
+				<button wicket:id="prevButton" class="btn btn-primary" type="button">Tilbage</button>
+				<button wicket:id="nextButton" class="btn btn-primary" type="button">Videre</button>
+				<button wicket:id="otherBundlesButton" class="btn btn-default" type="button"><span wicket:id="label"></span></button>
+			</div>
+		</form>
+	</wicket:panel>
+</body>
+</html>

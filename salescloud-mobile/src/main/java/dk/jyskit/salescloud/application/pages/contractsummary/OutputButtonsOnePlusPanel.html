@@ -1,0 +1,28 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<body>
+	<wicket:extend>
+		<div class="row ">
+			<div class="col-md-12">
+				<h3>Dokumenter til kunden</h3>
+				<span wicket:id="customerDocuments">
+					<a wicket:id="link" target="_blank" style="margin-top: 4px" class="btn btn-default"><span wicket:id="title"></span></a>
+				</span>
+
+				<h3>Dokumenter til Salesforce</h3>
+				<div wicket:id="tastebilagsproblem"></div>
+				<span wicket:id="salesforceDocuments">
+					<a wicket:id="link" target="_blank" style="margin-top: 4px" class="btn btn-default"><span wicket:id="title"></span></a>
+				</span>
+
+				<h3 style="">Rabataftale</h3>
+				<span wicket:id="rabataftaleDocuments" style="">
+					<a wicket:id="link" target="_blank" style="margin-top: 4px" class="btn btn-default"><span wicket:id="title"></span></a>
+				</span>
+			</div>
+		</div>
+	</wicket:extend>
+</body>
+</html>
+

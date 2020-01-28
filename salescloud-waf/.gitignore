@@ -1,0 +1,10 @@
+/bin
+/gradle.properties
+/.classpath
+/.settings
+/.project
+/.gradle
+/build/
+/.nb-gradle/profiles/private/
+/hs_err*
+*.bak

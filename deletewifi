@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<style type="text/css" id="dk-jyskit-waf-application-components-login-username-UsernameLoginPanel-0">
+/*<![CDATA[*/
+
+			#login-wrapper {
+				margin-top: 100px;
+			}
+			@media (max-width: 980px) {
+				#login-wrapper {
+					margin-top: 25px;
+				}
+			}
+		
+/*]]>*/
+</style>
+	
+	<title>Login</title>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<link rel="stylesheet" type="text/css" href="./wicket/resource/de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesomeCssReference/css/font-awesome.min-ver-FEDA974A77EA5783B8BE673F142B7C88.css" />
+<link rel="stylesheet" type="text/css" href="./wicket/resource/dk.jyskit.salescloud.application.pages.base.themes.magicbootstrap.TdcTheme/css/magic-bootstrap-ver-585D13DBAB90BD36D9E18A229F4E73F2.css" />
+<link rel="stylesheet" type="text/css" href="./wicket/resource/dk.jyskit.salescloud.application.pages.base.themes.magicbootstrap.TdcTheme/css/custom-ver-9D14FBD41A0704A796EF86BE0CAAB981.css" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans%7CPT+Serif%7CMonaco" />
+<!--[if lt IE 9]><script type="text/javascript" src="./wicket/resource/dk.jyskit.salescloud.application.pages.base.themes.magicbootstrap.TdcTheme/js/html5shiv-ver-8B274205CD64482D27ED1B0DAFFA3DC0.js"></script>
+<![endif]-->
+<!--[if lt IE 9]><script type="text/javascript" src="./wicket/resource/dk.jyskit.salescloud.application.pages.base.themes.magicbootstrap.TdcTheme/js/respond.min-ver-9CCCBCD9BC6AED2BB14DF1013E185CE3.js"></script>
+<![endif]-->
+</head>
+<body>
+	<div class=" mainbar navbar-default navbar" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="./"> 
+				<img src="./wicket/resource/dk.jyskit.salescloud.application.pages.base.themes.magicbootstrap.TdcTheme/images/tdc_logo_42x36-ver-BAD607C25E22381843D82B76A4D721A6.png" alt="TDC">
+				</a>
+			</div>
+	
+			<div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation" id="collapsef">
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div>
+		<div class="row" id="login-wrapper">
+			<div class="col-md-4 col-md-offset-4">
+	    		<div class="panel panel-default">
+				  	<div class="panel-heading">
+				    	<h3 class="panel-title">Log ind i TDC Salgskonfigurator</h3>
+				 	</div>
+				  	<div class="panel-body">
+				    	<form accept-charset="UTF-8" role="form" id="id2" method="post" action="./login?1-1.IFormSubmitListener-login-loginForm"><div style="width:0px;height:0px;position:absolute;left:-100px;top:-100px;overflow:hidden"><input type="hidden" name="id2_hf_0" id="id2_hf_0" /></div>
+		                    <fieldset>
+								<div>
+  
+</div>
+								
+					    	  	<div class="form-group">
+					    		    <input class="form-control" placeholder="Brugernavn" name="username" type="text" value="" id="id1">
+					    		</div>
+					    		<div class="form-group">
+					    			<input class="form-control" placeholder="Kodeord" name="password" type="password" value="">
+					    		</div>
+					    		<input class="btn btn-lg btn-primary btn-block" type="submit" value="">
+					    	</fieldset>
+				      	</form>
+				    </div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	</div>
+	<script type="text/javascript" src="./wicket/resource/org.apache.wicket.resource.JQueryResourceReference/jquery/jquery-1.11.2.min-ver-5790EAD7AD3BA27397AEDFA3D263B867.js"></script>
+<script type="text/javascript" src="./wicket/resource/org.apache.wicket.ajax.AbstractDefaultAjaxBehavior/res/js/wicket-event-jquery.min-ver-2A8B8EF9295A81B4FF15AA3DE14044D7.js"></script>
+<script type="text/javascript" src="./wicket/resource/de.agilecoders.wicket.core.markup.html.references.JQueryMigrateJavaScriptReference/js/jquery-migrate-1.2.1.min-ver-EB05D8D73B5B13D8D84308A4751ECE96.js"></script>
+<script type="text/javascript" id="bootstrap-js" defer="defer" src="./wicket/resource/de.agilecoders.wicket.webjars.request.resource.WebjarsJavaScriptResourceReference/webjars/bootstrap/3.3.2/js/bootstrap.min-ver-046BA2B5F4CFF7D2EAAA1AF55CAA9FD8.js"></script>
+<script type="text/javascript" >
+/*<![CDATA[*/
+Wicket.Event.add(window, "load", function(event) { 
+document.getElementById('id1').focus();;
+;});
+/*]]>*/
+</script>
+ 
+</body>
+</html>
+
+
+
