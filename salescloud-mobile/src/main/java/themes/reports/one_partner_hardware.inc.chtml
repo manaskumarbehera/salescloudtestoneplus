@@ -1,0 +1,81 @@
+<%@ var baseHref: String %>
+<%@ var currency: java.text.NumberFormat %>
+<%@ var dateNow: String %>
+<%@ var documentFooter: String %>
+<%@ var contract: dk.ngdata.tdconfig.model.Contract %>
+<%@ var oneTimeFeeLines: Seq[dk.ngdata.tdconfig.model.OrderLine] %>
+<%@ var partnerOneTimeFeeLines: Seq[dk.ngdata.tdconfig.model.OrderLine] %>
+<%@ var etableringsprisIalt: Long %>
+<%@ var hardwareIalt: Long %>
+<%@ var hardwareLoebetid: Int %>
+<%@ var rateBetalingIalt: Long %>
+<%@ var rateBetalingMonthly: Long %>
+
+	<div class="row">
+		<div class="col-sm-7">
+			<div class="bold">Specifikation af hardware i udstyrsaftale</div>
+			<div>Jævnfør support- og rate aftale TDC Erhverv One, specificerer dette bilag det omfattede hardware i udstyrsaftalen.</div>
+
+            <br/>
+			<table width="100%" border="0">
+			  <tr>
+			    <td width="10%" class="border bold">Antal</td>
+			    <td width="90%" class="border bold">Beskrivelse</td>
+			  </tr>
+			  	#for (line <- contract.getPartner.getHardware.getOrderLines)
+				  <tr>
+				    <td class="border">${line.getCount}</td>
+				    <td class="border">${line.getProduct.getName} ${line.getProduct.getGuiName}</td>
+				  </tr>
+			  	#end
+			</table>
+			<div>
+			  * Produktet er omfattet af bytteret/service<br/>
+			  ** Produktet er omfattet af ${hardwareLoebetid} måneders udvidet garanti
+			</div>
+
+			<!--table width="100%" border="0">
+				{.loop in $remarks as $remark}
+				  <tr>
+				    <td>{$remark.stars} {$remark.text}</td>
+				  </tr>
+				{.onEmpty}
+				{/loop}
+			</table-->
+
+            <br/>
+			<div class="bold">Pris</div>
+			<table width="100%" border="0">
+			  <tr>
+			    <td>Sum udstyrsaftale pr. måned</td>
+			    <td> </td>
+			    <td class="right"><span class="doubleUnderline">${currency.format(hardwareIalt / hardwareLoebetid / 100)}</span></td>
+			  </tr>
+			  <tr>
+			    <td colspan="3">Månedsprisen indgår i den samlede rate betaling.</td>
+			  </tr>
+			</table>
+			<br/>
+
+			<div class="bold">Bytteret/service</div>
+			<div>Produktet leveres med bytteret ved defekt. Bytteret giver mulighed for
+1 ombytning pr. aftaleår. Eventuelle ombytninger er ikke bundet til
+kalenderåret. Mere end én ombytning kan derfor godt finde sted i samme
+aftaleår. Bytteret udbydes og serviceres af TDC Erhvervscenter.
+Denne aftale løber over ${hardwareLoebetid / 12} år.</div>
+
+            <br/>
+			<div class="bold">Udvidet garanti</div>
+			<div>Udvidet garanti dækker over forlængelse af reklamationsfristen til at
+omfattet den ovenfor nævnte periode.</div>
+
+            <br/>
+			<div class="bold">Øvrigt udstyr</div>
+			<div>Øvrigt udstyr er omfattet af 12 måneders reklamationsret</div>
+
+		</div>
+		<div class="col-sm-4 pull-right">
+			<img class="media" src="img/hardware_aftale.png"/>
+		</div>
+	</div>
+

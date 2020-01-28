@@ -1,0 +1,17 @@
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<title>ControlGroup</title>
+	</head>
+	<body>
+		<wicket:border>
+			<div class="form-group">
+				<label wicket:id="label" style="display: none" class="col-sm-2 control-label">Text input</label>
+				<div wicket:id="editorCol" class="col-sm-10">
+					<wicket:body/>
+				</div>                
+                <p wicket:id="error" class="help-block"></p>
+				<p wicket:id="help" class="help-block">Supporting help text</p>
+			</div>
+		</wicket:border>
+	</body>
+</html>

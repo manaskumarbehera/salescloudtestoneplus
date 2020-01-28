@@ -1,0 +1,74 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<body>
+	<wicket:panel>
+		<form wicket:id="form" class="form-horizontal">
+			<div class="row">
+				<div class="col-md-4 col-sm-4 mb20" wicket:id="firstBundles" >
+					<div class="bundle">
+						<div class="bundle-header">
+							<div class="bundle-name">
+								<span wicket:id="name"></span>
+							</div>
+						</div>
+						
+						<div class="bundle-product bundle-product-primary-container">
+							<div wicket:id="primaryProducts" class="bundle-product-primary">
+								<span wicket:id="productName"></span>
+							</div>
+						</div>
+					</div>
+					
+					<input wicket:id="bundleSelection" type="checkbox" class="form-control" style="margin:4px 0 0 0; box-shadow:none;"/>
+				</div>
+			</div>
+			<div wicket:id="allSecondBundles" class="row">
+				<div class="col-md-4 col-sm-4 mb20" wicket:id="secondBundles" >
+					<div class="bundle">
+						<div class="bundle-header">
+							<div class="bundle-name">
+								<span wicket:id="name"></span>
+							</div>
+						</div>
+
+						<div class="bundle-product bundle-product-primary-container">
+							<div wicket:id="primaryProducts" class="bundle-product-primary">
+								<span wicket:id="productName"></span>
+							</div>
+						</div>
+					</div>
+
+					<input wicket:id="bundleSelection" type="checkbox" class="form-control" style="margin:4px 0 0 0; box-shadow:none;"/>
+				</div>
+			</div>
+
+			<wicket:enclosure child="installationTypeDropdownContainer">
+				<div class="form-group">
+					<label class="control-label col-sm-3">Vælg installation</label>
+					<div wicket:id="installationTypeDropdownContainer" class="col-sm-7">
+						<select wicket:id="installation" class="form-control" ></select>
+					</div>
+				</div>
+			</wicket:enclosure>
+
+			<div wicket:id="installationUserProfilesContainer">
+				<div class="form-group">
+					<label class="control-label col-sm-3">Installation - brugere</label>
+					<div class="col-sm-7">
+						<select wicket:id="installationTypeUserProfiles" class="form-control" ></select>
+					</div>
+				</div>
+			</div>
+			<div wicket:id="installationBusinessContainer">
+				<div class="form-group">
+					<label class="control-label col-sm-3">Installation - virksomhed</label>
+					<div class="col-sm-7">
+						<select wicket:id="installationTypeBusiness" class="form-control" ></select>
+					</div>
+				</div>
+			</div>
+		</form>
+	</wicket:panel>
+</body>
+</html>

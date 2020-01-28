@@ -1,0 +1,71 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<head>
+	<wicket:head>
+		<style type="text/css">
+			.led-container {
+				display: inline-flex;
+			}
+			
+			.led-box {
+			  height: 20px;
+			  width: 20px;
+			  margin: 2px 2px 0 0;
+			  float: left;
+			}
+			
+			.led-box p {
+			  font-size: 12px;
+			  text-align: center;
+			  margin: 1em;
+			}
+			
+			.led-red {
+			  margin: 0 auto;
+			  width: 16px;
+			  height: 16px;
+			  background-color: #F00;
+			  border-radius: 50%;
+			  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 4px 1px, inset #441313 0 -1px 5px, rgba(255, 0, 0, 0.5) 0 2px 7px;
+			}
+			.led-yellow {
+			  margin: 0 auto;
+			  width: 16px;
+			  height: 16px;
+			  background-color: #FF0;
+			  border-radius: 50%;
+			  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 4px 1px, inset #808002 0 -1px 5px, #FF0 0 2px 7px;
+			}
+			.led-green {
+			  margin: 0 auto;
+			  width: 16px;
+			  height: 16px;
+			  background-color: #ABFF00;
+			  border-radius: 50%;
+			  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 4px 1px, inset #304701 0 -1px 5px, #89FF00 0 2px 7px;
+			}
+			.led-blue {
+			  margin: 0 auto;
+			  width: 16px;
+			  height: 16px;
+			  background-color: #24E0FF;
+			  border-radius: 50%;
+			  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 4px 1px, inset #006 0 -1px 5px, #3F8CFF 0 2px 7px;
+			}
+		</style>
+	</wicket:head>
+</head>
+<body>
+	<wicket:panel>
+		<div class="led-container">
+			<div class="led-box">
+				<div wicket:id="statusSales" title="Salg" class="led-green"></div>
+			</div>
+			<div class="led-box">
+				<div wicket:id="statusImplementation" title="Implementering" class="led-yellow"></div>
+			</div>
+		</div>
+	</wicket:panel>
+</body>
+</html>

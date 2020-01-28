@@ -1,0 +1,35 @@
+<wicket:head>
+</wicket:head>
+
+<wicket:panel>
+	<div class="imagepreview" style="display:inline-block;">
+		<div wicket:id="modeView">
+			<img wicket:id="image" height="100" alt=""/><br/>
+			<wicket:enclosure><a href="#" wicket:id="fullSizeImage">Fuld størrelse</a> &nbsp;&nbsp; </wicket:enclosure><a wicket:id="showUploadLink">Skift billede</a>
+		</div>
+		
+		<div wicket:id="modeUpload">
+			<form wicket:id="uploadSubForm">
+				Nyt billede: <input wicket:id="file" type="file"/><br/>
+				<div class="form-buttons">
+					<input wicket:id="goToCropping" type="button" class="button" value="Upload den valgte fil"/>&nbsp; <a wicket:id="cancelUpload">Fortryd</a><br/>
+				</div>
+				<div wicket:id="feedback"></div>
+			</form>
+		</div>
+		
+		<div wicket:id="modeCrop">
+			<div wicket:id="cropImage"></div>
+		</div>
+		
+		<div wicket:id="modeSave">
+			<form wicket:id="uploadSubForm">
+				<img wicket:id="finalImage" height="100" alt=""/><br/>
+				<div class="form-buttons">
+					<input wicket:id="acceptCropping" type="submit" class="button" value="Gem billede"/>&nbsp; <a wicket:id="cancelCropping">Fortryd</a><br/>
+				</div>
+				<div wicket:id="feedback"></div>
+			</form>
+		</div>
+	</div>
+</wicket:panel>

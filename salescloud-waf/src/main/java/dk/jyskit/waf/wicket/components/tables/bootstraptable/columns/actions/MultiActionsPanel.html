@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:wicket="http://wicket.apache.org/">
+<head>
+<wicket:head>
+	<style type="text/css">
+		.tbl-row-link {
+			display: inline-block;
+			margin-right: 3px;
+			margin-bottom: 3px;
+		}
+	</style>
+</wicket:head>
+</head>
+<body>
+	<wicket:panel>
+        <span wicket:id="actions" class="tbl-row-link">
+        	<button wicket:id="link" class="btn btn-default btn-xs" type="button"><i wicket:id="icon"></i>&nbsp;<span wicket:id="text"></span></button>
+       	</span>
+        <wicket:child/>
+	</wicket:panel>
+</body>
+</html>

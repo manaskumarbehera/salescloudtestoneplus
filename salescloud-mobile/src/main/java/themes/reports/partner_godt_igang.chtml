@@ -1,0 +1,362 @@
+<html>
+<head>
+<style type="text/css">
+	/* Inspiration: https://github.com/zopyx/zopyx.smartprintng.plone/tree/cb1252601617324cf5513f65686dd4eb1e4b90a4/zopyx/smartprintng/plone/resources_default */
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	html {
+		margin: 0;
+		padding: 0;
+	}
+	
+	body {
+		font-size: 11px;
+		font-family: "ArialUnicode", Verdana, Arial, sans-serif;
+		line-height: 1.5em;
+		margin: 0;
+		padding: 0;
+	}
+
+	div.header {
+		display: block;
+		text-align: center;
+		position: running(header);
+	}
+	
+	div.footer {
+		display: block;
+		text-align: center;
+		position: running(footer);
+	}
+	
+	div.breakBefore {
+		page-break-before: always;
+	}
+	
+	div.breakAfter {
+		page-break-after: always;
+	}
+	
+	h1 {
+		font-size: 200%;
+		margin-top: 0;
+		padding-bottom: 0px;
+		line-height: 1.2em;
+	}
+	
+	h2 {
+		font-size: 133%;
+		padding-bottom: 0px;
+		line-height: 1.2em;
+	}
+	
+	h3 {
+		font-size: 115%;
+		padding-top: 10px;
+		padding-bottom: 0px;
+		margin-bottom: 0px;
+		line-height: 1.2em;
+	}
+	
+	h4, h5, h6 {
+		font-size: 100%;
+		line-height: 1.2em;
+	}
+	
+	.bold {
+	    font-weight: bold;
+	}
+
+	p {
+		line-height: 1.77em;
+	}
+	
+	table {
+		empty-cells: show; 
+		border-collapse: collapse; 
+	}
+	
+	table.dark {
+		background-color: #F2F5F5;
+	}
+	
+	tr.total {
+		font-weight: bold;
+	} 
+	
+	td {
+		border: thin solid #F2F5F5;
+	}	
+	
+	table.noborder td.border {
+		border: thin solid black;
+	}
+	
+	td.noborder {
+		border: none;
+	}	
+	
+	table.noborder td {
+		border: none;
+	}	
+	
+	.extraLineHeight {
+		line-height: 2.4em;
+	}
+	
+	pre {
+		font-size: 0.775em;
+		background-color: #eeeeee;
+		color: black;
+		white-space: pre-wrap;
+		margin-left: 1em;
+		margin-right: 1em;
+		padding: 0.5em;
+		font-family: "Courier New";
+		border: thin solid black;
+		border-radius: 8px;
+		padding: 0.4em;
+	}
+	
+	.border {
+		border: thin solid black;
+	}
+	
+	tt {
+		font-family: Courier;
+		background: #dddddd;
+	}	
+
+	.row {
+		margin-left: 0px;
+		margin-right: 0px;
+		padding: 0px;
+		width: 100%;
+		clear: both;
+		display: inline-block;
+	}
+	
+	.col-sm-1 { width: 8.3333%; }	
+	.col-sm-2 { width: 16.6666%; }	
+	.col-sm-3 { width: 25%; }
+	.col-sm-4 { width: 33.3333%; }
+	.col-sm-5 { width: 41.6666%; }	
+	.col-sm-6 { width: 50%; }
+	.col-sm-7 { width: 58.3333%; }	
+	.col-sm-8 { width: 66.6666%; }
+	.col-sm-9 { width: 75%; }	
+	.col-sm-10 { width: 83.3333%; }	
+	.col-sm-11 { width: 91.6666%; }	
+	.col-sm-12 { width: 100%; }
+	
+	.col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11,.col-sm-12
+		{
+		min-height: 1px;
+		float: left;
+		padding: 0px;
+	}
+	
+	.lm-10 { margin-left: 10px; }
+	.lm-20 { margin-left: 20px; }
+	.lm-30 { margin-left: 30px; }
+	.rm-10 { margin-right: 10px; }
+	.rm-20 { margin-right: 20px; }
+	.rm-30 { margin-right: 30px; }
+	
+	@page {
+		size: A4 portrait;
+		margin-top: 2.54cm;
+		margin-bottom: 2.54cm;
+		margin-left: 1.27cm;
+		margin-right: 0cm;
+		@top-center { 
+			content:element(header)
+		}
+	}
+	
+	@page { 
+		@bottom-right { 
+			content:element(footer);
+		}
+	}
+	
+	#pagenumber:before {
+		content: counter(page);
+	}
+	
+	#pagecount:before {
+		content: counter(pages);
+	}
+	
+	.reportlisting {
+		list-style: none;
+	}
+	
+	img.reportImage{
+		width: 100%;
+	}
+	
+	.right {
+		text-align: right;
+	}
+	
+	.pull-right {
+		float: right !important;
+	}
+	
+	.media {
+		width: 100%;
+	}
+</style>
+</head>
+
+<body>
+	<div class="panel-heading header">
+		<h2>{$document_header:}</h2>
+	</div>
+	
+	<div class="panel-footer footer">
+		{$date:}   -   {$document_footer:}   -   Side <span id="pagenumber"></span> af <span id="pagecount"></span>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-7">
+			<p>Mellem</p>
+			
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td>{$partner_companyName}</td>
+			  </tr>
+			  <tr>
+			    <td>{$partner_address}</td>
+			  </tr>
+			  <tr>
+			    <td>{$partner_zipCode} {$partner_city}</td>
+			  </tr>
+			</table>
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td width="10%">CVR:</td>
+			    <td>{$partner_company_id}</td>
+			  </tr>
+			</table>
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td>Herefter benævnt TDC Erhvervscenter</td>
+			  </tr>
+			</table>
+			
+			<p>Og</p>
+			
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td>{$customer_companyName}</td>
+			  </tr>
+			  <tr>
+			    <td>{$customer_address}</td>
+			  </tr>
+			  <tr>
+			    <td>{$customer_zipCode} {$customer_city}</td>
+			  </tr>
+			</table>
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td width="10%">CVR:</td>
+			    <td>{$customer_company_id}</td>
+			  </tr>
+			</table>
+			<table class="dark" width="100%" border="0">
+			  <tr>
+			    <td>Herefter benævnt Kunden</td>
+			  </tr>
+			</table>
+			
+			<h3>{$date:}</h3>
+			
+			<p class="bold">Er der indgået aftale om Godt I Gang hjælp med {$business_area} (”Aftalen”)</p>
+
+			<p>Som beskrevet i løsningsforslag til {$business_area}, er tilbud på Godt I Gang hjælp afholdt for sig selv, da dette udføres af TDC Erhvervscenter. 
+			Indholdet i Aftalen er udarbejdet i henhold til de oplysninger og informationer der er fremkommet ved vores møde.</p>
+
+			<br/>
+			
+			<table class="noborder" width="100%" border="0">
+			
+				{.loop in $partnerInstallationLinesKontant as $line}
+					<tr>
+						<td width="5%">{$line.count}</td>
+						<td width="7%">stk</td>
+						<td width="70%">{$line.text}</td>
+						<td>kr.</td>
+						<td class="right">{$line.amount}</td>
+					</tr>
+				{.onEmpty}
+				{/loop}
+
+{.if ($show_rate_discount == TRUE) }
+				<tr>
+				    <td colspan="3">Special rabat</td>
+					<td>kr.</td>
+					<td class="right">{$special_rabat}</td>
+				</tr>
+{/if}
+				<tr class="bold">
+				    <td colspan="3">Godt I Gang pris i alt</td>
+					<td>kr.</td>
+				    <td class="right" style="border-bottom: 2px double #000">{$partnerInstallationAfterDiscountKontant}</td>
+				</tr>
+			</table> 
+		
+			<p class="bold">Betingelser og forbehold</p>
+	
+			<p class="bold">Opsætning af telefoner</p>
+	
+			<p>Kunden udfylder installationsblanket med lokalnumre og navne mv.</p>
+			 
+			<p>Etableringen udføres på hverdage mellem kl. 08.00 - 16.00. Eventuelt
+			ekstra arbejde faktureres særskilt, med accept fra kunden.</p>
+			
+			<p>For øvrige betingelser henvises til {$partner_companyName}s generelle salgs- og leveringsbetingelser.</p>
+			
+			<p class="bold">Fakturering og betaling</p>
+
+			<p>Fakturering finder sted på dato for installation.<br/>
+			Alle priser er oplyst ekskl. moms.</p>
+			
+			<br/>
+			
+			<table width="100%" border="0">
+			  <tr>
+			    <td class="noborder" width="50%">Dato:</td>
+			    <td class="noborder" width="50%">Dato:</td>
+			  </tr>
+			  
+			  <tr class="extraLineHeight">
+			    <td class="noborder"></td>
+			    <td class="noborder"></td>
+			  </tr>
+			  <tr class="extraLineHeight">
+			    <td class="noborder line"><div style="border-bottom: 1px solid #000; height: 40px; width: 190px"></div></td>
+			    <td class="noborder line"><div style="border-bottom: 1px solid #000; height: 40px; width: 190px"></div></td>
+			  </tr>
+			  
+			  <tr>
+			    <td class="noborder">{$customer_name:}</td>
+			    <td class="noborder">{$seller_name:}</td>
+			  </tr>
+			  <tr>
+			    <td class="noborder">{$customer_companyName:}</td>
+			    <td class="noborder">{$seller_companyName:}</td>
+			  </tr>
+			</table> 
+		</div>
+		<div class="col-sm-4 pull-right">
+			<div class="media" data-src="{$main_image:}"/>
+		</div>
+	</div>
+</body>
+</html>
+

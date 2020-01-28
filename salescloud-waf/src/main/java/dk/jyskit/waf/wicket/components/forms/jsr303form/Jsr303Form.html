@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<wicket:panel>
+	<form wicket:id="form">
+		<div wicket:id="feedback" class="help-block"></div>
+
+		<div wicket:id="beforeButtonsPanels">
+			<div wicket:id="panel" class="form-panel"></div>
+		</div>
+
+		<div class="form-buttons">
+			<div wicket:id="buttons">
+				<div wicket:id="panel"></div>
+			</div>
+		</div>
+
+		<div wicket:id="afterButtonsPanels">
+			<div wicket:id="panel" class="form-panel"></div>
+		</div>
+	</form>
+
+	<div wicket:id="dialogContainer">
+		<div wicket:id="dialog" style="display: none;">
+		</div>
+	</div>
+</wicket:panel>
+
+</html>

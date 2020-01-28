@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<wicket:panel>
+	<div class="waf-form-group">
+	<fieldset wicket:id="fieldset">
+		<wicket:enclosure child="legend">
+			<legend><span wicket:id="legend"></span></legend>
+		</wicket:enclosure>
+
+		<wicket:enclosure child="beforeButtonsPanels">
+			<div wicket:id="beforeButtonsPanels">
+				<div wicket:id="panel" class="form-panel"></div>
+			</div>
+		</wicket:enclosure>
+
+		<wicket:enclosure child="buttons">
+			<br/>
+			<div class="form-group-buttons">
+				<div wicket:id="buttons">
+					<div wicket:id="panel"></div>
+				</div>
+			</div>
+		</wicket:enclosure>
+
+		<wicket:enclosure child="afterButtonsPanels">
+			<br/>
+			<div wicket:id="afterButtonsPanels">
+				<div wicket:id="panel" class="form-panel"></div>
+			</div>
+		</wicket:enclosure>
+	</fieldset>
+	</div>
+</wicket:panel>
+
+</html>

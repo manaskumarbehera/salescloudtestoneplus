@@ -1,0 +1,10 @@
+/bin
+/.classpath
+/.project
+/.gradle
+/.nb-gradle-properties
+/.settings
+/build
+/buildwar.sh
+*.log
+*.bak

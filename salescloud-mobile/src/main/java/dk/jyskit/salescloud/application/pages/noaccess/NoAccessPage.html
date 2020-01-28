@@ -1,0 +1,37 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<head>
+	<wicket:head>
+		<style type="text/css">
+			.well [class^="col"] + [class^="col"] {
+			    margin-left: -1px; /* compensate border width */
+			    border-left: 1px solid #e3e3e3;
+			}
+			
+			@media (max-width: 992px) {
+				.well [class^="col"] + [class^="col"] {
+				    margin-left: 0px; 
+				    border-left: none;
+				}
+			}
+			
+			.well a {
+				width : 100%;
+			}
+			
+			.info {
+				font-size: 15px;
+			}
+		</style>
+	</wicket:head>
+</head>
+<body>
+	<wicket:extend>
+		<div class="jumbotron">
+			<h1>TDC Salgskonfigurator</h1>
+			<p wicket:id="reason"></p>
+		</div>
+	</wicket:extend>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!-- Eclipselink 2.5 requires converteres to mentioned in orm.xml -->
+<entity-mappings xmlns="http://www.eclipse.org/eclipselink/xsds/persistence/orm" version="2.1">
+    <converter class="dk.jyskit.waf.eclipselink.PropertiesConverter"/>
+    <converter class="dk.jyskit.waf.eclipselink.EntityStateConverter"/>
+</entity-mappings>

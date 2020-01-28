@@ -1,0 +1,36 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<head>
+	<wicket:head>
+		<style type="text/css">
+			table.table .bootstrap-select.btn-group, table.table .bootstrap-select.btn-group[class*="span"] {
+			    margin-bottom: 0px;
+			}
+			table.table .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]) {
+			    width: 180px;
+			}
+			
+			table.table .bootstrap-select {
+			    /*width: 180px\9; IE8 and below*/
+			    width: 180px\0; /*IE9 and below*/
+			}
+			
+			li.feedbackPanelERROR {
+				display: inline-block;
+				color: darkred;
+				margin-left: -40px;
+			}
+		</style>
+	</wicket:head>
+</head>
+<body>
+	<wicket:extend>
+		<div class="container">
+			<div wicket:id="buttonPanel" style="margin-top: 20px"></div>
+			<div wicket:id="mainPanel"></div>
+		</div>
+		<div wicket:id="modalContainer"></div>
+	</wicket:extend>
+</body>
+</html>

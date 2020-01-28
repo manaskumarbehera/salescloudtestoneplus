@@ -1,0 +1,7 @@
+/.gradle
+/.nb-gradle-properties
+/.nb-gradle
+~$*.xls*
+*.iml
+*.ipr
+*.iws

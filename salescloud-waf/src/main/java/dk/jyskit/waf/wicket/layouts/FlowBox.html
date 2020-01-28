@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+<wicket:head>
+	<style type="text/css">
+
+.row-element {
+	float: left;
+	margin-right: 25px;
+}
+
+.flexbox {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-between;
+
+  /* old syntax */
+  -webkit-box-align:stretch;
+  -moz-box-align:stretch;
+
+  /* new syntax */
+  -webkit-align-items:stretch;
+  -moz-align-items:stretch;
+  -o-align-items:stretch;
+  -ms-align-items:stretch;
+  align-items:stretch;
+}
+
+.flexbox.flex-vert {
+	/* old syntax */
+	-webkit-box-orient: vertical;
+	-moz-box-orient: vertical;
+	/* new syntax */
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-o-flex-direction: column;
+	-ms-flex-direction: column;
+
+	flex-direction: column;
+
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap
+}
+
+.flexbox.flex-horz {
+	/* old syntax */
+	-webkit-box-orient: horizontal;
+	-moz-box-orient: horizontal;
+	/* new syntax */
+	-webkit-flex-direction: row;
+	-moz-flex-direction: row;
+	-o-flex-direction: row;
+	-ms-flex-direction: row;
+
+	flex-direction: row;
+	flex-wrap: wrap
+}
+
+.flexbox .flex-elm {
+	flex-basis: 1;
+	flex-grow: 1;
+	flex-shrink: 1;
+	margin: 5px;
+}
+</style>
+</wicket:head>
+</head>
+<wicket:panel>
+	<div wicket:id="box">	<wicket:container wicket:id="elements"><div wicket:id="element"></div></wicket:container> </div>
+</wicket:panel>
+</html>

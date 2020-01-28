@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html wicket:id="html">
+<head>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+	<wicket:head>
+		<link rel="Shortcut icon" href="favicon.ico">
+	</wicket:head>
+</head>
+
+<body>
+	<wicket:extend>
+		<div wicket:id="maintenanceMode" class="container">
+			<div class="panel panel-default" style="margin-top: 50px; font-size: 20px;">
+				<div class="panel-heading">
+					<h3 class="panel-title">Meddelelse fra system administratorerne</h3>
+				</div>
+				<div class="panel-body">
+					<img wicket:id="logo" src="" alt="TDC"
+						 style="width: 100%; padding: 10px 20px 15px 10px; max-width: 150px; float: left">
+					<div wicket:id="maintenanceText"></div>
+				</div>
+			</div>
+		</div>
+		<div wicket:id="standardMode" class="container">
+			<div wicket:id="notifications"></div>
+			<wicket:child />
+		</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-54032399-1', 'auto');
+ga('send', 'pageview');
+</script>
+	</wicket:extend>	
+</body>
+</html>

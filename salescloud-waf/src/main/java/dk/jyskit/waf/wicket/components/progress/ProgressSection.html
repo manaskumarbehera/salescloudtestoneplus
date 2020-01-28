@@ -1,0 +1,20 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<body>
+	<wicket:extend>
+		<form wicket:id="form">
+			<input type="button" wicket:id="startButton" class="btn" style="float: left; width: 130px;" />
+			
+			<div wicket:id="progressBar" style="width: 200px; float: left; margin-left: 30px;"></div>
+			
+			<br><br>
+			
+			<div wicket:id="logContainer">
+				<h4>Messages</h4>
+				<p wicket:id="log"></p>
+			</div>
+		</form>
+	</wicket:extend>
+</body>
+</html>

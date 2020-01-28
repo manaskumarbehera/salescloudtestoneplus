@@ -1,0 +1,60 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+group = 'dk.jyskit'
+version = '3.0.0'
+
+description = """salescloud-core"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8 
+
+repositories {  
+	jcenter()  
+	mavenLocal()
+}
+
+dependencies {
+	compile group: 'dk.jyskit', name: 'salescloud-waf-oneplus',  version: '3.2.+'
+	compile "commons-codec:commons-codec:1.7"
+	compile "org.apache.commons:commons-lang3:3.1"
+	compile "javax.validation:validation-api:1.0.0.GA"
+	compile "com.google.code.gson:gson:2.2.2"
+	compile "com.github.rjeschke:txtmark:0.11"
+    compile "com.x5dev:chunk-templates:3.5.0"
+    
+    compile "com.googlecode.wicked-charts:wicked-charts-wicket6:1.5.0"
+ 	
+	testCompile "junit:junit:4.11"
+	testCompile "org.hamcrest:hamcrest-all:1.1"
+	testCompile "org.mockito:mockito-core:1.9.0"
+}
+
+configurations {
+	all*.exclude group: 'javassist', module: 'javassist'
+	all {
+		// SNAPSHOTs should not be checked every time
+		resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+	}
+}
+
+jar {
+	from('src/main/java') {
+		include '**'
+		exclude '**/*.java'
+		into('/')
+	}
+}
+
+// fix problem with wicket poms in classpath
+eclipse {
+    classpath.file {
+        whenMerged { classpath ->
+            classpath.entries.removeAll { it.path.endsWith('pom') }
+        }
+    }
+}
+

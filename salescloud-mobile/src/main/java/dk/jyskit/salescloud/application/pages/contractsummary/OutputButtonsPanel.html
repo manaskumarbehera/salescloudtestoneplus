@@ -1,0 +1,103 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<body>
+	<wicket:panel>
+		<div class="mb20">
+			<form wicket:id="form">
+				<div class="row ">
+					<div wicket:id="offerAlert" class="col-md-12">
+						<div class="alert alert-warning" role="alert">
+							<strong>Kan ikke lave tilbud!</strong> Check venligst om kampagne rabat er for høj i forhold til GKS sum.
+						</div>
+					</div>
+				</div>
+				
+				
+				<div wicket:id="cdmOutputWifiLinkDisabled" class="row">
+					<div class="col-md-12">
+						Bemærk: Der er et eller flere felter på fanebladet Aftalepapir som mangler at blive udfyldt.<br/><br/>
+					</div>
+				</div>
+				<div class="row ">
+					<div class="col-md-12">
+						<div wicket:id="office">
+							<h3>Dokumenter til kunden</h3>
+							<a wicket:id="termsLink" 				target="_blank" style="margin-top: 4px" class="btn btn-default">Vilkår</a> 
+							<a wicket:id="firePOfficeLink" 			target="_blank" style="margin-top: 4px" class="btn btn-default">4 P'er</a>
+							<a wicket:id="officeCrashCourseLink" 	target="_blank" style="margin-top: 4px" class="btn btn-default">Lynkursus i O365</a>
+							<a wicket:id="officePresentationLink" 	target="_blank" style="margin-top: 4px" class="btn btn-default">Office in the cloud præsentation</a>
+							<h3>Dokumenter til Salesforce</h3>
+							<a wicket:id="officeTastebilagLink" 	target="_blank" style="margin-top: 4px" class="btn btn-default">Tastebilag</a>
+							<a wicket:id="offerLink" 				target="_blank" style="margin-top: 4px" class="btn btn-default">Tilbud</a> 
+							<a wicket:id="ecProcessLink"			target="_blank" style="margin-top: 4px" class="btn btn-default">EC proces for Office in the Cloud</a> 
+						</div>
+						<div wicket:id="fiber">
+							<h3>Dokumenter til kunden</h3>
+							<a wicket:id="preliminaryOfferLink" 	target="_blank" style="margin-top: 4px" class="btn btn-default">Prisoverslag</a>
+							<a wicket:id="termsLink" 				target="_blank" style="margin-top: 4px" class="btn btn-default">Netværk vilkår</a>
+							<a wicket:id="firePLink" 				target="_blank" style="margin-top: 4px" class="btn btn-default">4 P'er</a>
+							<a wicket:id="productSpecificationLink"	target="_blank" style="margin-top: 4px" class="btn btn-default">Produktspecifikation</a>
+							<h3>Dokumenter til Salesforce</h3>
+							<a wicket:id="offerLink" 				target="_blank" style="margin-top: 4px" class="btn btn-default">Tilbud</a> 
+							<a wicket:id="tastebilagLink" 			target="_blank" style="margin-top: 4px" class="btn btn-default">Tastebilag</a>
+							<div wicket:id="salesforceDocumentsDisabled" class="row">
+								<div class="col-md-12">
+									<br/>
+									Bemærk: For at færdiggøre tastebilaget, mangler der at blive udfyldt et eller flere felter på fanebladet Fiber<br/><br/>
+								</div>
+							</div>
+						</div>
+						<div wicket:id="onePlus">
+							<h3>Dokumenter til kunden</h3>
+							<a wicket:id="preliminaryOfferLink" 	target="_blank" style="margin-top: 4px" class="btn btn-default">Prisoverslag</a>
+							<a wicket:id="rammeaftaleLink" 			target="_blank" style="margin-top: 4px" class="btn btn-default">Rammeaftale + PB One+</a>
+							<a wicket:id="productSpecificLink" 		target="_blank" style="margin-top: 4px" class="btn btn-default">PB One+</a>
+							<a wicket:id="tilbudRammeaftalePBLink" 	target="_blank" style="margin-top: 4px" class="btn btn-default">Tilbud + Rammeaftale + PB One+</a>
+							<a wicket:id="termsLink" 				target="_blank" style="margin-top: 4px" class="btn btn-default">Netværk vilkår</a>
+							<a wicket:id="firePLink" 				target="_blank" style="margin-top: 4px" class="btn btn-default">4 P'er</a>
+							<h3>Dokumenter til Salesforce</h3>
+							<a wicket:id="offerLink" 				target="_blank" style="margin-top: 4px" class="btn btn-default">Tilbud</a>
+							<a wicket:id="tastebilagLink" 			target="_blank" style="margin-top: 4px" class="btn btn-default">Tastebilag</a>
+						</div>
+						<div wicket:id="other">
+							<a wicket:id="preliminaryOfferLink" target="_blank" style="margin-top: 4px" class="btn btn-default">Prisoverslag</a> <span wicket:id="offerLinkContainer"> <a wicket:id="offerLink" style="margin-top: 4px" target="_blank" class="btn btn-default">Tilbud</a>
+							</span>
+							<a wicket:id="rammeaftaleLink" target="_blank" style="margin-top: 4px" class="btn btn-default">Rammeaftale + PB Works</a> 
+							<a wicket:id="productSpecificLink" target="_blank"  style="margin-top: 4px" class="btn btn-default">PB Works</a> 
+							<a wicket:id="tilbudRammeaftalePBLink" target="_blank"  style="margin-top: 4px" class="btn btn-default">Tilbud + Rammeaftale + PB Works</a> 
+							<a wicket:id="cdmOutputLink" target="_blank"  style="margin-top: 4px" class="btn btn-default">CDM tastebilag</a> 
+							<a wicket:id="cdmOutputWifiLink" target="_blank"  style="margin-top: 4px" class="btn btn-default">CDM/Aftalepapir</a> 
+							<a wicket:id="termsLink" target="_blank"  style="margin-top: 4px" class="btn btn-default">Vilkår</a> 
+							<a wicket:id="fuldmagtMobilLink" target="_blank"  style="margin-top: 4px" class="btn btn-default">Fuldmagt (Mobil)</a>
+							<a wicket:id="fuldmagtFastnetLink" target="_blank"  style="margin-top: 4px" class="btn btn-default">Fuldmagt (Fastnet)</a>
+							<a wicket:id="brugerListeLink" target="_blank"  style="margin-top: 4px" class="btn btn-default">Brugerliste</a>
+							<a wicket:id="aftalePapirLink" target="_blank"  style="margin-top: 4px" class="btn btn-default">Aftalepapir</a>
+							<br>
+							<a wicket:id="firePOnboardingLink" target="_blank" style="margin-top: 4px" class="btn btn-default">4 P'er - Onboarding</a>
+							<a wicket:id="firePOmstillingLink" target="_blank" style="margin-top: 4px" class="btn btn-default">4 P'er - Omstilling</a>
+							<a wicket:id="firePOmstillingBredbaandLink" target="_blank" style="margin-top: 4px" class="btn btn-default">4 P'er - Omstilling bredbånd</a>
+							<a wicket:id="firePMobilAbonnementLink" target="_blank" style="margin-top: 4px" class="btn btn-default">4 P'er - Mobilabonnement</a>
+							<a wicket:id="wiFi4pLink" target="_blank" style="margin-top: 4px" class="btn btn-default">4 P'er</a>
+							<!-- 
+							<a wicket:id="process1Link" target="_blank" class="btn btn-default">4 P'er (ren TDC)</a>
+							<a wicket:id="process2Link" target="_blank" class="btn btn-default">4 P'er (partner)</a>
+							 -->
+							<a wicket:id="process3Link" target="_blank" style="margin-top: 4px" class="btn btn-default">Brudt fakturaforløb</a>
+							<button wicket:id="subscriptionConfigurationMail" style="margin-top: 4px" class="btn btn-default" type="button">Send link til konfiguration</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div wicket:id="partnerLinks" class="col-md-12">
+						<a wicket:id="partnerSupportOgRateLink" target="_blank" style="margin-top: 4px" class="btn btn-default">Support og Rate aftale</a> 
+						<a wicket:id="partnerSupportLink" target="_blank" style="margin-top: 4px" class="btn btn-default">Support aftale</a> 
+						<a wicket:id="partnerGodtIgangLink" target="_blank" style="margin-top: 4px" class="btn btn-default">Godt I Gang aftale</a> 
+					</div>
+				</div>
+			</form>
+		</div>
+	</wicket:panel>
+</body>
+</html>
+

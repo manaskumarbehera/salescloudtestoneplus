@@ -1,0 +1,94 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://git-wip-us.apache.org/repos/asf/wicket/repo?p=wicket.git;a=blob_plain;f=wicket-core/src/main/resources/META-INF/wicket-1.5.xsd;hb=master">
+<head>
+	<wicket:head>
+		<style type="text/css">
+			.well [class^="col"] + [class^="col"] {
+			    margin-left: -1px; /* compensate border width */
+			    border-left: 1px solid #e3e3e3;
+			}
+			
+			@media (max-width: 992px) {
+				.well [class^="col"] + [class^="col"] {
+				    margin-left: 0px; 
+				    border-left: none;
+				}
+			}
+			
+			.well a {
+				width : 100%;
+			}
+			
+			.info {
+				font-size: 15px;
+			}
+		</style>
+	</wicket:head>
+</head>
+<body>
+	<wicket:extend>
+		<div class="jumbotron">
+			<h1>TDC Salgskonfigurator</h1>
+			<p>Vælg herunder hvilken løsning du vil arbejde videre med</p>
+
+			<div>
+				<div wicket:id="group1" class="well">
+					<div class="row">
+						<div class="col-md-4"><a wicket:id="select" role="button"></a></div>
+						<div class="col-md-8 info"><span wicket:id="intro"></span></div>
+					</div>
+				</div>
+
+				<div class="well">
+					<div class="row">
+						<div class="col-md-4">
+							<a role="button" href="https://works.salescloud-erhverv.dk" class=" btn-lg btn-primary btn">&nbsp;TDC Erhverv Works</a>
+						</div>
+						<div class="col-md-8 info">
+							<p>TDC Works er den nye mobilportefølje. Der er fritale på alle abonnementer og 6 pakker med forskellige mængder mobildata og business app.</p>
+							<p>Bemærk: Denne konfigurator ligger på en anden server og derfor kan det være nødvendigt at logge ind igen.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="well">
+					<div class="row">
+						<div class="col-md-4">
+							<a role="button" href="https://works.salescloud-erhverv.dk" class=" btn-lg btn-primary btn">&nbsp;TDC Erhverv Fiber Plus</a>
+						</div>
+						<div class="col-md-8 info">
+							<p><strong>TDC Erhverv Fiber Plus</strong> konfiguratoren er stedet du hurtigt konfigurerer tilbud og komplet ordregrundlag på nysalg af <strong>TDC Erhverv Fiber Plus</strong>. Flere lokationer kan konfigureres i samme tilbud.</p>
+							<p>Bemærk: Denne konfigurator ligger på en anden server og derfor kan det være nødvendigt at logge ind igen.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="well">
+					<div class="row">
+						<div class="col-md-4">
+							<a role="button" href="https://works.salescloud-erhverv.dk" class=" btn-lg btn-primary btn">&nbsp;TDC Erhverv Fiber</a>
+						</div>
+						<div class="col-md-8 info">
+							<p><strong>TDC Erhverv Fiber</strong> konfiguratoren er stedet du hurtigt konfigurerer tilbud og komplet ordregrundlag på nysalg af <strong>TDC Erhverv Fiber</strong>, herunder også TDC Erhverv Rabataftale. Flere lokationer kan konfigureres i samme tilbud.</p>
+							<p>Bemærk: Denne konfigurator ligger på en anden server og derfor kan det være nødvendigt at logge ind igen.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="well">
+					<div class="row">
+						<div class="col-md-4">
+							<a role="button" href="https://works.salescloud-erhverv.dk" class=" btn-lg btn-primary btn">&nbsp;Office in the Cloud</a>
+						</div>
+						<div class="col-md-8 info">
+							<p>TDC Erhvervs Cloud Team tilbyder en Office in the Cloud-aftale, som giver jer Office 365 og onboarding hertil. Som en del af aftalen kan vi stille en række ydelser til rådighed inden for migrering og support. I får endvidere adgang til nogle af Danmarks førende eksperter og mest erfarne konsulenter.</p>
+							<p>Bemærk: Denne konfigurator ligger på en anden server og derfor kan det være nødvendigt at logge ind igen.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</wicket:extend>
+</body>
+</html>

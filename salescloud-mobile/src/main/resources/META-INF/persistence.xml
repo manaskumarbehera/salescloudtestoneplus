@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+
+	<persistence-unit name="persistence">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+		<class>dk.jyskit.waf.application.model.BaseEntity</class>
+		<class>dk.jyskit.waf.application.model.BaseRole</class>
+		<class>dk.jyskit.waf.application.model.BaseUser</class>
+		<class>dk.jyskit.waf.application.model.extradata.ExtraData</class>
+		<class>dk.jyskit.waf.application.model.extradata.ExtraDataDefinition</class>
+
+		<class>dk.jyskit.salescloud.application.model.AdminRole</class>
+		<class>dk.jyskit.salescloud.application.model.Amounts</class>
+		<class>dk.jyskit.salescloud.application.model.BundleProductRelation</class>
+		<class>dk.jyskit.salescloud.application.model.BusinessArea</class>
+		<class>dk.jyskit.salescloud.application.model.BusinessEntity</class>
+		<class>dk.jyskit.salescloud.application.model.Campaign</class>
+		<class>dk.jyskit.salescloud.application.model.CampaignProductRelation</class>
+		<class>dk.jyskit.salescloud.application.model.Content</class>
+		<class>dk.jyskit.salescloud.application.model.ContentCategory</class>
+		<class>dk.jyskit.salescloud.application.model.Contract</class>
+		<class>dk.jyskit.salescloud.application.model.ContractCategory</class>
+		<class>dk.jyskit.salescloud.application.model.DiscountPoint</class>
+		<class>dk.jyskit.salescloud.application.model.DiscountScheme</class>
+		<class>dk.jyskit.salescloud.application.model.FeatureType</class>
+		<class>dk.jyskit.salescloud.application.model.FeeCategory</class>
+		<class>dk.jyskit.salescloud.application.model.FixedDiscount</class>
+		<class>dk.jyskit.salescloud.application.model.MobileCampaign</class>
+		<class>dk.jyskit.salescloud.application.model.MobileContract</class>
+		<class>dk.jyskit.salescloud.application.model.MobileContractBundle</class>
+		<class>dk.jyskit.salescloud.application.model.MobileContractSummary</class>
+		<class>dk.jyskit.salescloud.application.model.MobileProduct</class>
+		<class>dk.jyskit.salescloud.application.model.MobileProductBundle</class>
+		<class>dk.jyskit.salescloud.application.model.MobileProductGroup</class>
+		<class>dk.jyskit.salescloud.application.model.OrderLine</class>
+		<class>dk.jyskit.salescloud.application.model.PageInfo</class>
+		<class>dk.jyskit.salescloud.application.model.Organisation</class>
+		<class>dk.jyskit.salescloud.application.model.OrganisationType</class>
+		<class>dk.jyskit.salescloud.application.model.Product</class>
+		<class>dk.jyskit.salescloud.application.model.ProductAccessType</class>
+		<class>dk.jyskit.salescloud.application.model.ProductionItem</class>
+		<class>dk.jyskit.salescloud.application.model.ProductGroup</class>
+		<class>dk.jyskit.salescloud.application.model.ProductBundle</class>
+		<class>dk.jyskit.salescloud.application.model.ProductRelation</class>
+		<class>dk.jyskit.salescloud.application.model.Report</class>
+		<class>dk.jyskit.salescloud.application.model.ReportElement</class>
+		<class>dk.jyskit.salescloud.application.model.SalesmanagerRole</class>
+		<class>dk.jyskit.salescloud.application.model.SalespersonRole</class>
+		<class>dk.jyskit.salescloud.application.model.Segment</class>
+		<class>dk.jyskit.salescloud.application.model.SystemUpdate</class>
+		<class>dk.jyskit.salescloud.application.model.Subscription</class>
+		<class>dk.jyskit.salescloud.application.model.SwitchboardIpsaDiscountScheme</class>
+		<class>dk.jyskit.salescloud.application.model.RabatAftaleDiscountScheme</class>
+		<class>dk.jyskit.salescloud.application.model.UserManagerRole</class>
+	</persistence-unit>
+</persistence>

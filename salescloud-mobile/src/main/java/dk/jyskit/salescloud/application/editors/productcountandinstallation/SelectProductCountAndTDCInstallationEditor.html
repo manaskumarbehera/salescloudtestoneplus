@@ -1,0 +1,25 @@
+<wicket:head>
+<style>
+	.floatlabel-wrapper {
+		display: inline-block;
+		margin-top: 0px; 
+	}
+</style>
+</wicket:head>
+<wicket:panel>
+	<div style="display:inline-block; white-space:nowrap; width: 100%">
+		<div class="row">
+			<div class="col-sm-7">
+				<div class="pull-right" style="margin-bottom: 0px;">
+					<input wicket:id="countNew" type="number" class="form-control" style="min-width: 70px;max-width: 70px;">
+					<input wicket:id="countExisting" type="number" class="form-control" style="min-width: 100px;max-width: 100px">
+				</div>
+			</div>
+			<div class="col-sm-5">
+				<button wicket:id="installationSelectedButton" data-color="primary" class="btn btn-default" type="button">
+					<i wicket:id="icon" class="state-icon fa fa-square-o"></i>&nbsp;TDC Installation</button>
+				<input type="checkbox" class="hidden">
+			</div>
+		</div>
+	</div>
+</wicket:panel>

@@ -1,0 +1,46 @@
+{
+	"id": "5302377e-62fa-f2b0-82da-187044200c79",
+	"name": "CVR",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "84bc7436-d7b8-2108-9cc9-5d740afa2d22",
+			"name": "CVR",
+			"description": "",
+			"order": [
+				"2d309f5f-8140-3558-1f5f-837f4333f617"
+			],
+			"owner": 0
+		}
+	],
+	"timestamp": 1439928054845,
+	"owner": 0,
+	"remoteLink": "",
+	"public": false,
+	"requests": [
+		{
+			"id": "2d309f5f-8140-3558-1f5f-837f4333f617",
+			"headers": "Content-Type: application/json\nAuthorization: Basic MzkxMzIyNzQ6RGd2bWtkdmZkNTQh\n",
+			"url": " http://distribution.virk.dk/cvr-permanent-20150305/_search",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "basicAuth",
+			"helperAttributes": {
+				"username": "39132274",
+				"password": "Dgvmkdvfd54!"
+			},
+			"time": 1439928393415,
+			"name": "Test søgning 1",
+			"description": "",
+			"collectionId": "5302377e-62fa-f2b0-82da-187044200c79",
+			"responses": [],
+			"rawModeData": "{ \"from\" : 0, \"size\" : 1,\n  \"query\": {\n    \"term\": {\n      \"cvrNummer\": 10961211\n    }\n  }\n}"
+		}
+	]
+}

@@ -1,0 +1,322 @@
+<html>
+<head>
+<style type="text/css">
+	/* Inspiration: https://github.com/zopyx/zopyx.smartprintng.plone/tree/cb1252601617324cf5513f65686dd4eb1e4b90a4/zopyx/smartprintng/plone/resources_default */
+	
+	* {
+		box-sizing: border-box;
+	}
+	
+	html {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		font-size: 11px;
+		font-family: "ArialUnicode", Verdana, Arial, sans-serif;
+		line-height: 1.5em;
+		margin: 0;
+		padding: 0;
+	}
+
+	div.header {
+		display: block;
+		text-align: center;
+		position: running(header);
+	}
+
+	div.footer {
+		display: block;
+		text-align: center;
+		position: running(footer);
+	}
+
+	div.breakBefore {
+		page-break-before: always;
+	}
+
+	div.breakAfter {
+		page-break-after: always;
+	}
+
+	h1 {
+		font-size: 200%;
+		margin-top: 0;
+		padding-bottom: 0px;
+		line-height: 1.2em;
+	}
+
+	h2 {
+		font-size: 133%;
+		padding-bottom: 0px;
+		line-height: 1.2em;
+	}
+
+	h3 {
+		font-size: 115%;
+		padding-top: 10px;
+		padding-bottom: 0px;
+		margin-bottom: 0px;
+		line-height: 1.2em;
+	}
+
+	h4, h5, h6 {
+		font-size: 100%;
+		line-height: 1.2em;
+	}
+
+	.bold {
+	    font-weight: bold;
+	}
+
+	p {
+		line-height: 1.77em;
+	}
+
+	table {
+		background-color: #F2F5F5;
+		empty-cells: show;
+		border-collapse: collapse;
+	}
+
+	tr.total {
+		font-weight: bold;
+	}
+
+	td {
+		border: thin solid #F2F5F5;
+	}
+
+	.extraLineHeight {
+		line-height: 2.4em;
+	}
+
+	pre {
+		font-size: 0.775em;
+		background-color: #eeeeee;
+		color: black;
+		white-space: pre-wrap;
+		margin-left: 1em;
+		margin-right: 1em;
+		padding: 0.5em;
+		font-family: "Courier New";
+		border: thin solid black;
+		border-radius: 8px;
+		padding: 0.4em;
+	}
+
+	.border {
+		border: thin solid black;
+	}
+
+	tt {
+		font-family: Courier;
+		background: #dddddd;
+	}
+
+	.row {
+		margin-left: 0px;
+		margin-right: 0px;
+		padding: 0px;
+		width: 100%;
+		clear: both;
+		display: inline-block;
+	}
+
+	.col-sm-1 { width: 8.3333%; }
+	.col-sm-2 { width: 16.6666%; }
+	.col-sm-3 { width: 25%; }
+	.col-sm-4 { width: 33.3333%; }
+	.col-sm-5 { width: 41.6666%; }
+	.col-sm-6 { width: 50%; }
+	.col-sm-7 { width: 58.3333%; }
+	.col-sm-8 { width: 66.6666%; }
+	.col-sm-9 { width: 75%; }
+	.col-sm-10 { width: 83.3333%; }
+	.col-sm-11 { width: 91.6666%; }
+	.col-sm-12 { width: 100%; }
+
+	.col-sm-1,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9,.col-sm-10,.col-sm-11,.col-sm-12
+		{
+		min-height: 1px;
+		float: left;
+		padding: 0px;
+	}
+
+	.lm-10 { margin-left: 10px; }
+	.lm-20 { margin-left: 20px; }
+	.lm-30 { margin-left: 30px; }
+	.rm-10 { margin-right: 10px; }
+	.rm-20 { margin-right: 20px; }
+	.rm-30 { margin-right: 30px; }
+
+	@page {
+		size: A4 portrait;
+		margin-top: 2.54cm;
+		margin-bottom: 2.54cm;
+		margin-left: 1.27cm;
+		margin-right: 1.27cm;
+		@top-center {
+			content:element(header)
+		}
+	}
+
+	@page {
+		@bottom-right {
+			content:element(footer);
+		}
+	}
+
+	#pagenumber:before {
+		content: counter(page);
+	}
+
+	#pagecount:before {
+		content: counter(pages);
+	}
+
+	.media {
+		margin-left: 20px;
+		margin-right: 0px;
+		padding-bottom: 10px;
+		width: 90%;
+		align: right;
+	}
+
+	.right {
+		text-align: right;
+	}
+
+	.pull-right {
+		float: right !important;
+	}
+</style>
+</head>
+
+<body>
+	<div class="panel-heading header">
+		<h2>{$document_header:}</h2>
+	</div>
+
+	<div class="panel-footer footer">
+		{$date:}   -   {$document_footer:}   -   Side <span id="pagenumber"></span> af <span id="pagecount"></span>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-8">
+			<p>Mellem</p>
+
+			<table width="100%" border="0">
+			  <tr><td>{$seller_companyName}</td></tr>
+			  <tr><td>{$seller_address}</td></tr>
+			  <tr><td>{$seller_zipCode} {$customer_city}</td></tr>
+			</table>
+			<table width="100%" border="0">
+			  <tr><td width="10%">CVR:</td><td>{$seller_company_id}</td></tr>
+			</table>
+			<table width="100%" border="0">
+			  <tr><td>Herefter benævnt TDC Erhvervscenter</td></tr>
+			</table>
+
+			<p>Og</p>
+
+			<table width="100%" border="0">
+			  <tr><td>{$customer_companyName}</td></tr>
+			  <tr><td>{$customer_address}</td></tr>
+			  <tr><td>{$customer_zipCode} {$customer_city}</td></tr>
+			</table>
+			<table width="100%" border="0">
+			  <tr><td width="10%">CVR:</td><td>{$customer_company_id}</td></tr>
+			</table>
+			<table width="100%" border="0">
+			  <tr><td>Herefter benævnt Kunden</td></tr>
+			</table>
+
+			<h3>{$date}</h3>
+
+			<p class="bold">Er der indgået aftale om Installation af TDC Erhverv One+ (”Aftalen”)</p>
+
+			<p>Hermed separat tilbud på installation af TDC Erhverv One+. Installationen udføres af TDC Erhvervscenter og
+			indholdet i Aftalen er udarbejdet i henhold til de oplysninger og informationer der er fremkommet ved vores møde.
+			</p>
+
+			<br/>
+
+			<table style="width: 100%">
+				<thead><tr><td width="10%"></td><td width="65%"></td><td width="25%"></td></tr></thead>
+
+				<tr><td colspan="3"><strong>Detaljeret oversigt over installation</strong></td></tr>
+				<tr><td colspan="3" style="min-height:1em"> </td></tr>
+				<tr class="total"><td>Stk.</td><td>Navn</td><td class="right">Beløb</td></tr>
+
+				{.loop in $partnerInstallationLinesKontant as $line}
+					{.if ($line.type == header) }
+						<tr><td colspan="3"><strong>{$line.text}</strong></td></tr>
+					{.elseIf ($line.type == discount) }
+						<tr><td colspan="3" style="font-style: normal;">{$line.text}</td></tr>
+					{.elseIf ($line.type == single_column) }
+						<tr><td colspan="3">{$line.text}</td></tr>
+					{.elseIf ($line.type == campaign_comment) }
+						<tr><td colspan="3" style="font-style: normal;">{$line.text}</td></tr>
+					{.elseIf ($line.type == space) }
+						<tr><td colspan="3" style="min-height:1em"> </td></tr>
+					{.elseIf ($line.type == total) }
+						<tr class="total"><td>{$line.count}</td><td>{$line.text}</td><td class="right">{$line.amount} kr.</td></tr>
+					{.else}
+						<tr><td>{$line.count}</td><td>{$line.text}</td><td class="right">{$line.amount} kr.</td></tr>
+					{/if}
+				{.onEmpty}
+				{/loop}
+				<tr><td colspan="3" style="min-height:1em"> </td></tr>
+				{.if ($show_installation_fee_discount == TRUE) }
+					<tr><td></td><td>Special rabat</td><td class="right">-{$installation_fee_discount} kr.</td></tr>
+				{/if}
+				<tr class="total"><td> </td><td>Samlet installationspris</td><td class="right">{$partnerInstallationAfterDiscountKontant} kr.</td></tr>
+			</table>
+		</div>
+		<div class="col-sm-4">
+			<div class="media" data-src="{$main_image:}"/>
+		</div>
+	</div>
+
+	<div class="breakAfter"></div>
+
+	<div class="row">
+		<div class="col-sm-8">
+			<p class="bold">Betingelser og forbehold</p>
+
+			<p class="bold">Opsætning af telefoner</p>
+
+			<p>Kunden udfylder installationsblanket med lokalnumre og navne mv.</p>
+
+			<p>Etableringen udføres på hverdage mellem kl. 08.00 - 16.00. Eventuelt
+			ekstra arbejde faktureres særskilt, med accept fra kunden.</p>
+
+			<p>For øvrige betingelser henvises til TDC Erhvervscenters generelle salgs- og leveringsbetingelser.</p>
+
+			<p class="bold">Fakturering og betaling</p>
+
+			<p>Fakturering finder sted på dato for installation.<br/>
+			Alle priser er oplyst ekskl. moms.</p>
+
+			<br/>
+
+			<table style="width: 100%">
+				<thead><tr><td width="50%"></td><td width="50%"></td></tr></thead>
+				<tr><td>Dato:</td><td>Dato: {$contract_date:}</td></tr>
+				<tr><td>For kunden:</td><td>For leverandøren:</td></tr>
+				<tr><td> </td><td> </td></tr>
+				<tr><td> </td><td> </td></tr>
+				<tr><td> </td><td> </td></tr>
+				<tr><td>__________________________________</td><td>__________________________________</td></tr>
+				<tr><td style="padding-left:20px">{$customer_name:}</td><td style="padding-left:20px">{$seller_name:}</td></tr>
+			</table>
+		</div>
+		<div class="col-sm-4">
+			<div class="media" data-src="{$main_image:}"/>
+		</div>
+	</div>
+</body>
+</html>
+
