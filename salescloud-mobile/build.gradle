@@ -32,11 +32,12 @@ dependencies {
 
 	compile "net.bull.javamelody:javamelody-core:1.73.1"
 
-	providedCompile "org.projectlombok:lombok:1.18.8"
-
 	providedCompile "org.eclipse.jetty:jetty-server:9.2.4.v20141103"
 	providedCompile "org.eclipse.jetty:jetty-webapp:9.2.4.v20141103"
 	providedCompile "org.eclipse.jetty:jetty-util:9.2.4.v20141103"
+
+	providedCompile "org.projectlombok:lombok:1.18.+"
+	annotationProcessor 'org.projectlombok:lombok:1.18.+'
 }
 
 sourceSets {

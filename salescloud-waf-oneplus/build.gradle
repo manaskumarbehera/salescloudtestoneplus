@@ -6,23 +6,23 @@ apply plugin: 'idea'
 apply plugin: 'com.github.ben-manes.versions'
 
 group = 'dk.jyskit'
-version = '3.2.0'
+version = '3.2.3'
 
 description = """waf"""
 
-ext.wicketVersion					= '6.28.0'
-ext.wicketJqueryUiVersion			= '6.28.0'
-ext.wicketStuffVersion				= '6.28.0'
+ext.wicketVersion			= '6.28.0'
+ext.wicketJqueryUiVersion		= '6.28.0'
+ext.wicketStuffVersion			= '6.28.0'
 ext.wicketStuffRecentVersion		= '6.28.0'
-ext.wicketBootstrapVersion			= '0.9.22'
-ext.jacksonVersion					= '2.5.1'
+ext.wicketBootstrapVersion		= '0.9.22'
+ext.jacksonVersion			= '2.5.1'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8 
 
 repositories {  
-	jcenter()  
 	mavenLocal()
+	maven { url "https://repo.maven.apache.org/maven2" }
 }
 
 dependencies {
@@ -93,7 +93,7 @@ dependencies {
 	compile "net.sf.opencsv:opencsv:2.3"
 
 	compile "org.xhtmlrenderer:flying-saucer-core:9.1.11"
-    compile "org.xhtmlrenderer:flying-saucer-pdf:9.1.11" 	 
+	compile "org.xhtmlrenderer:flying-saucer-pdf:9.1.11" 	 
 
 	testCompile "com.icegreen:greenmail:1.3"
 	testCompile "junit:junit:4.11"
@@ -102,7 +102,8 @@ dependencies {
 
 	compile "javax.servlet:javax.servlet-api:3.0.1"
 	 
-	compile "org.projectlombok:lombok:1.18.8"
+	compileOnly "org.projectlombok:lombok:1.18.10"
+	annotationProcessor "org.projectlombok:lombok:1.18.+"
 }
 
 configurations {
@@ -119,19 +120,9 @@ task sourcesJar(type: Jar, dependsOn:classes) {
 	from sourceSets.main.allSource
 }
 
-javadoc {
-	failOnError = false
-}
-
-task javadocJar(type: Jar, dependsOn:javadoc) {
-	classifier = 'javadoc'
-	from javadoc.destinationDir
-}
-
 // add javadoc/source jar tasks as artifacts
 artifacts {
 	archives sourcesJar
-	archives javadocJar
 }
 
 jar {

@@ -8,13 +8,13 @@ subprojects {
 
 	repositories {
 		mavenCentral()
-		maven { url "http://repo.maven.apache.org/maven2" }
+		maven { url "https://repo.maven.apache.org/maven2" }
 		maven { url "http://lambdaj.googlecode.com/svn/repo/releases/" }
 		mavenLocal()
 	}
 }
 
-project(':salescloud-waf') {
+project(':salescloud-waf-oneplus') {
 }
 
 project(':salescloud-core') {
