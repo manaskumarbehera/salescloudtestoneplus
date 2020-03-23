@@ -2144,13 +2144,25 @@ public class MobileContract extends Contract {
 									&& (((MobileProductBundle) countProductOrBundleAmount.getProductBundleSafely()).getBundleType().equals(HARDWARE_BUNDLE))) {
 								// Ignore this
 							} else {
-								addToCdmList(list, totals, String.valueOf(countProductOrBundleAmount.getCount().getCountNew()), code, text,
-										countProductOrBundleAmount
-												.getAmountsAfterCampaignAndContractDiscounts().getNonRecurringFees(),
-										countProductOrBundleAmount.getAmountsAfterCampaignAndContractDiscounts()
-												.getRecurringFee() * countProductOrBundleAmount.getCount().getCountNew()
-												/ countProductOrBundleAmount.getCount().getCountTotal(),
-										notes + "N");
+								if (MobileSession.get().isBusinessAreaOnePlus()
+										&& countProductOrBundleAmount.getProductSafely() != null
+										&& StringUtils.equals("Mobile Only", countProductOrBundleAmount.getProductSafely().getInternalName())) {
+									addToCdmListEvenIfZero(list, totals, String.valueOf(countProductOrBundleAmount.getCount().getCountNew()),
+											code, text, countProductOrBundleAmount
+													.getAmountsAfterCampaignAndContractDiscounts().getNonRecurringFees(),
+											countProductOrBundleAmount.getAmountsAfterCampaignAndContractDiscounts()
+													.getRecurringFee() * countProductOrBundleAmount.getCount().getCountNew()
+													/ countProductOrBundleAmount.getCount().getCountTotal(),
+											notes + "N");
+								} else {
+									addToCdmList(list, totals, String.valueOf(countProductOrBundleAmount.getCount().getCountNew()), code, text,
+											countProductOrBundleAmount
+													.getAmountsAfterCampaignAndContractDiscounts().getNonRecurringFees(),
+											countProductOrBundleAmount.getAmountsAfterCampaignAndContractDiscounts()
+													.getRecurringFee() * countProductOrBundleAmount.getCount().getCountNew()
+													/ countProductOrBundleAmount.getCount().getCountTotal(),
+											notes + "N");
+								}
 							}
 						}
 					}

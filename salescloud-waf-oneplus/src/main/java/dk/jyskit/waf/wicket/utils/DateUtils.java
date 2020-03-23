@@ -2,6 +2,8 @@ package dk.jyskit.waf.wicket.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import org.apache.wicket.protocol.http.WebSession;
@@ -75,5 +77,17 @@ public class DateUtils {
 		} else {
 			return (SimpleDateFormat) DateFormat.getDateTimeInstance(style, style, locale);
 		}
+	}
+
+	public static int getMonthNow() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		return calendar.get(Calendar.MONTH) + 1;
+	}
+
+	public static int getYearNow() {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date());
+		return calendar.get(Calendar.YEAR);
 	}
 }

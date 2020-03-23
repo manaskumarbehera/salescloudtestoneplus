@@ -11,4 +11,5 @@ public interface ContractDao extends Dao<Contract> {
 	List<Contract> findByBusinessArea(BusinessArea businessArea);
 	List<Contract> findNewerThan(Date date);
 	List<Contract> findOlderThan(Date date);
+	List<Contract> findByYearMonth(int year, int month);  // fx 2020, 12
 }

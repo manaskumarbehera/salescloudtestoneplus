@@ -49,7 +49,7 @@ public class OutputButtonsOnePlusPanel extends AbstractOutputButtonsPanel {
 
 		list = Lists.newArrayList();
 //		list.add(newReportLink("Tilbud", "One+ - Tilbud - {cvr}{date}.pdf", new TilbudOgKontraktReport(true)));
-		list.add(newReportLink("Tilbud", "One+ - Tilbud - {cvr}{date}.pdf", new TilbudRammeaftaleOgPBReport(true, false, false, false)));
+//		list.add(newReportLink("Tilbud", "One+ - Tilbud - {cvr}{date}.pdf", new TilbudRammeaftaleOgPBReport(true, false, false, false)));
 		list.add(newReportLink("Tilbud med rabataftale + Produktspecifikt Bilag",
 				"One+ - Tilbud med rabataftale + Produktspecifikt Bilag - {cvr}{date}.pdf",
 				new TilbudRammeaftaleOgPBReport(true, true, true, true)));

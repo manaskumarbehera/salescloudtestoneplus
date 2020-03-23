@@ -54,18 +54,24 @@ public class ContractsSpreadsheet implements Provider<Workbook>, Serializable{
 	    
 	    MobileContract contractInSession = MobileSession.get().getContract();
 	    MobileContract contract = null;
-	    for (Contract c : Lookup.lookup(ContractDao.class).findNewerThan(DateUtils.addYears(new Date(), -1))) {
+		log.info("---------- start ----------");
+//		for (Contract c : Lookup.lookup(ContractDao.class).findNewerThan(DateUtils.addMonths(new Date(), -6))) {
+	    for (Contract c : Lookup.lookup(ContractDao.class).findByYearMonth(MobileSession.get().getDumpYear(), MobileSession.get().getDumpMonth())) {
 		    try {
 		    	contract = (MobileContract) c;
+				log.info("Contract: " + contract.getId());
 			    MobileSession.get().setContract(contract);
 		    	ContractFinansialInfo contractFinansialInfo = contract.getContractFinansialInfo(true, false, false);	// CHECKMIG
 		    	if (contract.getBusinessArea().isActive()) {
 		    		addRow(s, null, contract, contractFinansialInfo, cols);
 		    	}
+				log.info("Contract: " + contract.getId() + " - added");
 		    } catch (Exception e) {
 		    	log.error("Some problem with contract " + contract.getId(), e);
 			}
 	    }
+		log.info("---------- done ----------");
+		MobileSession.get().updateMonthToDump();
 	    MobileSession.get().setContract(contractInSession);
 		return s.getWorkbook();
 	}
@@ -488,6 +494,15 @@ public class ContractsSpreadsheet implements Provider<Workbook>, Serializable{
 					}
 				}
 				return Double.valueOf(0);
+			}
+		});
+		cols.add(new Col("Pulje") {
+			Object getValue(MobileContract contract, ContractFinansialInfo contractFinansialInfo) {
+				if (((MobileContract) contract).isPoolsMode()) {
+					return "Ja";
+				} else {
+					return "Nej";
+				}
 			}
 		});
 		for (BusinessArea businessArea : ((BusinessAreaDao) Lookup.lookup(BusinessAreaDao.class)).findAll()) {

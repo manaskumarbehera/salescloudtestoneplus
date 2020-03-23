@@ -47,7 +47,7 @@ public class Start {
 		context.setServer(server);
 		context.setContextPath("/");
 //		context.setWar("src/main/webapp");
-		context.setWar("/home/jan/dev/java/projects/jyskit/salescloud/salescloud-mobile/src/main/webapp");
+		context.setWar("/home/jan/dev/java/projects/jyskit/tdc/salescloud-oneplus/salescloud-mobile/src/main/webapp");
 
 		StopHandler stopHandler = new StopHandler(server);
 

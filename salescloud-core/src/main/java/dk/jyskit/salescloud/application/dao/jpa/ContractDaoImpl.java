@@ -48,4 +48,14 @@ public class ContractDaoImpl extends GenericDaoImpl<Contract> implements Contrac
     			.setParameter("date", date);
     	return q.getResultList();
     }
+
+    @Override
+    public List<Contract> findByYearMonth(int year, int month) {
+    	TypedQuery<Contract> q = em()
+    			.createQuery("select c from " + clazz.getSimpleName() + " c "
+    					+ "where (SQL('EXTRACT(YEAR FROM ?)', c.creationDate) = :year) and (SQL('EXTRACT(MONTH FROM ?)', c.creationDate) = :month)", clazz)
+				.setParameter("year", year)
+				.setParameter("month", month);
+    	return q.getResultList();
+    }
 }

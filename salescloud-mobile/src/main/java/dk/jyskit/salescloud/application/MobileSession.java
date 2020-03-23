@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dk.jyskit.salescloud.application.model.*;
+import dk.jyskit.waf.wicket.utils.DateUtils;
 import org.apache.wicket.request.Request;
 
 import dk.jyskit.salescloud.application.dao.ProductBundleDao;
@@ -20,6 +21,8 @@ public class MobileSession extends CoreSession {
 	private boolean externalAccessMode;
 	private boolean customerLoggedIn;
 	private boolean implementerLoggedIn;
+	private Integer dumpYear;
+	private Integer dumpMonth;
 
 	// Used for partner hardware products
 	private Map<Long, Amounts> customPriceMap = new HashMap<>();
@@ -113,5 +116,27 @@ public class MobileSession extends CoreSession {
 					((salespersonRole.getOrganisation() != null) && (salespersonRole.getOrganisation().getType().equals(OrganisationType.PARTNER_CENTER)));
 		}
 		return false;
+	}
+
+	public void updateMonthToDump() {
+		dumpMonth -= 1;
+		if (dumpMonth < 1) {
+			dumpYear -= 1;
+			dumpMonth = 12;
+		}
+	}
+
+	public Integer getDumpYear() {
+		if (dumpYear == null) {
+			dumpYear = DateUtils.getYearNow();
+		}
+		return dumpYear;
+	}
+
+	public Integer getDumpMonth() {
+		if (dumpMonth == null) {
+			dumpMonth = DateUtils.getMonthNow();
+		}
+		return dumpMonth;
 	}
 }

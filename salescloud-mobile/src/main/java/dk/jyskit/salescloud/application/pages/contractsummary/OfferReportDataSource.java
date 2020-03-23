@@ -205,25 +205,28 @@ public class OfferReportDataSource {
 						text = campaignProductRelation.getOutputTextOverride();
 					}
 					int count = countTextAmount.getCount().getCountForFeeCategory(feeCategory);
-					if ((campaignProductRelation != null) && (campaignProductRelation.getCampaignDiscountAmounts().sum(feeCategory) > 0) &&
-							(campaignProductRelation.isExtraRowInOffer()) && (!StringUtils.isEmpty(campaignProductRelation.getExtraRowInOfferText()))) {
-						long amount = countTextAmount.getBaseAmountsWithContractDiscountsDeducted().sum(feeCategory);
-						data.addLine(LineType.columns, "" + count, text,
-								Amounts.getFormattedWithDecimals(amount/count) + " kr.",
-								Amounts.getFormattedWithDecimals(amount) + " kr.",
-								feeCategory);
-						amount = -countTextAmount.getCampaignDiscountsWithContractDiscountsDeducted().sum(feeCategory);
-						data.addLine(LineType.columns, "" + count, campaignProductRelation.getExtraRowInOfferText(),
-								Amounts.getFormattedWithDecimals(amount/count) + " kr.",
-								Amounts.getFormattedWithDecimals(amount) + " kr.",
-								feeCategory);
+					if (count == 0) {
+						log.info("Line not added because count is 0: " + feeCategory.name() + "/" + text);
 					} else {
-						data.addLine(LineType.columns, "" + count, text,
-								Amounts.getFormattedWithDecimals(sum/count) + " kr.",
-								Amounts.getFormattedWithDecimals(sum) + " kr.",
-								feeCategory);
+						if ((campaignProductRelation != null) && (campaignProductRelation.getCampaignDiscountAmounts().sum(feeCategory) > 0) &&
+								(campaignProductRelation.isExtraRowInOffer()) && (!StringUtils.isEmpty(campaignProductRelation.getExtraRowInOfferText()))) {
+							long amount = countTextAmount.getBaseAmountsWithContractDiscountsDeducted().sum(feeCategory);
+							data.addLine(LineType.columns, "" + count, text,
+									Amounts.getFormattedWithDecimals(amount/count) + " kr.",
+									Amounts.getFormattedWithDecimals(amount) + " kr.",
+									feeCategory);
+							amount = -countTextAmount.getCampaignDiscountsWithContractDiscountsDeducted().sum(feeCategory);
+							data.addLine(LineType.columns, "" + count, campaignProductRelation.getExtraRowInOfferText(),
+									Amounts.getFormattedWithDecimals(amount/count) + " kr.",
+									Amounts.getFormattedWithDecimals(amount) + " kr.",
+									feeCategory);
+						} else {
+							data.addLine(LineType.columns, "" + count, text,
+									Amounts.getFormattedWithDecimals(sum/count) + " kr.",
+									Amounts.getFormattedWithDecimals(sum) + " kr.",
+									feeCategory);
+						}
 					}
-
 				}
 			}
 			

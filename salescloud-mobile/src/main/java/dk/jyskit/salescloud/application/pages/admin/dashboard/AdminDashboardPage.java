@@ -8,8 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.inject.Provider;
+import dk.jyskit.salescloud.application.links.spreadsheets.WorkbookAndFileName;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -105,7 +108,25 @@ public class AdminDashboardPage extends AdminBasePage {
 			};
 		};
 		add(adminFeaturesContainer);
-		adminFeaturesContainer.add(new SpreadsheetLink("contractsSpreadsheet", "salescloud_kontrakter.xls", objectFactory.getContractsSpreadsheet()));
+		adminFeaturesContainer.add(new SpreadsheetLink("contractsSpreadsheet",
+				new WorkbookAndFileName() {
+					@Override
+					public Provider<Workbook> getWorkbook() {
+						return objectFactory.getContractsSpreadsheet();
+					}
+
+					@Override
+					public IModel<String> getFileName() {
+						return Model.of("salescloud_kontrakter_" + MobileSession.get().getDumpYear() + "_" + MobileSession.get().getDumpMonth() + ".xls");
+					}
+				}));
+
+//				new AbstractReadOnlyModel<String>() {
+//					@Override
+//					public String getObject() {
+//						return "salescloud_kontrakter_" + MobileSession.get().getDumpYear() + "_" + MobileSession.get().getDumpMonth() + ".xls";
+//					}
+//				}, objectFactory.getContractsSpreadsheet()));
 		adminFeaturesContainer.add(new SpreadsheetLink("productsSpreadsheet", "salescloud_produkter.xls", objectFactory.getProductsSpreadsheet()));
 		adminFeaturesContainer.add(new SpreadsheetLink("usersSpreadsheet", "salescloud_brugere.xls", objectFactory.getUsersSpreadsheet()));
 		Link fixInconsistenciesLink = new Link("fixInconsistencies") {

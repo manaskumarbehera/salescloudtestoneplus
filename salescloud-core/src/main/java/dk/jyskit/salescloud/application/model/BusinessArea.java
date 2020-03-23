@@ -195,6 +195,17 @@ public class BusinessArea extends BaseEntity {
 		return null;
 	}
 
+//	@Transient
+//	public ProductGroup getProductGroupByUniqueNameFixed(String uniqueName) {
+//		for (ProductGroup productGroup : getProductGroupsAndChildren()) {
+//			ProductGroup matchingProductGroup = productGroup.getByUniqueName(uniqueName);
+//			if (matchingProductGroup != null) {
+//				return matchingProductGroup;
+//			}
+//		}
+//		return null;
+//	}
+
 	@Transient
 	public ProductGroup getProductGroupByUniqueName(String uniqueName) {
 		for (ProductGroup productGroup : getProductGroups()) {
