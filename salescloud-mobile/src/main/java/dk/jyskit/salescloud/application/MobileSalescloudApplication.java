@@ -5,6 +5,7 @@ import static dk.jyskit.waf.wicket.utils.BootstrapUtils.navbarPageLink;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.x5.template.Theme;
 import dk.jyskit.salescloud.application.pages.accessnew.locations.LocationsPage;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;

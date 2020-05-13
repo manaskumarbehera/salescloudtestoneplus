@@ -42,6 +42,10 @@
 		page-break-after: always;
 	}
 	
+	div.smaller-text {
+		font-size: 11px;
+	}
+
 	h1 {
 		font-size: 200%;
 		margin-top: 0;
@@ -228,7 +232,11 @@
 {.if ($is_offer == TRUE) }
 	<div class="row">
 		<div class="col-sm-7">
+{.if ($show_allonge == TRUE) }
+			<h1>Allonge</h1>
+{.else}
 			<h1>Tilbud</h1>
+{/if}
 			<div class="lm-20 rm-20">
 				{$customer_companyName}<br/>
 				{$customer_name}<br/>
@@ -329,7 +337,11 @@
 	<div class="breakBefore"></div>
 	<div class="row">
 		<div class="col-sm-12">
+{.if ($show_allonge == TRUE) }
+			<h1>Allonge</h1>
+{.else}
 			<h1>Tilbud</h1>
+{/if}
 			{.if ($onetime_is_zero == TRUE) }
 			{.else}
 			<div class="lm-20 rm-20">
@@ -419,7 +431,11 @@
 {.if ($is_mobile_voice == TRUE) }
 	<div class="row">
 		<div class="col-sm-7">
+{.if ($show_allonge == TRUE) }
+			<h1>Allonge</h1>
+{.else}
 			<h1>Tilbud</h1>
+{/if}
 			<div class="lm-20 rm-20">
 				<table style="width: 100%">
 					<thead><tr><td width="8%"></td><td width="60%"></td><td width="16%"></td><td width="16%"></td></tr></thead>
@@ -456,7 +472,11 @@
 {.if ($is_switchboard == TRUE) }
 	<div class="row">
 		<div class="col-sm-7">
+{.if ($show_allonge == TRUE) }
+			<h1>Allonge</h1>
+{.else}
 			<h1>Tilbud</h1>
+{/if}
 			<div class="lm-20 rm-20">
 				<table style="width: 100%">
 					<thead><tr><td width="8%"></td><td width="60%"></td><td width="16%"></td><td width="16%"></td></tr></thead>
@@ -492,7 +512,11 @@
 
 	<div class="row">
 		<div class="col-sm-7">
+{.if ($show_allonge == TRUE) }
+			<h1>Allonge</h1>
+{.else}
 			<h1>Tilbud</h1>
+{/if}
 			<div class="lm-20 rm-20">
 				<table style="width: 100%">
 					<thead><tr><td width="8%"></td><td width="60%"></td><td width="16%"></td><td width="16%"></td></tr></thead>
@@ -529,7 +553,11 @@
 {.if ($is_works == TRUE) }
 	<div class="row">
 		<div class="col-sm-7">
+{.if ($show_allonge == TRUE) }
+			<h1>Allonge</h1>
+{.else}
 			<h1>Tilbud</h1>
+{/if}
 			<div class="lm-20 rm-20">
 				<table style="width: 100%">
 					<thead><tr><td width="8%"></td><td width="60%"></td><td width="16%"></td><td width="16%"></td></tr></thead>
@@ -565,7 +593,11 @@
 
 	<div class="row">
 		<div class="col-sm-7">
+{.if ($show_allonge == TRUE) }
+			<h1>Allonge</h1>
+{.else}
 			<h1>Tilbud</h1>
+{/if}
 			<div class="lm-20 rm-20">
 				<table style="width: 100%">
 					<thead><tr><td width="8%"></td><td width="60%"></td><td width="16%"></td><td width="16%"></td></tr></thead>
@@ -602,7 +634,11 @@
 {.if ($is_reduce_page_count == TRUE) }
 	<div class="row">
 		<div class="col-sm-7">
+{.if ($show_allonge == TRUE) }
+			<h1>Allonge</h1>
+{.else}
 			<h1>Tilbud</h1>
+{/if}
 			<div class="lm-20 rm-20">
 				<table style="width: 100%">
 					<thead><tr><td width="8%"></td><td width="60%"></td><td width="16%"></td><td width="16%"></td></tr></thead>
@@ -689,9 +725,17 @@
 {.else}
 	<div class="breakBefore"></div>
 
+	{.if ($is_one_plus == TRUE) }
+	<div class="row smaller-text">
+	{.else}
 	<div class="row">
+	{/if}
 		<div class="col-sm-12">
+{.if ($show_allonge == TRUE) }
+			<h2>Accept af Allonge vedrørende TDC Erhverv One</h2>
+{.else}
 			<h2>Accept af tilbud</h2>
+{/if}
 			<hr style="margin-bottom:0px"/>
 			<div class="row" style="margin:0px">
 				<div class="col-sm-6">
@@ -714,6 +758,28 @@
 				</div>
 			</div>
 			<hr style="margin-top:2px"/>
+
+{.if ($show_allonge == TRUE) }
+<p>Med afsæt i aftalen om TDC Erhverv One mellem (Kunden) og TDC fremsendes denne allonge til forlængelse af aftalens varighed. Allongen har en varighed på 12 måneder og erstatter samtidig løbetiden i den eksisterende aftale mellem (Kunden) og TDC. Ved modstrid mellem allongen og den eksisterende abonnementsaftale har allongens bestemmelser forrang.</p>
+
+<p><strong>Ikrafttræden og indhold</strong></p>
+<p>Allongen træder i kraft fra kundens underskrift. Samtlige vilkår for TDC Erhverv One inklusiv eventuelle tillægsvilkår indgået mellem (kunden/abonnenten) og TDC fortsætter i sin eksisterende form i allongens løbetid. Se dog nedenfor under Opsigelse og forlængelse.</p>
+
+<p>Allongen indeholder desuden en række nye fordele for (Kunden). Allongen inkluderer adgang til bestilling af Roaming+ 10 GB* til brugere med One-profilerne Mobil 22GB og Kombi 22GB
+samt ekstra 50GB data i virksomhedspuljen per måned uden yderligere beregning.</p>
+
+<p><strong>*Roaming+</strong></p>
+<p>10GB data månedligt og samtalepriser på 3 kr. på kald hjem til DK og ved modtagne samtaler fra udlandet. 21 lande inkl. i pakken: Australien, Canada, Færøerne, Grønland, Hong Kong, Japan, Kina, Malaysia, Monaco, New Zealand, Singapore, Thailand, Tyrkiet, USA, Indien, Rusland, Albanien, Serbien, Ukraine, Taiwan, Vietnam. Roaming+ indhold er gældende jf. opdatering på TDC.dk</p>
+
+<p><strong>Opsigelse og forlængelse</strong></p>
+<p>Allongen kan ikke opsiges og kan ikke forlænges ud over 12 måneder. Denne allonge erstatter derfor opsigelsesbeføjelserne i Vilkår for TDC Erhverv One.</p>
+
+<p>Indgåelse af en ny aftale om TDC Erhverv One+ mellem (Kunden) og TDC vil erstatte denne allonge. Allongen vil i dette tilfælde ophæves på ikrafttrædelsesdatoen for TDC Erhverv One +.</p>
+
+<p><strong>Pris og rabatordninger</strong></p>
+<p>Der vil ikke være ændringer i (kundens/abonnentens) pris eller rabatordninger i allongens løbetid.</p>
+
+{.else}
 			<p>{$customer_companyName} og TDC aftaler hermed levering af ydelser som beskrevet i tilbud af {$date}.</p>
 			<table style="width: 100%">
 				<thead><tr><td width="75%"></td><td width="8%"></td><td width="17%"></td></tr></thead>
@@ -740,10 +806,9 @@
 			<li>Internetløsningen - se vilkårsbrochure for TDC Erhverv Netværk.</li>
  			</ul>
 
-			<p>TDC Erhverv One+ forudsætter løbende dialog mellem virksomheden og TDC Erhverv. Undertegnede afgiver herved følgende permission til TDC Erhverv.
-			Afgivet permission:</p>
-            <p>Få tips og nyheder til min TDC Erhverv One-løsning<br/>
-			<div class="media" data-src="{$checkbox_image:}" style="width: 14px; display: inline-block; margin: 0px;"/> Ja tak, jeg vil gerne modtage nyheder, rådgivning og tilbud om TDC Erhvervs produkter på email og sms. TDC Erhverv må gerne bruge regnings- og forbrugsoplysninger til at give mig relevante tilbud. Jeg kan altid ombestemme mig. Følgende email konti er omfattet af permission:</p>
+			<p>TDC Erhverv One+ forudsætter løbende dialog mellem virksomheden og TDC Erhverv. Med underskrift af denne aftale gives permission til at TDC Erhverv må kontakte Kunden.</p>
+            <p>Få tips og nyheder til min TDC Erhverv One+ løsning.<br/>
+			<div class="media" data-src="{$checkbox_image:}" style="width: 14px; display: inline-block; margin: 0px;"/> One+ løsning - ja tak. TDC Erhverv må gerne bruge regnings- og forbrugsoplysninger til at give mig relevante tilbud. Jeg kan altid ombestemme mig. Følgende email konti er omfattet af permission:</p>
 			<table style="width: 100%">
 				<thead><tr><td width="50%"></td><td width="50%"></td></tr></thead>
 				<tr><td>Navn:</td><td>Email:</td></tr>
@@ -796,7 +861,11 @@
 					<p>Tilbuddet er gældende i 30 dage og først bindende efter kontakt og teknisk sign-off med TDCs implementeringskonsulent. Løsningen er ikke omfattet af binding.</p>
 	{.else}
 		{.if ($is_one_plus == TRUE) }
-					<p>Tilbuddet er gældende i 30 dage.{$contract_info_one:}{$contract_info_network:} Ved indgåelse af denne aftale, accepteres, at vilkår for TDC Erhverv rabataftale træder i kraft ved dato for ordreindtastning. Evt. forudgående indplacering i TDC Erhverv rabataftale, vil blive annulleret og erstattet af ny rabat jf. denne aftale.</p>
+					<p>Tilbuddet på One+ er gældende i 30 dage{$contract_info1_one:}{$contract_info1_network:}.</p>
+					<ul>
+					<li>Aftalen om One+ løsningen indgås ved modtagelse af ordrebekræftelse fra TDC, hvor Kunden samtidig oplyses om forventet leveringstidspunkt. Ved levering af One+ løsningen, overgår Kunden til de i aftalen gældende priser og vilkår for One+.</li>
+					{$contractaftale_bullet:}
+					</ul>
 		{.else}
 			{.if ($is_works == TRUE) }
 						<p>Tilbuddet er gældende i 30 dage og forudsætter samtidig indgåelse/gentegning af {$contract_length:}-årig kontrakt.</p>
@@ -806,6 +875,8 @@
 		{/if}
 	{/if}
 {/if}
+{/if}
+
 			<table style="width: 100%; margin-bottom: 0px;">
 				<thead><tr><td width="50%"></td><td width="50%"></td></tr></thead>
 				<tr><td>Dato:</td><td>Dato: {$contract_date:}</td></tr>
@@ -1259,7 +1330,7 @@
 				<div class="lm-5 rm-20">
 					<table class="bordered" style="width:60%" cellpadding="3">
 						<tr><td>Kontraktsum</td><td>{$rabataftale_kontraktsum} Kr.</td></tr>
-						<tr><td>Startdato</td><td>{$contract_start_date}</td></tr>
+						<tr><td>Forventet startdato</td><td>{$contract_start_date}</td></tr>
 						<tr><td>Bindingsperiode</td><td>{$contract_length} år</td></tr>
 						<tr><td>Udløbsdato</td><td>{$contract_end_date}</td></tr>
 						<tr><td>Rabat %</td><td>{$contract_discount_pct}</td></tr>

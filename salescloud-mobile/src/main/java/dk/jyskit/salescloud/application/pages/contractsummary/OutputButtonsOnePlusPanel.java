@@ -16,12 +16,12 @@ import org.apache.wicket.markup.html.link.ResourceLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 @Slf4j
-@Data
 public class OutputButtonsOnePlusPanel extends AbstractOutputButtonsPanel {
 	public OutputButtonsOnePlusPanel(String id) {
 		super(id);
@@ -53,6 +53,14 @@ public class OutputButtonsOnePlusPanel extends AbstractOutputButtonsPanel {
 		list.add(newReportLink("Tilbud med rabataftale + Produktspecifikt Bilag",
 				"One+ - Tilbud med rabataftale + Produktspecifikt Bilag - {cvr}{date}.pdf",
 				new TilbudRammeaftaleOgPBReport(true, true, true, true)));
+
+//		try {
+//			if (new Date().after(new SimpleDateFormat("yyyyMMdd").parse("20200430"))) {
+				list.add(newReportLink("Allonge","One+ - Allonge - {cvr}{date}.pdf", new AllongeReport()));
+//			}
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
 
 		ResourceLink tastebilag = newReportLink("Tastebilag", "One+ - Tastebilag - {cvr}{date}.pdf", new CdmOutputReport(false));
 		list.add(tastebilag);
@@ -87,8 +95,8 @@ public class OutputButtonsOnePlusPanel extends AbstractOutputButtonsPanel {
 			list.add(newAnyFileLink("Smulskema", "One+ - Smulskema - {cvr}{date}.xlsx", "documents/one/smulskema.xlsx", "application/xls"));
 		}
 		list.add(newAnyFileLink("Brugerliste", "One+ - Brugerliste - {cvr}{date}.xlsm", "documents/one/brugerliste.xlsm", "application/xls"));
+		list.add(newAnyFileLink("Aftalepapir", "One+ - Aftalepapir - {cvr}{date}.docm", "documents/one/aftalepapir.docm", "application/vnd.ms-word.document.macroEnabled.12"));
 		if (MobileSession.get().userIsPartnerEC()) {
-			list.add(newAnyFileLink("Aftalepapir", "One+ - Aftalepapir - {cvr}{date}.docm", "documents/one/aftalepapir.docm", "application/vnd.ms-word.document.macroEnabled.12"));
 //		list.add(newPdfLink("Installation", "One+ - Installation - {cvr}{date}.pdf", "documents/one/x.pdf"));
 			list.add(newReportLink("Installation", "One+ - Installation - {cvr}{date}.pdf", new PartnerInstallationReport("TDC Erhvervscenter installation One+")));
 

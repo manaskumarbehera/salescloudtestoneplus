@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static dk.jyskit.salescloud.application.model.LocationBundleData.INSTALLATION_ONSITE_REMOTE_TDC;
+import static dk.jyskit.salescloud.application.model.LocationBundleData.INSTALLATION_TDC;
 import static dk.jyskit.salescloud.application.model.PartnerData.VARIANT_TASTEBILAG;
 
 @Slf4j
@@ -110,18 +112,16 @@ public class CdmOutputReport implements Provider<String>, Serializable {
 			} else {
 				html.set("existing_flex_connect_subscriptions", "");
 			}
-			{
-				Product product = ProductDao.lookup().findById(contract.getInstallationTypeBusinessEntityId());
-				html.set("installation_business", product == null ? "" : product.getInternalName());
-			}
-			{
-				Product product = ProductDao.lookup().findById(contract.getInstallationTypeUserProfilesEntityId());
-				html.set("installation_users", product == null ? "" : product.getInternalName());
-			}
+			String installation_business = null;
+			String installation_users = null;
 			{
 				if (contract.getLocationBundles().size() > 0) {
 					LocationBundleData locationBundleData = contract.getLocationBundles().get(0);
 					html.set("installation_locations", LocationBundleData.getInstallationProviderAsString(locationBundleData.getInstallationProvider()));
+					if ((locationBundleData.getInstallationProvider() == INSTALLATION_TDC) || (locationBundleData.getInstallationProvider() == INSTALLATION_ONSITE_REMOTE_TDC)) {
+						installation_business 	= LocationBundleData.getInstallationProviderAsString(locationBundleData.getInstallationProvider());
+						installation_users 		= LocationBundleData.getInstallationProviderAsString(locationBundleData.getInstallationProvider());
+					}
 				} else {
 					html.set("installation_locations", "");
 				}
@@ -129,11 +129,21 @@ public class CdmOutputReport implements Provider<String>, Serializable {
 			{
 				if (contract.getLocationBundles().size() > 0) {
 					LocationBundleData locationBundleData = contract.getLocationBundles().get(0);
-					html.set("hardware_locations", LocationBundleData.getInstallationProviderAsString(locationBundleData.getHardwareProvider()));
+					html.set("hardware_locations", LocationBundleData.getHardwareProviderAsString(locationBundleData.getHardwareProvider()));
 				} else {
 					html.set("hardware_locations", "");
 				}
 			}
+			if (installation_business == null) {
+				Product product = ProductDao.lookup().findById(contract.getInstallationTypeBusinessEntityId());
+				installation_business = product == null ? "" : product.getInternalName();
+			}
+			if (installation_users == null) {
+				Product product = ProductDao.lookup().findById(contract.getInstallationTypeUserProfilesEntityId());
+				installation_users = product == null ? "" : product.getInternalName();
+			}
+			html.set("installation_business", installation_business);
+			html.set("installation_users", installation_users);
 
 			int noOfFiberPlusLocations 	= 0;
 			int noOfFiberPlusQos	 	= 0;

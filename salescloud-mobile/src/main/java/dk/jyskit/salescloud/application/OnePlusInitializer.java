@@ -229,6 +229,33 @@ public class OnePlusInitializer extends AbstractBusinessAreaInitializer {
 				}
 			}
 			// ===============================
+			{
+				String name = "Omdøb evt. impl_onsite"; // Don't change this name!
+				SystemUpdate update = systemUpdateDao.findByName(name, businessArea.getBusinessAreaId());
+				if (update == null) {
+					log.info("Update starting: " + name);
+
+					for (ProductGroup productGroup: businessArea.getProductGroupsAndChildren()) {
+						for (Product product: productGroup.getProducts()) {
+							if ("_Impl_Onsite".equals(product.getProductId())) {
+								if (!StringUtils.equalsIgnoreCase(product.getPublicName(), "Onsite + TDC Remote")) {
+									((MobileProduct) product).setPublicName("Onsite + TDC Remote");
+									((MobileProduct) product).setInternalName("Onsite + TDC Remote");
+									ProductDao.lookup().save(product);
+								}
+								break;
+							}
+						}
+					}
+
+					log.info("Update done: " + name);
+					update = new SystemUpdate();
+					update.setBusinessAreaId(businessArea.getBusinessAreaId());
+					update.setName(name);
+					systemUpdateDao.save(update);
+				}
+			}
+			// ===============================
 			
 			log.info("Done making system updates");
 		} catch (Exception e) {

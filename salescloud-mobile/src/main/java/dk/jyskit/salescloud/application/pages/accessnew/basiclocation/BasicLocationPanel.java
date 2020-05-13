@@ -77,6 +77,13 @@ public class BasicLocationPanel extends AbstractLocationAccessPanel implements I
 		List<LocationBundleData> locationBundles = contract.getLocationBundles();
 		LocationBundleData bundleData = locationBundles.get(bi);
 
+		if (bundleData.getInstallationProvider() == INSTALLATION_ONSITE_REMOTE_TDC) {
+			bundleData.setInstallationProvider(INSTALLATION_TDC);
+		}
+		if (bundleData.getHardwareProvider() == HARDWARE_ONSITE_REMOTE_TDC) {
+			bundleData.setHardwareProvider(HARDWARE_TDC);
+		}
+
 		if (bi == 0) {
 			if (StringUtils.isEmpty(bundleData.getAddressRoad())) {
 				bundleData.setAddressRoad(contract.getCustomer().getAddress());
@@ -158,6 +165,9 @@ public class BasicLocationPanel extends AbstractLocationAccessPanel implements I
 			}
 
 			for (MobileProduct product : groupType.getProducts(MobileSession.get().getBusinessArea())) {
+				if (product.isExcludeFromConfigurator()) {
+					continue;
+				}
 				ProductCountAndInstallation productRow = new ProductCountAndInstallation(product, null,
 						contract.getCountNewForProduct(product, bi), contract.getCountExistingForProduct(product, bi));
 				LocationAccessComponentWrapper wrapper = LocationAccessComponentWrapper.addSelectProductCountEditorWrapper(values, labelMap, productRow,
@@ -180,7 +190,7 @@ public class BasicLocationPanel extends AbstractLocationAccessPanel implements I
 
 				wrapper.setListener((LocationAccessComponentWrapper.WrapperUpdateListener) (target, w) -> {
 					boolean updated = false;
-					boolean switchSelected	= sumCountNewOf(PRODUCT_GROUP_LOCATIONS_HARDWARE_SWITCHES, new Predicate<Product>() {
+					boolean switchSelected	= sumCountTotalOf(PRODUCT_GROUP_LOCATIONS_HARDWARE_SWITCHES, new Predicate<Product>() {
 						@Override
 						public boolean test(Product product) {
 							return (product.getPublicName().toLowerCase().indexOf("fravalgt") == -1);
@@ -296,6 +306,9 @@ public class BasicLocationPanel extends AbstractLocationAccessPanel implements I
 		}
 
 		for (MobileProduct product : MobileProductGroupEnum.PRODUCT_GROUP_LOCATIONS_INSTALLATION.getProducts(MobileSession.get().getBusinessArea())) {
+			if (product.isExcludeFromConfigurator()) {
+				continue;
+			}
 			SimpleProductCount productRow = new SimpleProductCount(product, contract.getCountNewForProduct(product, bi));
 			LocationAccessComponentWrapper wrapper = LocationAccessComponentWrapper.addSimpleProductCountEditorWrapper(values, labelMap, productRow,
 					String.valueOf(product.getId()), bi, formContainer, product.getPublicName(), componentWrappers);
@@ -442,6 +455,9 @@ public class BasicLocationPanel extends AbstractLocationAccessPanel implements I
 	private int sumCountNewOf(MobileProductGroupEnum group, Predicate<Product> productPredicate) {
 		int sum = 0;
 		for (MobileProduct product : group.getProducts(MobileSession.get().getBusinessArea())) {
+			if (product.isExcludeFromConfigurator()) {
+				continue;
+			}
 			if (productPredicate.test(product)) {
 				sum += countNewOf(product.getProductId());
 			}
@@ -449,10 +465,40 @@ public class BasicLocationPanel extends AbstractLocationAccessPanel implements I
 		return sum;
 	}
 
+	private int sumCountTotalOf(MobileProductGroupEnum group, Predicate<Product> productPredicate) {
+		int sum = 0;
+		for (MobileProduct product : group.getProducts(MobileSession.get().getBusinessArea())) {
+			if (product.isExcludeFromConfigurator()) {
+				continue;
+			}
+			if (productPredicate.test(product)) {
+				sum += countNewOf(product.getProductId());
+			}
+		}
+		return sum;
+	}
+
+	private int countTotalOf(String productId) {
+		Object value = values.get(keyToProductId.inverse().get(productId));
+		if (value == null) {
+			log.warn("Not found (maybe not shown in configurator?): " + productId);
+			return 0;
+		}
+		if (value instanceof ProductCountAndInstallation) {
+			ProductCountAndInstallation productCountAndInstallation = (ProductCountAndInstallation) values.get(keyToProductId.inverse().get(productId));
+			return productCountAndInstallation.getCountExisting().intValue() + productCountAndInstallation.getCountNew().intValue();
+		} else if (value instanceof SimpleProductCount) {
+			SimpleProductCount simpleProductCount = (SimpleProductCount) values.get(keyToProductId.inverse().get(productId));
+			return simpleProductCount.getCountNew();
+		}
+		throw new IllegalArgumentException("Unexpected type of value: " + productId);
+	}
+
 	private int countNewOf(String productId) {
 		Object value = values.get(keyToProductId.inverse().get(productId));
 		if (value == null) {
-			throw new IllegalArgumentException("Not found: " + productId);
+			log.warn("Not found (maybe not shown in configurator?): " + productId);
+			return 0;
 		}
 		if (value instanceof ProductCountAndInstallation) {
 			ProductCountAndInstallation productCountAndInstallation = (ProductCountAndInstallation) values.get(keyToProductId.inverse().get(productId));
@@ -519,7 +565,20 @@ public class BasicLocationPanel extends AbstractLocationAccessPanel implements I
 			bundle.setAddressCity((String) values.get(makeKey(KEY_ADDRESS_CITY, bi)));
 
 			bundle.setInstallationProvider(LocationBundleData.getInstallationProviderAsCode((String) values.get(makeKey(KEY_INSTALLATION_PROVIDER, bi))));
+			if (bundle.getInstallationProvider() == INSTALLATION_TDC) {
+				int sumOfOnsiteServices = sumCountNewOf("4401533", "4401509", "4401515", "4401516", "4401517", "4401518");
+				if (sumOfOnsiteServices > 0) {
+					bundle.setInstallationProvider(INSTALLATION_ONSITE_REMOTE_TDC);
+				}
+			}
+
 			bundle.setHardwareProvider(LocationBundleData.getHardwareProviderAsCode((String) values.get(makeKey(KEY_HARDWARE_PROVIDER, bi))));
+			if (bundle.getHardwareProvider() == INSTALLATION_TDC) {
+				int sumOfOnsiteServices = sumCountNewOf("4401533", "4401509", "4401515", "4401516", "4401517", "4401518");
+				if (sumOfOnsiteServices > 0) {
+					bundle.setHardwareProvider(INSTALLATION_ONSITE_REMOTE_TDC);
+				}
+			}
 
 			for (MobileProductGroupEnum groupType: new MobileProductGroupEnum[]
 					{PRODUCT_GROUP_LOCATIONS_HARDWARE_SWITCHES, PRODUCT_GROUP_LOCATIONS_HARDWARE_IP, PRODUCT_GROUP_LOCATIONS_HARDWARE_MISC}) {

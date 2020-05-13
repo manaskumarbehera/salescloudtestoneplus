@@ -709,7 +709,10 @@
 					<p>Tilbuddet er gældende i 30 dage og først bindende efter kontakt og teknisk sign-off med TDCs implementeringskonsulent. Løsningen er ikke omfattet af binding.</p>
 	{.else}
 		{.if ($is_one_plus == TRUE) }
-					<p>Tilbuddet er gældende i 30 dage og priserne er afrundet til nærmeste krone.{$contract_info_one:}{$contract_info_network:}</p>
+					<p>Tilbuddet på One+ er gældende i 30 dage{$no_contract_info:}{$contract_info1_one:}{$contract_info1_network:}</p>
+					<ul>
+					<li>Aftalen om One+ løsningen indgås ved modtagelse af ordrebekræftelse fra TDC, hvor Kunden samtidig oplyses om forventet leveringstidspunkt. Ved levering af One+ løsningen, overgår Kunden til de i aftalen gældende priser og vilkår for One +.</li>
+					{$contractaftale_bullet:}</ul>
 		{.else}
 			{.if ($is_works == TRUE) }
 						<p>Tilbuddet er gældende i 30 dage og forudsætter samtidig indgåelse/gentegning af {$contract_length:}-årig kontrakt.</p>

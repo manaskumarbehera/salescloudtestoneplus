@@ -4,8 +4,6 @@ import com.x5.template.Chunk;
 import dk.jyskit.salescloud.application.MobileSession;
 
 public class TilbudRammeaftaleOgPBReport extends ContractAcceptReport {
-
-
 	public TilbudRammeaftaleOgPBReport(boolean offer, boolean rammeaftale, boolean bilagOne, boolean bilagNetwork) {
 		super(offer, rammeaftale, bilagOne, bilagNetwork);
 	}
