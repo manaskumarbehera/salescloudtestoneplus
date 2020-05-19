@@ -75,6 +75,7 @@ public class EditCampaignPanel extends AbstractEditPanel<Campaign, BusinessArea>
 		
 		form.addTextArea("prisaftaleTextMatrix");
 		form.addTextArea("prisaftaleTextMatrixNetwork");
+		form.addTextArea("prisaftaleTextMatrixPool");
 
 		if (parentModel.getObject().hasFeature(FeatureType.SWITCHBOARD)) {
 			form.addTextArea("switchboardHelpText");

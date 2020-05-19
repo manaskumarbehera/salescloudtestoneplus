@@ -219,6 +219,14 @@ public class CdmOutputReport implements Provider<String>, Serializable {
 
             MobileCampaign contractCampaign = (MobileCampaign) contract.getCampaigns().get(0);
             MobileCampaign permanentCampaign = (MobileCampaign) contract.getBusinessArea().getPermanentCampaign();
+            if (contract.isPoolsMode()) {
+				html.set("prisaftale_1_pool", StringUtils.defaultString(permanentCampaign.getPrisaftalePool(discountStep, contract.getAdjustedContractLength())));
+				html.set("prisaftale_2_pool", StringUtils.defaultString(contractCampaign.getPrisaftalePool(discountStep, contract.getAdjustedContractLength())));
+			} else {
+				html.set("prisaftale_1_pool", "");
+				html.set("prisaftale_2_pool", "");
+			}
+
         	if (contractCampaign.isDisableContractDiscount()) {
         		html.set("prisaftale_1", "");
 				html.set("prisaftale_1_network", "");

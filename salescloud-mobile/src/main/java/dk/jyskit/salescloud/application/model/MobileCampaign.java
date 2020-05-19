@@ -49,6 +49,9 @@ public class MobileCampaign extends Campaign {
 	@Column(length=1000)
 	private String prisaftaleTextMatrixNetwork;
 
+	@Column(length=1000)
+	private String prisaftaleTextMatrixPool;
+
 	private boolean disableContractDiscount = false;
 	
 	// --------------------------------
@@ -81,6 +84,23 @@ public class MobileCampaign extends Campaign {
 		}
 		if (!StringUtils.isEmpty(prisaftaleTextMatrixNetwork)) {
 			String[] rows = prisaftaleTextMatrixNetwork.split("#");
+			String[] cells = rows[year-1].split(",");
+			return cells[level].trim();
+		}
+		return null;
+	}
+
+	/**
+	 * @param level (zero-based)
+	 * @param year (not zero-based)
+	 * @return
+	 */
+	public String getPrisaftalePool(int level, int year) {
+		if (year == 0) {
+			return "";
+		}
+		if (!StringUtils.isEmpty(prisaftaleTextMatrixPool)) {
+			String[] rows = prisaftaleTextMatrixPool.split("#");
 			String[] cells = rows[year-1].split(",");
 			return cells[level].trim();
 		}
