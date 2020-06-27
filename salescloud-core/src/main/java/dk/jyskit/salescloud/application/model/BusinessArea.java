@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dk.jyskit.salescloud.application.services.accesscodes.AccessCodeChecker;
 import dk.jyskit.waf.wicket.security.UserSession;
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +62,7 @@ public class BusinessArea extends BaseEntity {
 	@Column(length=2000)
 	private String standardDiscountMatrixNetwork;
 
+	@JsonIgnore
 	@AttributeOverrides({
 	    @AttributeOverride(name="name", column= @Column(name="b_name")),
 	    @AttributeOverride(name="position", column= @Column(name="b_position")),
@@ -75,24 +77,30 @@ public class BusinessArea extends BaseEntity {
 	  })
 	@Embedded
 	private BusinessEntity seller;   // TODO: ok?
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "businessArea", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductGroup> productGroups = new ArrayList<>();
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "businessArea", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductRelation> productRelations = new ArrayList<>();
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "businessArea", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Campaign> campaigns = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "businessArea", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PageInfo> pages = new ArrayList<>();
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "businessArea", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Report> reports = new ArrayList<>();
 
 	// WAF Pattern: collection of enums
-	@ElementCollection(targetClass = FeatureType.class) 
+	@JsonIgnore
+	@ElementCollection(targetClass = FeatureType.class)
 	@CollectionTable(name = "BUS_FEATURE",
 	    joinColumns = @JoinColumn(name = "BUSINESS_AREA_ID"))
 	@Column(name = "FEATURE_ID")

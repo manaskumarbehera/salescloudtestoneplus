@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.x5.template.Theme;
 import dk.jyskit.salescloud.application.pages.accessnew.locations.LocationsPage;
+import dk.jyskit.salescloud.application.pages.makeupdates.MakeUpdatesPage;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
@@ -165,6 +166,7 @@ public class MobileSalescloudApplication extends CoreApplication {
         mountPage("admin", AdminHomePage.class);
         mountPage("removebusinessareas/${ba}", RemoveBusinessAreasPage.class);
 //        mountPage("removefiber", RemoveFiberPage.class);
+        mountPage("makeupdates", MakeUpdatesPage.class);
         mountPage("konfiguration/${businessAreaId}/${contract}", ExternalSubscriptionConfigurationPage.class);
         mountPage("implementering/${businessAreaId}/${contract}", ExternalSubscriptionImplementationPage.class);
         // API

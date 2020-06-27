@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -41,24 +42,27 @@ public class Campaign extends BaseEntity {
 	@NonNull
 	@Column(length=50)
 	private String name;
-	
+
+	@JsonIgnore
 	@Nonnull
 	@ManyToOne(optional = false)
 	private BusinessArea businessArea;
 	
 	// Perform GKS validation on summary?
 	private boolean gksValidation;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProductBundle> productBundles = new ArrayList<>();
 	
 	/* Many-to-many relation */
+	@JsonIgnore
 	@OneToMany(mappedBy = "campaign", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<CampaignProductRelation> campaignProducts = new ArrayList<>();
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date fromDate;	// Inclusive this timestamp. Value is null if the campaign is "permanent"
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date toDate;	// Inclusive this timestamp. You may want to set it to something like "dd.mm.yyyy 23:59"
 	

@@ -26,6 +26,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.panel.EmptyPanel;
@@ -53,6 +56,7 @@ public class Contract extends BaseEntity {
 
 	public final static SimpleDateFormat CONTRACT_DATE_FORMAT = new SimpleDateFormat("d/M yyyy");
 
+	@JsonView(Contract.class)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BUSINESS_AREA_ID")
 	protected BusinessArea businessArea;
@@ -133,7 +137,8 @@ public class Contract extends BaseEntity {
 //	@ManyToMany
 //	@JoinTable(name = "contract_discountscheme", joinColumns = { @JoinColumn(name = "CONTRACT_ID", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "DISCOUNT_SCHEME_ID", referencedColumnName = "ID") })
 //	protected List<DiscountScheme> discountSchemes;
-	
+
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "contract_id", referencedColumnName = "id")
 	@PrivateOwned
