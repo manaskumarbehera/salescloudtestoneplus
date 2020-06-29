@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dk.jyskit.waf.application.model.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -50,14 +51,17 @@ public class Product extends BaseEntity {
 	
 	@Embedded
 	protected Amounts price;
-	
+
+	@JsonIgnore
 	@ManyToOne(optional = false)
 	private BusinessArea businessArea;
-	
+
+	@JsonIgnore
 	@ManyToOne(optional = false)
 	private ProductGroup productGroup;
 	
 	// NOT USED!!!
+	@JsonIgnore
 	@Deprecated
 	@ElementCollection
 	private List<ProductionItem> productionItems = new ArrayList<>();
@@ -72,6 +76,7 @@ public class Product extends BaseEntity {
 	private boolean discountEligible;
 	
 	// NOT USED!!!
+	@JsonIgnore
 	@Deprecated
 	@ManyToMany
 	@JoinTable(name = "product_discountscheme", joinColumns = { @JoinColumn(name = "product_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "discountscheme_id", referencedColumnName = "id") })
@@ -95,6 +100,7 @@ public class Product extends BaseEntity {
 		sortIndex++;
 	}
 
+	@JsonIgnore
 	@Transient
 	public Amounts getAmountsBeforeDiscounts(OrderLineCount count, Contract contract) {
 		Amounts amounts = new Amounts();
@@ -104,7 +110,8 @@ public class Product extends BaseEntity {
 		}
 		return amounts;
 	}
-	
+
+	@JsonIgnore
 	@Transient
 	public Amounts getAmounts(OrderLineCount count, boolean deductCampaignDiscount, boolean deductContractDiscount, Contract contract) {
 		Amounts amountsBeforeCampaignDiscount = getAmountsBeforeDiscounts(count, contract);
@@ -126,6 +133,7 @@ public class Product extends BaseEntity {
 		return amountsAfterCampaignDiscount;
 	}
 
+	@JsonIgnore
 	@Transient
 	public Amounts getActualPrice() {
 		return price;  // TODO : Look up price for partner stuff
@@ -140,6 +148,7 @@ public class Product extends BaseEntity {
 	 * @param amounts
 	 * @return
 	 */
+	@JsonIgnore
 	@Transient
 	public Amounts getContractDiscounts(Contract contract, Amounts amountsBeforeCampaignDiscount, Amounts amountsAfterCampaignDiscount) {
 		Amounts contractDiscounts = new Amounts();
@@ -158,12 +167,14 @@ public class Product extends BaseEntity {
 		}
 		return contractDiscounts;
 	}
-	
+
+	@JsonIgnore
 	@Transient
 	public Amounts getCampaignDiscounts(Contract contract, OrderLineCount count) {
 		return new Amounts();
 	}
 
+	@JsonIgnore
 	@Transient
 	public boolean isInstallationHandledByTdc(Integer subIndex) {
 		return true;

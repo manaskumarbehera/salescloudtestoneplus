@@ -6,7 +6,7 @@ apply plugin: 'idea'
 apply plugin: 'com.github.ben-manes.versions'
 
 group = 'dk.jyskit'
-version = '3.2.5'
+version = '3.2.6'
 
 description = """waf"""
 
