@@ -47,13 +47,23 @@ public class CampaignProductRelation implements Serializable {
 //	  })
 //	@Embedded
 //	private Amounts baseAmounts = new Amounts();	
-	
+
+	/*
+	New feature (20200627). If a campaign price is defined, the campaign discount is calculated
+	as original price - contract discount - campaign price.
+	 */
 	@AttributeOverrides({
-	    @AttributeOverride(name="amounts", column= @Column(name="d_amounts"))
+	    @AttributeOverride(name="amounts", column= @Column(name="d_campaign_prices"))
+	})
+	@Embedded
+	private Amounts campaignPriceAmounts = new Amounts(0, 0, 0);
+
+	@AttributeOverrides({
+			@AttributeOverride(name="amounts", column= @Column(name="d_amounts"))
 	})
 	@Embedded
 	private Amounts campaignDiscountAmounts = new Amounts(0, 0, 0);
-	
+
 	@Column(length=100)
 	private String outputCodeOverride;  // Kode i tastegrundlag (CDM/Nabs)
 	
