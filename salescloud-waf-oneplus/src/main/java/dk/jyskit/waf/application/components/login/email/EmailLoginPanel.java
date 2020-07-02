@@ -18,9 +18,9 @@ import dk.jyskit.waf.application.components.login.LoginAuxErrorProvider;
 public class EmailLoginPanel extends Panel {
 	private static final long serialVersionUID = 1L;
 
-	public EmailLoginPanel(String id, LoginAuxErrorProvider auxErrorProvider) {
+	public EmailLoginPanel(String id) {
 		super(id);
 
-		add(new EmailLoginForm("loginForm", auxErrorProvider));
+		add(new EmailLoginForm("loginForm"));
 	}
 }

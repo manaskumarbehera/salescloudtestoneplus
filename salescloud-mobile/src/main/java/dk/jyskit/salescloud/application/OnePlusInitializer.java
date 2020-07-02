@@ -1,5 +1,6 @@
 package dk.jyskit.salescloud.application;
 
+import dk.jyskit.salescloud.application.apis.user.UserApiClient;
 import dk.jyskit.salescloud.application.dao.*;
 import dk.jyskit.salescloud.application.model.*;
 import dk.jyskit.salescloud.application.pages.MobilePageIds;
@@ -256,7 +257,7 @@ public class OnePlusInitializer extends AbstractBusinessAreaInitializer {
 				}
 			}
 			// ===============================
-			
+
 			log.info("Done making system updates");
 		} catch (Exception e) {
 			log.error("", e);

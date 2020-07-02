@@ -744,3 +744,94 @@ com.intellij.openapi.util.TraceableDisposable.ObjectNotDisposedException: See st
 2020-05-06 21:23:16,919 [9577621]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.provider.LombokProcessorProvider) 
 2020-05-07 01:55:04,671 [25885373]   WARN - .diagnostic.PerformanceWatcher - UI was frozen for 23564ms, details saved to /home/jan/.cache/JetBrains/IdeaIC2020.1/log/threadDumps-freeze-20200507-015446-IC-201.7223.91-Unsafe.park-23sec 
 2020-05-09 03:28:12,589 [204273291]   WARN - pl.local.NativeFileWatcherImpl - File watcher is still alive. Doing a force quit. 
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+Already running
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+2020-07-02 03:18:48,276 [   8020]   WARN - llij.ide.plugins.PluginManager - Problems found loading plugins:
+  The XSLT Debugger (id=XSLT-Debugger, path=~/dev/java/tools/idea-IC-183.5429.30/plugins/xslt-debugger) plugin Non-optional dependency plugin XPathView is disabled 
+2020-07-02 03:19:12,975 [  32719]   WARN - .diagnostic.PerformanceWatcher - UI was frozen for 8965ms, details saved to /home/jan/.cache/JetBrains/IdeaIC2020.1/log/threadDumps-freeze-20200702-031908-IC-201.7223.91-BaseComponentAdapter.getInstanceUncached-8sec 
+2020-07-02 03:19:37,204 [  56948]   WARN - .diagnostic.PerformanceWatcher - UI was frozen for 5647ms, details saved to /home/jan/.cache/JetBrains/IdeaIC2020.1/log/threadDumps-freeze-20200702-031936-IC-201.7223.91-Page.get-5sec 
+2020-07-02 03:19:54,707 [  74451]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-02 03:19:55,663 [  75407]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-02 03:19:56,146 [  75890]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-02 03:19:57,408 [  77152]   WARN - openapi.wm.impl.ToolWindowImpl - ToolWindow icons should be 13x13. Please fix ToolWindow (ID:  Problems View) or icon jar:file:/home/jan/dev/java/tools/idea-IC-183.5429.30/lib/icons.jar!/general/warning.svg 
+2020-07-02 03:20:08,563 [  88307]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.modifier.FieldDefaultsModifierProcessor) 
+2020-07-02 03:20:08,567 [  88311]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.lombokconfig.ConfigDiscovery) 
+2020-07-02 03:20:22,117 [ 101861]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.provider.LombokProcessorProvider) 
+2020-07-02 03:20:22,145 [ 101889]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.DataProcessor) 
+2020-07-02 03:20:22,147 [ 101891]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.GetterProcessor) 
+2020-07-02 03:20:22,152 [ 101896]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.SetterProcessor) 
+2020-07-02 03:20:22,155 [ 101899]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.EqualsAndHashCodeProcessor) 
+2020-07-02 03:20:22,161 [ 101905]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.ToStringProcessor) 
+2020-07-02 03:20:22,165 [ 101909]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.WitherProcessor) 
+2020-07-02 03:20:22,168 [ 101912]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.field.WitherFieldProcessor) 
+2020-07-02 03:20:22,174 [ 101918]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderPreDefinedInnerClassFieldProcessor) 
+2020-07-02 03:20:22,179 [ 101923]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.handler.BuilderHandler) 
+2020-07-02 03:20:22,182 [ 101926]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderPreDefinedInnerClassMethodProcessor) 
+2020-07-02 03:20:22,185 [ 101929]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderClassProcessor) 
+2020-07-02 03:20:22,187 [ 101931]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderProcessor) 
+2020-07-02 03:20:22,190 [ 101934]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.method.BuilderClassMethodProcessor) 
+2020-07-02 03:20:22,192 [ 101936]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.method.BuilderMethodProcessor) 
+2020-07-02 03:20:22,196 [ 101940]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderPreDefinedInnerClassFieldProcessor) 
+2020-07-02 03:20:22,199 [ 101943]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.handler.SuperBuilderHandler) 
+2020-07-02 03:20:22,201 [ 101945]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderPreDefinedInnerClassMethodProcessor) 
+2020-07-02 03:20:22,203 [ 101947]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderClassProcessor) 
+2020-07-02 03:20:22,204 [ 101948]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderProcessor) 
+2020-07-02 03:20:22,206 [ 101950]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.ValueProcessor) 
+2020-07-02 03:20:22,211 [ 101955]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.fieldnameconstants.FieldNameConstantsOldProcessor) 
+2020-07-02 03:20:22,222 [ 101966]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.field.DelegateFieldProcessor) 
+2020-07-02 03:20:22,229 [ 101973]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.method.DelegateMethodProcessor) 
+2020-07-02 03:21:13,171 [ 152915]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-02 03:21:13,548 [ 153292]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-02 03:21:13,951 [ 153695]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-02 03:21:14,401 [ 154145]   WARN - openapi.wm.impl.ToolWindowImpl - ToolWindow icons should be 13x13. Please fix ToolWindow (ID:  Problems View) or icon jar:file:/home/jan/dev/java/tools/idea-IC-183.5429.30/lib/icons.jar!/general/warning.svg 
+2020-07-02 03:21:24,618 [ 164362]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.provider.LombokProcessorProvider) 
+2020-07-02 03:26:29,555 [ 469299]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-02 03:27:32,767 [ 532511]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-02 03:34:38,272 [ 958016]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-02 03:34:58,209 [ 977953]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-02 03:37:14,266 [1114010]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-02 03:42:55,930 [1455674]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-02 03:45:19,149 [1598893]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)

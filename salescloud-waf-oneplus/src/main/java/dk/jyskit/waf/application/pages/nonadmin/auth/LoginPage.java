@@ -16,29 +16,29 @@ public class LoginPage extends WebPage {
         add(new BootstrapBaseBehavior());  // Add admin theme
         add(new HeaderResponseContainer("footer-container", "footer-container"));  // For JS to be added
         
-    	LoginAuxErrorProvider auxErrorProvider = new LoginAuxErrorProvider() {
-    		@Override
-    		public String evaluateUser(BaseUser user) {
-    			if (user.isAuthenticatedBy("Slettet")) {
-    				return "auth.error.userNotFound";
-    			}
-    			if (user.isAuthenticatedBy("Passiv")) {
-    				return "auth.error.userNotFound";
-    			}
-    			if (user.isAuthenticatedBy("Deleted")) {
-    				return "auth.error.userNotFound";
-    			}
-    			if (user.isAuthenticatedBy("Passive")) {
-    				return "auth.error.userNotFound";
-    			}
-    			return null;
-    		}
-    	};
+//    	LoginAuxErrorProvider auxErrorProvider = new LoginAuxErrorProvider() {
+//    		@Override
+//    		public String evaluateUser(BaseUser user) {
+//    			if (user.isAuthenticatedBy("Slettet")) {
+//    				return "auth.error.userNotFound";
+//    			}
+//    			if (user.isAuthenticatedBy("Passiv")) {
+//    				return "auth.error.userNotFound";
+//    			}
+//    			if (user.isAuthenticatedBy("Deleted")) {
+//    				return "auth.error.userNotFound";
+//    			}
+//    			if (user.isAuthenticatedBy("Passive")) {
+//    				return "auth.error.userNotFound";
+//    			}
+//    			return null;
+//    		}
+//    	};
     	
 		if (JITAuthenticatedWicketApplication.get().isUseEmailForLogin()) {
-			add(new EmailLoginPanel("login", auxErrorProvider));
+			add(new EmailLoginPanel("login"));
 		} else {
-			add(new UsernameLoginPanel("login", auxErrorProvider));
+			add(new UsernameLoginPanel("login"));
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package dk.jyskit.salescloud.application;
 
+import dk.jyskit.salescloud.application.apis.user.UserApiClient;
 import org.apache.wicket.util.time.Duration;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Request;

