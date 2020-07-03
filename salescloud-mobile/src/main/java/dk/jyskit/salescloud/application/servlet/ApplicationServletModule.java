@@ -12,7 +12,9 @@ import dk.jyskit.salescloud.application.services.contractsaver.ContractSaver;
 import dk.jyskit.salescloud.application.services.contractsaver.ContractSaverImpl;
 import dk.jyskit.salescloud.application.services.supercontract.FakeSuperContractService;
 import dk.jyskit.salescloud.application.services.supercontract.SuperContractService;
+import dk.jyskit.salescloud.application.services.users.UserEvaluationServiceImpl;
 import dk.jyskit.waf.application.dao.Dao;
+import dk.jyskit.waf.application.services.users.UserEvaluationService;
 import dk.jyskit.waf.application.servlet.JITApplicationServletModule;
 
 public class ApplicationServletModule extends JITApplicationServletModule {
@@ -68,6 +70,7 @@ public class ApplicationServletModule extends JITApplicationServletModule {
 		bind(OrderLineCountModifier.class).to(MobileOrderLineCountModifier.class);
 		bind(SuperContractService.class).to(FakeSuperContractService.class);
 		bind(ContractSaver.class).to(ContractSaverImpl.class);
+		bind(UserEvaluationService.class).to(UserEvaluationServiceImpl.class);
 	}
 
 	@Override

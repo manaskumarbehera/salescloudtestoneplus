@@ -11,8 +11,13 @@
  ******************************************************************************/
 package dk.jyskit.waf.application.components.login.username;
 
-import java.util.List;
-
+import com.google.inject.Inject;
+import dk.jyskit.waf.application.JITAuthenticatedWicketApplication;
+import dk.jyskit.waf.application.dao.UserDao;
+import dk.jyskit.waf.application.model.BaseUser;
+import dk.jyskit.waf.application.services.users.UserEvaluationService;
+import dk.jyskit.waf.wicket.components.forms.BaseForm;
+import dk.jyskit.waf.wicket.components.forms.annotations.DefaultFocusBehavior;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.markup.html.form.HiddenField;
@@ -21,14 +26,7 @@ import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 
-import com.google.inject.Inject;
-
-import dk.jyskit.waf.application.JITAuthenticatedWicketApplication;
-import dk.jyskit.waf.application.components.login.LoginAuxErrorProvider;
-import dk.jyskit.waf.application.dao.UserDao;
-import dk.jyskit.waf.application.model.BaseUser;
-import dk.jyskit.waf.wicket.components.forms.BaseForm;
-import dk.jyskit.waf.wicket.components.forms.annotations.DefaultFocusBehavior;
+import java.util.List;
 
 @Slf4j
 public class UsernameLoginForm extends BaseForm<LoginInfo> {
@@ -37,12 +35,12 @@ public class UsernameLoginForm extends BaseForm<LoginInfo> {
 	@Inject
 	private UserDao userDao;
 
-	private LoginAuxErrorProvider auxErrorProvider;
+	@Inject
+	private UserEvaluationService userEvaluationService;
 
-	public UsernameLoginForm(String id, LoginAuxErrorProvider auxErrorProvider) {
+	public UsernameLoginForm(String id) {
 		super(id, new CompoundPropertyModel<LoginInfo>(new LoginInfo()));
-		this.auxErrorProvider = auxErrorProvider;
-		
+
 		add(new FeedbackPanel("feedback"));
 
 		HiddenField<String> widthField = new HiddenField<>("width");
@@ -57,8 +55,8 @@ public class UsernameLoginForm extends BaseForm<LoginInfo> {
 	public void onSubmit() {
 		List<BaseUser> usersWithName = userDao.findByUsername(getModelObject().getUsername());
 		for (BaseUser user : usersWithName) {
-			if (auxErrorProvider != null) {
-				String key = auxErrorProvider.evaluateUser(user);
+			if (userEvaluationService != null) {
+				String key = userEvaluationService.evaluateUser(getPage(), user);
 				if (!StringUtils.isEmpty(key)) {
 					transError(key);
 					return;
@@ -76,6 +74,7 @@ public class UsernameLoginForm extends BaseForm<LoginInfo> {
 
 				// goto home page
 				setResponsePage(JITAuthenticatedWicketApplication.get().getAdminHomePage());
+
 				return;
 			}
 		}

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.x5.template.Theme;
+import dk.jyskit.salescloud.application.apis.user.UserApiPasswordPage;
 import dk.jyskit.salescloud.application.pages.accessnew.locations.LocationsPage;
 import dk.jyskit.salescloud.application.pages.makeupdates.MakeUpdatesPage;
 import org.apache.wicket.Application;
@@ -170,8 +171,9 @@ public class MobileSalescloudApplication extends CoreApplication {
         mountPage("konfiguration/${businessAreaId}/${contract}", ExternalSubscriptionConfigurationPage.class);
         mountPage("implementering/${businessAreaId}/${contract}", ExternalSubscriptionImplementationPage.class);
         // API
-        mountPage("v1/api/auth", ApiAuthPage.class); 
-        mountPage("v1/api/auth/update", ApiAuthUpdatePage.class); 
+		mountPage("v1/api/user/password", UserApiPasswordPage.class);
+//		mountPage("v1/api/auth", ApiAuthPage.class);
+//        mountPage("v1/api/auth/update", ApiAuthUpdatePage.class);
 	}
 
 	public boolean isUseEmailForLogin() {

@@ -2,15 +2,10 @@ package dk.jyskit.waf.application.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -41,6 +36,10 @@ public class BaseUser extends BaseEntity implements IAuthModel {
 	private String username;
 	private byte[] passwordEncrypt;
 	private byte[] passwordSalt;
+
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date passwordChangedDate;
 
 	/**
 	 * Social security number or other identifier

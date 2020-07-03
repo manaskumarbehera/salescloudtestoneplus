@@ -1,5 +1,6 @@
 package dk.jyskit.salescloud.application.pages.admin.profile;
 
+import dk.jyskit.salescloud.application.apis.user.UserApiClient;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.TextField;
@@ -21,6 +22,9 @@ import dk.jyskit.waf.wicket.components.forms.jsr303form.components.buttons.AjaxE
 import dk.jyskit.waf.wicket.components.forms.jsr303form.components.buttons.AjaxSubmitListener;
 import dk.jyskit.waf.wicket.components.forms.jsr303form.labelstrategy.EntityLabelStrategy;
 import dk.jyskit.waf.wicket.security.UserSession;
+
+import java.util.Date;
+import java.util.regex.Pattern;
 
 @AuthorizeInstantiation({ AdminRole.ROLE_NAME, SalespersonRole.ROLE_NAME, SalesmanagerRole.ROLE_NAME, UserManagerRole.ROLE_NAME })
 public class ChangePasswordPage extends BasePage {
@@ -58,15 +62,18 @@ public class ChangePasswordPage extends BasePage {
 					String repeat = eph.getRepeatNewPassword();
 
 					if (u.isAuthenticatedBy(old)) {
-						if (newPass.length() < 4) {
-							form.getForm().error(getString("new.pass.too_short"));
+						String passwordRegEx = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+						if (newPass.matches(passwordRegEx)) {
+							form.getForm().error(getString("new.pass.too_weak"));
 						} else if (newPass.equals(repeat)) {
 							u.setPassword(newPass);
+//							u.setPasswordChangedDate(new Date());
 							u = userDao.save(u);
 							form.getForm().info(getString("new.pass.saved"));
 							eph.setOldPassword(null);
 							eph.setNewPassword(null);
 							eph.setRepeatNewPassword(null);
+							UserApiClient.changePasswordOnOtherServer(u.getUsername(), newPass);
 							userDao.flush();
 							setResponsePage(JITAuthenticatedWicketApplication.get().getAdminHomePage());
 						} else {

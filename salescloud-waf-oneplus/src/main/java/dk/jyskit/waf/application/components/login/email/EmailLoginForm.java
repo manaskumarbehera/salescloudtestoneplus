@@ -13,6 +13,7 @@ package dk.jyskit.waf.application.components.login.email;
 
 import java.util.List;
 
+import dk.jyskit.waf.application.services.users.UserEvaluationService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -34,14 +35,12 @@ public class EmailLoginForm extends BaseForm<LoginInfo> {
 	@Inject
 	private UserDao userDao;
 
-	private LoginAuxErrorProvider auxErrorProvider;
+	@Inject
+	private UserEvaluationService userEvaluationService;
 
-	public EmailLoginForm(String id, LoginAuxErrorProvider auxErrorProvider) {
+	public EmailLoginForm(String id) {
 		super(id, new CompoundPropertyModel<LoginInfo>(new LoginInfo()));
-		this.auxErrorProvider = auxErrorProvider;
-		
 		add(new FeedbackPanel("feedback"));
-
 		add(new RequiredTextField<String>("email").add(new DefaultFocusBehavior()));
 		add(new PasswordTextField("password"));
 	}
@@ -50,13 +49,13 @@ public class EmailLoginForm extends BaseForm<LoginInfo> {
 	public void onSubmit() {
 		List<BaseUser> usersWithEmail = userDao.findByEmail(getModelObject().getEmail());
 		for (BaseUser user : usersWithEmail) {
-			if (auxErrorProvider != null) {
-				String key = auxErrorProvider.evaluateUser(user);
+			if (userEvaluationService != null) {
+				String key = userEvaluationService.evaluateUser(getPage(), user);
 				if (!StringUtils.isEmpty(key)) {
 					transError(key);
 					return;
 				}
-			} 
+			}
 			// check if user can login and do login
 			if (user.isActive() && user.isAuthenticatedBy(getModelObject().getPassword())) {
 				// login user
