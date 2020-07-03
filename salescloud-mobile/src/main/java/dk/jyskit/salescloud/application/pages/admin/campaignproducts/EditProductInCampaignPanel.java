@@ -78,10 +78,14 @@ public class EditProductInCampaignPanel extends AbstractEditPanel<CampaignProduc
 		
 		form.addTextField("rabataftaleCampaignDiscountMatrix");
 
+		form.addTextField("campaignPriceAmounts.oneTimeFee");
+		form.addTextField("campaignPriceAmounts.installationFee");
+		form.addTextField("campaignPriceAmounts.recurringFee");
+
 		form.addTextField("campaignDiscountAmounts.oneTimeFee");
 		form.addTextField("campaignDiscountAmounts.installationFee");
 		form.addTextField("campaignDiscountAmounts.recurringFee");
-		
+
 		form.addTextField("outputCodeOverride");
 		form.addTextField("outputCodeKvikOverride");
 		form.addTextField("outputTextOverride");

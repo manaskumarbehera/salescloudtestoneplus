@@ -293,6 +293,8 @@
 		<tr><td class="metadata">Kontrakt start dato netværk</td><td>{$contract_start_date_network:}</td></tr>
 		<tr><td class="metadata">Prisaftale 1 netværk</td><td>{$prisaftale_1_network:}</td></tr>
 		<tr><td class="metadata">Prisaftale 2 netværk</td><td>{$prisaftale_2_network:}</td></tr>
+		<tr><td class="metadata">Prisaftale 1 datapulje</td><td>{$prisaftale_1_pool:}</td></tr>
+		<tr><td class="metadata">Prisaftale 2 datapulje</td><td>{$prisaftale_2_pool:}</td></tr>
 		<tr><td class="metadata mb-20"></td><td></td></tr>
 
 		<tr><td class="metadata"><strong>Access info:</strong></td><td></td></tr>

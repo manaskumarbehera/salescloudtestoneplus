@@ -1749,11 +1749,32 @@ public class MobileContract extends Contract {
 				countProductOrBundleAmounts.setCampaignDiscountAmounts(new Amounts());
 			}
 		} else {
+			Amounts discounts = new Amounts();
+			if (getBusinessArea().hasFeature(FeatureType.RABATAFTALE_CAMPAIGN_DISCOUNT)) {
+				if ((campaignProductRelation.getCampaignPriceAmounts() == null) ||
+						campaignProductRelation.getCampaignPriceAmounts().isAllZero()) {
+					discounts = getRabataftaleCampaignDiscounts(product.getPrice().clone(),
+							campaignProductRelation.getRabataftaleCampaignDiscountMatrix(), new Amounts(), false);
+				} else {
+					// The campaign discount is calculated to be the discount required to get to the fixed campaign price
+					discounts = product.getPrice().clone()
+							.subtract(product.getContractDiscounts(this,
+								countProductOrBundleAmounts.getBaseAmounts(), countProductOrBundleAmounts.getBaseAmounts()))
+							.subtract(campaignProductRelation.getCampaignPriceAmounts());
+				}
+			}
+			if (discounts.isAllZero()) {
+				discounts = campaignProductRelation.getCampaignDiscountAmounts();
+			}
 			countProductOrBundleAmounts
 					.setCampaignDiscountAmounts(
-							handleInstallationType(
-									campaignProductRelation.getCampaignDiscountAmounts(),
-									product.getProductGroup())); // Durikke! - bruges det??
+							handleInstallationType(discounts, product.getProductGroup())); // Durikke! - bruges det??
+
+//			countProductOrBundleAmounts
+//					.setCampaignDiscountAmounts(
+//							handleInstallationType(
+//									campaignProductRelation.getCampaignDiscountAmounts(),
+//									product.getProductGroup())); // Durikke! - bruges det??
 		}
 
 		Amounts a = product.getAmounts(countProductOrBundleAmounts.getCount(), false, true, this);
