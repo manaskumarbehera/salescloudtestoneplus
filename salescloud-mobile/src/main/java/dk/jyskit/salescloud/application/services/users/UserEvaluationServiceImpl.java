@@ -15,9 +15,9 @@ public class UserEvaluationServiceImpl implements UserEvaluationService {
 			return "auth.error.userNotFound";
 		} else if (user.isAuthenticatedBy("Passiv")) {
 			return "auth.error.userNotFound";
-		} else if ((user.getPasswordChangedDate() == null) || DateUtils.addMonths(user.getPasswordChangedDate(), 2).before(new Date())) {
-			page.setResponsePage(ChangePasswordPage.class);
-			return "auth.error.passwordNeedsChanging";
+//		} else if ((user.getPasswordChangedDate() == null) || DateUtils.addMonths(user.getPasswordChangedDate(), 2).before(new Date())) {
+//			page.setResponsePage(ChangePasswordPage.class);
+//			return "auth.error.passwordNeedsChanging";
 		} else if ((Environment.isOneOf("heroku2"))
 					&& (!"RMO@tdc.dk".equalsIgnoreCase(user.getUsername())
 					&& !"RMO@tdc.dk".equalsIgnoreCase(user.getEmail())

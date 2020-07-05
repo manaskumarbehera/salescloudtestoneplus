@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.ILoggerFactory;
 import org.slf4j.LoggerFactory;
 
@@ -71,6 +72,25 @@ public class Environment {
 					properties.load(getClass().getResourceAsStream("/META-INF/env/" + name + ".properties"));
 				}
 				properties.putAll(System.getProperties());
+
+				// Special handling for Heroku environments
+				String dbUrl = System.getenv("JAWSDB_URL");
+				if (!StringUtils.isEmpty(dbUrl)) {
+					// mysql://jcyzi5exh1e2tu6f:amfofpi0siruphs0@itg0sxltai3omdne.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/primary_app_db
+					// salescloud.javax.persistence.jdbc.url=jdbc:mysql://honmv7ftvy8nenqd.chr7pe7iynqr.eu-west-1.rds.amazonaws.com/primary_app_db
+					// salescloud.javax.persistence.jdbc.user=
+					// salescloud.javax.persistence.jdbc.password=
+					String s[] = dbUrl.split("@");
+					if (s.length == 2) {
+						properties.put("salescloud.javax.persistence.jdbc.url", "jdbc:mysql:://" + s[1].replace(":3306", ""));
+						s = s[0].replace("mysql://", "").split(":");
+						if (s.length == 2) {
+							properties.put("salescloud.javax.persistence.jdbc.user", s[0]);
+							properties.put("salescloud.javax.persistence.jdbc.password", s[1]);
+						}
+					}
+				}
+
 				// sync environment and system properties.
 				System.getProperties().putAll(properties);
 				reconfigureLogger();

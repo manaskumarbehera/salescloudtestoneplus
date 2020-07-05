@@ -15,7 +15,9 @@ import dk.jyskit.salescloud.application.model.ProductGroup;
 import dk.jyskit.salescloud.application.model.SalespersonRole;
 import dk.jyskit.waf.wicket.crud.CrudContext;
 
-public interface ObjectFactory {
+import java.io.Serializable;
+
+public interface ObjectFactory extends Serializable {
 	Contract createContract();
 	
 	Contract createAndSaveContract(BusinessArea businessArea, SalespersonRole salesperson);

@@ -256,7 +256,7 @@ public class MobileSalescloudApplication extends CoreApplication {
 					}
 					
 					if (businessArea.hasFeature(FeatureType.PARTNER_SETTINGS)) {
-						if (salesperson.getOrganisation().getType().equals(OrganisationType.PARTNER_CENTER)) {
+						if ((salesperson.getOrganisation() != null) && salesperson.getOrganisation().getType().equals(OrganisationType.PARTNER_CENTER)) {
 							menuItems.add(navbarPageLink(PartnerSettingsPage.class, "menu.sales.partnersettings"));  // .setIconType(FontAwesomeIconType.bullseye));
 						}
 					}

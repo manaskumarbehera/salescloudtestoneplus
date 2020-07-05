@@ -72,7 +72,6 @@ import dk.jyskit.waf.wicket.components.tables.bootstraptable.BootstrapTableStyle
 import lombok.extern.slf4j.Slf4j;
 
 @AuthorizeInstantiation({ AdminRole.ROLE_NAME, SalesmanagerRole.ROLE_NAME })
-@SuppressWarnings("serial")
 @Slf4j
 public class AdminDashboardPage extends AdminBasePage {
 	@Inject

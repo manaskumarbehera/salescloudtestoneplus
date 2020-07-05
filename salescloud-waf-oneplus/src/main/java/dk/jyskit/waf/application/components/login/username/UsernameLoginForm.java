@@ -56,8 +56,10 @@ public class UsernameLoginForm extends BaseForm<LoginInfo> {
 		List<BaseUser> usersWithName = userDao.findByUsername(getModelObject().getUsername());
 		for (BaseUser user : usersWithName) {
 			if (userEvaluationService != null) {
+				log.info("Evaluating user: " + getModelObject().getUsername());
 				String key = userEvaluationService.evaluateUser(getPage(), user);
 				if (!StringUtils.isEmpty(key)) {
+					log.info("Error: " + key);
 					transError(key);
 					return;
 				}

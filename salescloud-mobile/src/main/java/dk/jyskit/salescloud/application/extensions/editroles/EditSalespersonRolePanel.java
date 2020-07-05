@@ -109,6 +109,10 @@ public class EditSalespersonRolePanel extends AbstractEditPanel<SalespersonRole,
 			error("Mindst en sælger kategori skal vælges.");
 			return false;
 		}
+		if (entity.getOrganisation() == null) {
+			error("En organisation skal vælges.");
+			return false;
+		}
 		return true;
 	}
 

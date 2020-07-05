@@ -54,18 +54,18 @@ public class AdminHomePage extends BasePage {
 		super(parameters);
 
 
-		Thread thread1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(10000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				UserApiClient.changePasswordOnOtherServer("janjysk", "Devguy");
-			}
-		});
-		thread1.start();
+//		Thread thread1 = new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					Thread.sleep(10000);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//				UserApiClient.changePasswordOnOtherServer("janjysk", "Devguy");
+//			}
+//		});
+//		thread1.start();
 
 		
 		BaseUser user = (BaseUser) CoreSession.get().getUser();
