@@ -82,7 +82,7 @@ public class Environment {
 					// salescloud.javax.persistence.jdbc.password=
 					String s[] = dbUrl.split("@");
 					if (s.length == 2) {
-						properties.put("salescloud.javax.persistence.jdbc.url", "jdbc:mysql:://" + s[1].replace(":3306", ""));
+						properties.put("salescloud.javax.persistence.jdbc.url", "jdbc:mysql://" + s[1].replace(":3306", ""));
 						s = s[0].replace("mysql://", "").split(":");
 						if (s.length == 2) {
 							properties.put("salescloud.javax.persistence.jdbc.user", s[0]);
