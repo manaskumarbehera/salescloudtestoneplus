@@ -225,22 +225,9 @@ public class SystemUtilsPage extends BasePage {
 
 							ObjectMapper mapper = new ObjectMapper();
 							mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-							String json = mapper.registerModule(module)
+							mapper.registerModule(module)
 									.writer(new DefaultPrettyPrinter())
-									.writeValueAsString(contract);
-
-//							ObjectMapper objectMapper = new ObjectMapper();
-//							objectMapper.setVisibility(
-//									objectMapper.getSerializationConfig().
-//											getDefaultVisibilityChecker().
-//											withFieldVisibility(JsonAutoDetect.Visibility.ANY).
-//											withGetterVisibility(JsonAutoDetect.Visibility.NONE));
-//
-//
-//							String json = objectMapper
-//									.writer(new DefaultPrettyPrinter())
-//									.writeValueAsString(contract);
-							FileUtils.writeStringToFile(new File(FileUtils.getTempDirectory() + "/" + contract.getId() + ".contract"), json);
+									.writeValue(new File(FileUtils.getTempDirectory() + "/" + contract.getId() + ".contract"), contract);
 						} catch (IOException e) {
 							log.error("", e);
 						}
