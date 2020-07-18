@@ -1,4 +1,4 @@
-package dk.jyskit.salescloud.application.pages.makeupdates;
+package dk.jyskit.salescloud.application.pages.systemutils;
 
 import javax.persistence.PersistenceException;
 import javax.persistence.RollbackException;
@@ -12,7 +12,6 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import com.google.inject.Inject;
 
-import dk.jyskit.salescloud.application.MobileSession;
 import dk.jyskit.salescloud.application.pages.base.BasePage;
 import lombok.extern.slf4j.Slf4j;
 

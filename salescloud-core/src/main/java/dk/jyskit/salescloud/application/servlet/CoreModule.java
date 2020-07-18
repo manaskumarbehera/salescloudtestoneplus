@@ -5,50 +5,9 @@ import com.google.inject.Module;
 import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
 
-import dk.jyskit.salescloud.application.dao.BusinessAreaDao;
-import dk.jyskit.salescloud.application.dao.CampaignDao;
-import dk.jyskit.salescloud.application.dao.ContractDao;
-import dk.jyskit.salescloud.application.dao.OrderLineDao;
-import dk.jyskit.salescloud.application.dao.PageInfoDao;
-import dk.jyskit.salescloud.application.dao.ProductBundleDao;
-import dk.jyskit.salescloud.application.dao.ProductDao;
-import dk.jyskit.salescloud.application.dao.ProductGroupDao;
-import dk.jyskit.salescloud.application.dao.ProductRelationDao;
-import dk.jyskit.salescloud.application.dao.ReportDao;
-import dk.jyskit.salescloud.application.dao.ReportElementDao;
-import dk.jyskit.salescloud.application.dao.SalesmanagerRoleDao;
-import dk.jyskit.salescloud.application.dao.SalespersonRoleDao;
-import dk.jyskit.salescloud.application.dao.UserManagerRoleDao;
-import dk.jyskit.salescloud.application.dao.jpa.BusinessAreaDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.CampaignDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.ContractDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.OrderLineDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.PageInfoDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.ProductBundleDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.ProductDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.ProductGroupDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.ProductRelationDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.ReportDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.ReportElementDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.SalesmanagerRoleDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.SalespersonRoleDaoImpl;
-import dk.jyskit.salescloud.application.dao.jpa.UserManagerRoleDaoImpl;
-import dk.jyskit.salescloud.application.model.AdminRole;
-import dk.jyskit.salescloud.application.model.BusinessArea;
-import dk.jyskit.salescloud.application.model.Campaign;
-import dk.jyskit.salescloud.application.model.Contract;
-import dk.jyskit.salescloud.application.model.ContractCategory;
-import dk.jyskit.salescloud.application.model.OrderLine;
-import dk.jyskit.salescloud.application.model.PageInfo;
-import dk.jyskit.salescloud.application.model.Product;
-import dk.jyskit.salescloud.application.model.ProductBundle;
-import dk.jyskit.salescloud.application.model.ProductGroup;
-import dk.jyskit.salescloud.application.model.ProductRelation;
-import dk.jyskit.salescloud.application.model.Report;
-import dk.jyskit.salescloud.application.model.ReportElement;
-import dk.jyskit.salescloud.application.model.SalesmanagerRole;
-import dk.jyskit.salescloud.application.model.SalespersonRole;
-import dk.jyskit.salescloud.application.model.UserManagerRole;
+import dk.jyskit.salescloud.application.dao.*;
+import dk.jyskit.salescloud.application.dao.jpa.*;
+import dk.jyskit.salescloud.application.model.*;
 import dk.jyskit.waf.application.dao.Dao;
 import dk.jyskit.waf.application.dao.impl.GenericDaoImpl;
 
@@ -72,6 +31,10 @@ public class CoreModule extends AbstractModule implements Module {
 		bind(new TypeLiteral<CampaignDao>(){}).to(campaignDao).in(Scopes.SINGLETON);
 		bind(new TypeLiteral<Dao<Campaign>>(){}).to(campaignDao).in(Scopes.SINGLETON);
 		
+		TypeLiteral<DiscountSchemeDaoImpl> discountSchemeDao = new TypeLiteral<DiscountSchemeDaoImpl>(){};
+		bind(new TypeLiteral<DiscountSchemeDao>(){}).to(discountSchemeDao).in(Scopes.SINGLETON);
+		bind(new TypeLiteral<Dao<DiscountScheme>>(){}).to(discountSchemeDao).in(Scopes.SINGLETON);
+
 		bind(new TypeLiteral<Dao<ContractCategory>>(){}).to(new TypeLiteral<GenericDaoImpl<ContractCategory>>(){}).in(Scopes.SINGLETON);
 		
 		TypeLiteral<OrderLineDaoImpl> orderLineDaoImpl = new TypeLiteral<OrderLineDaoImpl>(){};

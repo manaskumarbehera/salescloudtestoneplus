@@ -61,6 +61,7 @@ public class Contract extends BaseEntity {
 	@JoinColumn(name = "BUSINESS_AREA_ID")
 	protected BusinessArea businessArea;
 
+	@JsonView(Contract.class)
 	@Nonnull
 	@ManyToOne(optional = false)
 	private SalespersonRole salesperson;
@@ -77,6 +78,7 @@ public class Contract extends BaseEntity {
 	 * owned by campaigns, but bundles may also be defined in the scope of a contract. The
 	 * existence of a bundle is not same as saying the customer has ordered it. An orderline
 	 * referring to the bundle is required for that purpose. */
+	@JsonView(Contract.class)
 	@OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<ProductBundle> productBundles = new ArrayList<>();
 	
@@ -85,11 +87,13 @@ public class Contract extends BaseEntity {
 	protected ContractCategory category;
 
 	/* Note: sub-projects may only allow one campaign per contract, but the model supports multiple. */
+	@JsonView(Contract.class)
 	@ManyToMany
 	@JoinTable(name = "contract_campaign", joinColumns = { @JoinColumn(name = "contract_id", referencedColumnName = "id") }, 
 		inverseJoinColumns = { @JoinColumn(name = "campaign_id", referencedColumnName = "id") })
 	protected List<Campaign> campaigns = new ArrayList<>();
-		
+
+	@JsonView(Contract.class)
 	@AttributeOverrides({
 	    @AttributeOverride(name="name", column= @Column(name="s_name")),
 	    @AttributeOverride(name="position", column= @Column(name="s_position")),
@@ -104,7 +108,8 @@ public class Contract extends BaseEntity {
 	  })
 	@Embedded
 	protected BusinessEntity seller	= new BusinessEntity();
-	
+
+	@JsonView(Contract.class)
 	@AttributeOverrides({
 	    @AttributeOverride(name="name", column= @Column(name="c_name")),
 	    @AttributeOverride(name="position", column= @Column(name="c_position")),
@@ -120,6 +125,7 @@ public class Contract extends BaseEntity {
 	@Embedded
 	protected BusinessEntity customer	= new BusinessEntity();
 
+	@JsonView(Contract.class)
 	@OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<OrderLine> orderLines = new ArrayList<OrderLine>();
 
@@ -188,7 +194,8 @@ public class Contract extends BaseEntity {
 	}
 	
 	// --------------------------------
-	
+
+	@JsonIgnore
 	@Transient
 	public String getName() {
 		return title;  // this is a hack to make GUI for deleting a contract work

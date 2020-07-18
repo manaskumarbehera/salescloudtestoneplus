@@ -5,10 +5,10 @@ import static dk.jyskit.waf.wicket.utils.BootstrapUtils.navbarPageLink;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.x5.template.Theme;
 import dk.jyskit.salescloud.application.apis.user.UserApiPasswordPage;
 import dk.jyskit.salescloud.application.pages.accessnew.locations.LocationsPage;
-import dk.jyskit.salescloud.application.pages.makeupdates.MakeUpdatesPage;
+import dk.jyskit.salescloud.application.pages.imports.ImportsPage;
+import dk.jyskit.salescloud.application.pages.systemutils.SystemUtilsPage;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
@@ -23,8 +23,6 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.button.ButtonList;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.Navbar;
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesomeIconType;
-import dk.jyskit.salescloud.application.apis.auth.ApiAuthPage;
-import dk.jyskit.salescloud.application.apis.auth.ApiAuthUpdatePage;
 import dk.jyskit.salescloud.application.dao.BusinessAreaDao;
 import dk.jyskit.salescloud.application.dao.ContractDao;
 import dk.jyskit.salescloud.application.model.AccessCodes;
@@ -50,8 +48,7 @@ import dk.jyskit.salescloud.application.pages.contractsettings.MobileContractSet
 import dk.jyskit.salescloud.application.pages.contractsummary.ContractSummaryPage;
 import dk.jyskit.salescloud.application.pages.accessnew.fiber.FiberPage;
 import dk.jyskit.salescloud.application.pages.home.AdminHomePage;
-import dk.jyskit.salescloud.application.pages.makeupdates.RemoveFiberPage;
-import dk.jyskit.salescloud.application.pages.makeupdates.RemoveBusinessAreasPage;
+import dk.jyskit.salescloud.application.pages.systemutils.RemoveBusinessAreasPage;
 import dk.jyskit.salescloud.application.pages.officeadditional.OfficeAdditionalProductsPage;
 import dk.jyskit.salescloud.application.pages.officeimplementation.OfficeImplementationPage;
 import dk.jyskit.salescloud.application.pages.partner.PartnerSettingsPage;
@@ -167,7 +164,8 @@ public class MobileSalescloudApplication extends CoreApplication {
         mountPage("admin", AdminHomePage.class);
         mountPage("removebusinessareas/${ba}", RemoveBusinessAreasPage.class);
 //        mountPage("removefiber", RemoveFiberPage.class);
-        mountPage("makeupdates", MakeUpdatesPage.class);
+        mountPage("system-cmd", SystemUtilsPage.class);
+		mountPage("system-import", ImportsPage.class);
         mountPage("konfiguration/${businessAreaId}/${contract}", ExternalSubscriptionConfigurationPage.class);
         mountPage("implementering/${businessAreaId}/${contract}", ExternalSubscriptionImplementationPage.class);
         // API

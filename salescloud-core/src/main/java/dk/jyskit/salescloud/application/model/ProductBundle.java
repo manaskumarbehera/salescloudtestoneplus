@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 
 import dk.jyskit.waf.application.model.BaseEntity;
@@ -49,10 +50,12 @@ public class ProductBundle extends BaseEntity {
 	private String internalName;
 	
 	private long sortIndex;
-	
+
+	@JsonIgnore
 	@ManyToOne(optional = true)
 	private Contract contract;
-	
+
+	@JsonIgnore
 	@ManyToOne(optional = true)
 	private Campaign campaign;
 	
@@ -72,6 +75,7 @@ public class ProductBundle extends BaseEntity {
 	@Column(length=500)
 	private String rabataftaleCampaignDiscountMatrix;
 
+	@JsonIgnore
 	public String getRabataftaleCampaignDiscountMatrix() {
 		return rabataftaleCampaignDiscountMatrix;
 	}
@@ -83,6 +87,7 @@ public class ProductBundle extends BaseEntity {
 	@Column(length=500)
 	private String rabataftaleCampaignDiscountMatrixNetwork;
 
+	@JsonIgnore
 	public String getRabataftaleCampaignDiscountMatrixNetwork() {
 		return rabataftaleCampaignDiscountMatrixNetwork;
 	}
@@ -159,16 +164,19 @@ public class ProductBundle extends BaseEntity {
 	}
 	
 	@Transient
+	@JsonIgnore
 	public boolean isCampaignBundle() {
 		return (campaign != null);
 	}
 	
 	@Transient
+	@JsonIgnore
 	public boolean isContractBundle() {
 		return (contract != null);
 	}
 	
 	@Transient
+	@JsonIgnore
 	public long getOneTimeFeeDiscount() {
 		return discountAmounts.getOneTimeFee();
 	}
@@ -180,6 +188,7 @@ public class ProductBundle extends BaseEntity {
 		discountAmounts.getAmounts()[FeeCategory.ONETIME_FEE.getFromIndex()] = oneTimeFeeDiscount;
 	}
 
+	@JsonIgnore
 	@Transient
 	public long getInstallationFeeDiscount() {
 		return discountAmounts.getInstallationFee();
@@ -193,6 +202,7 @@ public class ProductBundle extends BaseEntity {
 	}
 
 	@Transient
+	@JsonIgnore
 	public long getRecurringFeeDiscount() {
 		return discountAmounts.getRecurringFee();
 	}

@@ -835,3 +835,296 @@ java.net.SocketException: Socket closed
 	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
 	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
 	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+2020-07-16 00:51:37,675 [   6576]   WARN - llij.ide.plugins.PluginManager - Problems found loading plugins:
+  The XSLT Debugger (id=XSLT-Debugger, path=~/dev/java/tools/idea-IC-183.5429.30/plugins/xslt-debugger) plugin Non-optional dependency plugin XPathView is disabled 
+2020-07-16 00:52:24,347 [  53248]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-16 00:52:25,040 [  53941]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-16 00:52:25,841 [  54742]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-16 00:52:26,797 [  55698]   WARN - openapi.wm.impl.ToolWindowImpl - ToolWindow icons should be 13x13. Please fix ToolWindow (ID:  Problems View) or icon jar:file:/home/jan/dev/java/tools/idea-IC-183.5429.30/lib/icons.jar!/general/warning.svg 
+2020-07-16 00:52:44,416 [  73317]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-16 00:52:45,645 [  74546]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-16 00:52:46,397 [  75298]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-16 00:52:49,912 [  78813]   WARN - openapi.wm.impl.ToolWindowImpl - ToolWindow icons should be 13x13. Please fix ToolWindow (ID:  Problems View) or icon jar:file:/home/jan/dev/java/tools/idea-IC-183.5429.30/lib/icons.jar!/general/warning.svg 
+2020-07-16 00:52:50,136 [  79037]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.modifier.FieldDefaultsModifierProcessor) 
+2020-07-16 00:52:50,140 [  79041]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.lombokconfig.ConfigDiscovery) 
+2020-07-16 00:53:33,302 [ 122203]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.provider.LombokProcessorProvider) 
+2020-07-16 00:53:33,405 [ 122306]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.DataProcessor) 
+2020-07-16 00:53:33,415 [ 122316]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.GetterProcessor) 
+2020-07-16 00:53:33,435 [ 122336]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.SetterProcessor) 
+2020-07-16 00:53:33,465 [ 122366]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.EqualsAndHashCodeProcessor) 
+2020-07-16 00:53:33,488 [ 122389]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.ToStringProcessor) 
+2020-07-16 00:53:33,494 [ 122395]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.WitherProcessor) 
+2020-07-16 00:53:33,502 [ 122403]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.field.WitherFieldProcessor) 
+2020-07-16 00:53:33,511 [ 122412]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderPreDefinedInnerClassFieldProcessor) 
+2020-07-16 00:53:33,524 [ 122425]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.handler.BuilderHandler) 
+2020-07-16 00:53:33,526 [ 122427]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderPreDefinedInnerClassMethodProcessor) 
+2020-07-16 00:53:33,527 [ 122428]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderClassProcessor) 
+2020-07-16 00:53:33,528 [ 122429]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderProcessor) 
+2020-07-16 00:53:33,531 [ 122432]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.method.BuilderClassMethodProcessor) 
+2020-07-16 00:53:33,539 [ 122440]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.method.BuilderMethodProcessor) 
+2020-07-16 00:53:33,552 [ 122453]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderPreDefinedInnerClassFieldProcessor) 
+2020-07-16 00:53:33,558 [ 122459]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.handler.SuperBuilderHandler) 
+2020-07-16 00:53:33,561 [ 122462]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderPreDefinedInnerClassMethodProcessor) 
+2020-07-16 00:53:33,565 [ 122466]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderClassProcessor) 
+2020-07-16 00:53:33,569 [ 122470]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderProcessor) 
+2020-07-16 00:53:33,578 [ 122479]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.ValueProcessor) 
+2020-07-16 00:53:33,585 [ 122486]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.fieldnameconstants.FieldNameConstantsOldProcessor) 
+2020-07-16 00:53:33,610 [ 122511]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.field.DelegateFieldProcessor) 
+2020-07-16 00:53:33,650 [ 122551]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.method.DelegateMethodProcessor) 
+2020-07-16 00:53:42,001 [ 130902]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.provider.LombokProcessorProvider) 
+2020-07-16 19:00:45,873 [65354774]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-16 19:14:16,235 [66165136]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-16 19:30:26,729 [67135630]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-16 20:01:43,318 [69012219]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8325x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-16 20:02:03,039 [69031940]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8957x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-16 20:11:19,093 [69587994]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-16 20:31:08,330 [70777231]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-16 20:31:08,334 [70777235]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-16 20:37:56,604 [71185505]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+2020-07-17 17:42:04,369 [   1724]   WARN - llij.ide.plugins.PluginManager - Problems found loading plugins:
+  The XSLT Debugger (id=XSLT-Debugger, path=~/dev/java/tools/idea-IC-183.5429.30/plugins/xslt-debugger) plugin Non-optional dependency plugin XPathView is disabled 
+2020-07-17 17:42:20,974 [  18329]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-17 17:42:21,341 [  18696]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-17 17:42:21,500 [  18855]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-17 17:42:22,616 [  19971]   WARN - openapi.wm.impl.ToolWindowImpl - ToolWindow icons should be 13x13. Please fix ToolWindow (ID:  Problems View) or icon jar:file:/home/jan/dev/java/tools/idea-IC-183.5429.30/lib/icons.jar!/general/warning.svg 
+2020-07-17 17:42:29,011 [  26366]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.modifier.FieldDefaultsModifierProcessor) 
+2020-07-17 17:42:29,011 [  26366]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.lombokconfig.ConfigDiscovery) 
+2020-07-17 17:42:40,298 [  37653]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-17 17:42:40,715 [  38070]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-17 17:42:41,064 [  38419]   WARN - ge.ExternalProjectsDataStorage - Cannot find class `org.jetbrains.plugins.gradle.model.data.AnnotationProcessingData$AnnotationProcessorOutput` 
+2020-07-17 17:42:41,797 [  39152]   WARN - openapi.wm.impl.ToolWindowImpl - ToolWindow icons should be 13x13. Please fix ToolWindow (ID:  Problems View) or icon jar:file:/home/jan/dev/java/tools/idea-IC-183.5429.30/lib/icons.jar!/general/warning.svg 
+2020-07-17 17:42:42,950 [  40305]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.provider.LombokProcessorProvider) 
+2020-07-17 17:42:43,043 [  40398]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.DataProcessor) 
+2020-07-17 17:42:43,059 [  40414]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.GetterProcessor) 
+2020-07-17 17:42:43,062 [  40417]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.SetterProcessor) 
+2020-07-17 17:42:43,075 [  40430]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.EqualsAndHashCodeProcessor) 
+2020-07-17 17:42:43,077 [  40432]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.ToStringProcessor) 
+2020-07-17 17:42:43,086 [  40441]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.WitherProcessor) 
+2020-07-17 17:42:43,087 [  40442]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.field.WitherFieldProcessor) 
+2020-07-17 17:42:43,106 [  40461]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderPreDefinedInnerClassFieldProcessor) 
+2020-07-17 17:42:43,110 [  40465]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.handler.BuilderHandler) 
+2020-07-17 17:42:43,113 [  40468]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderPreDefinedInnerClassMethodProcessor) 
+2020-07-17 17:42:43,118 [  40473]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderClassProcessor) 
+2020-07-17 17:42:43,120 [  40475]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.BuilderProcessor) 
+2020-07-17 17:42:43,124 [  40479]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.method.BuilderClassMethodProcessor) 
+2020-07-17 17:42:43,127 [  40482]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.method.BuilderMethodProcessor) 
+2020-07-17 17:42:43,144 [  40499]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderPreDefinedInnerClassFieldProcessor) 
+2020-07-17 17:42:43,158 [  40513]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.handler.SuperBuilderHandler) 
+2020-07-17 17:42:43,161 [  40516]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderPreDefinedInnerClassMethodProcessor) 
+2020-07-17 17:42:43,165 [  40520]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderClassProcessor) 
+2020-07-17 17:42:43,168 [  40523]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.builder.SuperBuilderProcessor) 
+2020-07-17 17:42:43,170 [  40525]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.ValueProcessor) 
+2020-07-17 17:42:43,180 [  40535]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.clazz.fieldnameconstants.FieldNameConstantsOldProcessor) 
+2020-07-17 17:42:43,212 [  40567]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.field.DelegateFieldProcessor) 
+2020-07-17 17:42:43,223 [  40578]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.processor.method.DelegateMethodProcessor) 
+2020-07-17 17:42:47,264 [  44619]   WARN - Container.ComponentManagerImpl - Do not use constructor injection (requestorClass=de.plushnikov.intellij.plugin.provider.LombokProcessorProvider) 
+2020-07-17 17:49:03,366 [ 420721]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8081x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-17 18:08:50,396 [1607751]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8977x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-17 18:09:29,349 [1646704]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8977x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-17 18:09:29,374 [1646729]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8977x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-17 18:22:10,178 [2407533]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-17 18:26:52,738 [2690093]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 7071x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-17 18:26:52,760 [2690115]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 7071x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-17 18:47:39,953 [3937308]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8977x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-17 18:47:39,969 [3937324]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8977x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-17 21:08:36,768 [12394123]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-18 00:54:41,032 [25958387]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 9020x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-18 00:54:41,044 [25958399]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 9020x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-18 00:54:46,379 [25963734]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 9020x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-18 01:04:05,698 [26523053]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-18 01:09:31,479 [26848834]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8978x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-18 01:41:03,408 [28740763]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 9022x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-18 01:41:03,415 [28740770]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 9022x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-18 03:33:33,383 [35490738]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-18 03:47:31,641 [36328996]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
+2020-07-18 03:55:08,103 [36785458]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8977x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-18 03:55:08,117 [36785472]   WARN - ntellij.ui.popup.AbstractPopup - popup preferred size is bigger than screen: 8977x28
+    com.intellij.ui.popup.AbstractPopup$MyContentPanel
+      com.intellij.ui.components.panels.OpaquePanel
+        com.intellij.codeInsight.hint.HintUtil$HintLabel
+          com.intellij.ui.SimpleColoredComponent
+      javax.swing.JPanel
+        com.intellij.ui.CaptionPanel 
+2020-07-18 04:07:26,985 [37524340]   WARN - .ExternalSystemTaskDebugRunner - Socket closed 
+java.net.SocketException: Socket closed
+	at java.base/java.net.PlainSocketImpl.socketAccept(Native Method)
+	at java.base/java.net.AbstractPlainSocketImpl.accept(AbstractPlainSocketImpl.java:458)
+	at java.base/java.net.ServerSocket.implAccept(ServerSocket.java:565)
+	at java.base/java.net.ServerSocket.accept(ServerSocket.java:533)
+	at com.intellij.openapi.externalSystem.service.execution.ForkedDebuggerThread.run(ForkedDebuggerThread.java:102)
