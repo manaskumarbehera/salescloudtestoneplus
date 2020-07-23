@@ -119,6 +119,16 @@ public class ImportsUtil {
 		mc.setCountExistingSubscriptions(any.get("countExistingSubscriptions").toInt());
 		mc.setCountNewSubscriptions(any.get("countNewSubscriptions").toInt());
 
+		if (any.get("productBundles").size() > 0) {
+			for (Any anyPb : any.get("productBundles")) {
+				long creationTime = anyPb.get("creationDate").toLong();
+				Date creationDate = new Date(creationTime);
+				log.info("Using this date: " + DATE_FORMAT.format(creationDate));
+				mc.setCreationDate(creationDate);
+				break;
+			}
+		}
+
 		mc = MobileContractDao.lookup().saveAndFlush(mc);
 
 		if (any.get("productBundles").size() > 0) {
@@ -174,24 +184,29 @@ public class ImportsUtil {
 		}
 
 		if (any.get("discountSchemes").size() > 0) {
-			for (Any anyC : any.get("discountSchemes")) {
-				DiscountScheme scheme = DiscountSchemeDao.lookup().findById(anyC.get("id").as(Long.class));
-				if (scheme instanceof RabatAftaleDiscountScheme) {
-					RabatAftaleDiscountScheme discountScheme = new RabatAftaleDiscountScheme();
-					if (mc.getBusinessArea().getBusinessAreaId() == BusinessAreas.FIBER_ERHVERV) {
-						discountScheme.setName("TDC Erhverv Rabataftale");
-					} else {
-						discountScheme.setName("TEM 5 kontraktrabat");
-					}
-					mc.addDiscountScheme(discountScheme);
-				} else if (scheme instanceof FixedDiscount) {
-					mc.addDiscountScheme((FixedDiscount) ((FixedDiscount) scheme).clone());
-				} else if (scheme instanceof SpecifiedDiscount) {
-					mc.addDiscountScheme((SpecifiedDiscount) ((SpecifiedDiscount) scheme).clone());
-				} else if (scheme instanceof SwitchboardIpsaDiscountScheme) {
-					mc.addDiscountScheme((SwitchboardIpsaDiscountScheme) ((SwitchboardIpsaDiscountScheme) scheme).clone());
-				}
+			if (mc.getBusinessArea().isOnePlus()) {
+				RabatAftaleDiscountScheme discountScheme = new RabatAftaleDiscountScheme();
+				discountScheme.setName("TEM 5 kontraktrabat");
+				mc.addDiscountScheme(discountScheme);
 			}
+//			for (Any anyC : any.get("discountSchemes")) {
+//				DiscountScheme scheme = DiscountSchemeDao.lookup().findById(anyC.get("id").as(Long.class));
+//				if (scheme instanceof RabatAftaleDiscountScheme) {
+//					RabatAftaleDiscountScheme discountScheme = new RabatAftaleDiscountScheme();
+//					if (mc.getBusinessArea().getBusinessAreaId() == BusinessAreas.FIBER_ERHVERV) {
+//						discountScheme.setName("TDC Erhverv Rabataftale");
+//					} else {
+//						discountScheme.setName("TEM 5 kontraktrabat");
+//					}
+//					mc.addDiscountScheme(discountScheme);
+//				} else if (scheme instanceof FixedDiscount) {
+//					mc.addDiscountScheme((FixedDiscount) ((FixedDiscount) scheme).clone());
+//				} else if (scheme instanceof SpecifiedDiscount) {
+//					mc.addDiscountScheme((SpecifiedDiscount) ((SpecifiedDiscount) scheme).clone());
+//				} else if (scheme instanceof SwitchboardIpsaDiscountScheme) {
+//					mc.addDiscountScheme((SwitchboardIpsaDiscountScheme) ((SwitchboardIpsaDiscountScheme) scheme).clone());
+//				}
+//			}
 		}
 
 		if (any.get("orderLines").size() > 0) {

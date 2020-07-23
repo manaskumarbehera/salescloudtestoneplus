@@ -196,6 +196,7 @@ public class SystemUtilsPage extends BasePage {
 							module.addSerializer(DiscountScheme.class,
 									(obj, jgen) -> {
 										jgen.writeNumberField("id", obj.getId());
+										jgen.writeStringField("clazz", obj.getClass().getSimpleName());
 									}
 							);
 
