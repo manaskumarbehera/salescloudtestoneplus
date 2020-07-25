@@ -5,7 +5,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'war'
 
-group = 'dk.jyskit'
+group = 'dk.escapetech.oneplus'
 version = '3.0.0'
 
 description = """salescloud-oneplus"""
@@ -24,7 +24,7 @@ dependencies {
 	testCompile "org.hamcrest:hamcrest-all:1.1"
 	testCompile "org.mockito:mockito-core:1.9.0"
 	
-	compile "dk.jyskit:salescloud-core:3.0.+"
+	compile "dk.escapetech.oneplus:salescloud-core:3.0.+"
 	
 	compile group: 'commons-validator', name: 'commons-validator', version: '1.6'
 //	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.1'

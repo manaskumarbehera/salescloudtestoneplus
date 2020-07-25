@@ -13,6 +13,7 @@ import dk.jyskit.salescloud.application.services.contractsaver.ContractSaverImpl
 import dk.jyskit.salescloud.application.services.supercontract.FakeSuperContractService;
 import dk.jyskit.salescloud.application.services.supercontract.SuperContractService;
 import dk.jyskit.salescloud.application.services.users.UserEvaluationServiceImpl;
+import dk.jyskit.waf.application.Environment;
 import dk.jyskit.waf.application.dao.Dao;
 import dk.jyskit.waf.application.services.users.UserEvaluationService;
 import dk.jyskit.waf.application.servlet.JITApplicationServletModule;
@@ -80,6 +81,6 @@ public class ApplicationServletModule extends JITApplicationServletModule {
 
 	@Override
 	public String getNamespace() {
-		return "salescloud";
+		return Environment.getNamespace();
 	}
 }
