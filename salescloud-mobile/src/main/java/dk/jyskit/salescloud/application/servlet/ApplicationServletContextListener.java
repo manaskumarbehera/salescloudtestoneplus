@@ -10,6 +10,7 @@ public class ApplicationServletContextListener extends JITGuiceServletContextLis
 
 	public ApplicationServletContextListener() {
 		Environment.NAMESPACE = "salescloud-oneplus";
+		System.out.println("Setting namespace: " + Environment.NAMESPACE);
 	}
 
 	@Override

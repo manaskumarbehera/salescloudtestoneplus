@@ -1,6 +1,7 @@
 package dk.jyskit.waf.application.services.users;
 
 import dk.jyskit.waf.application.model.BaseUser;
+import org.apache.wicket.Component;
 import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
 
@@ -10,5 +11,5 @@ public interface UserEvaluationService {
 	 * @param user
 	 * @return
 	 */
-	String evaluateUser(Page page, BaseUser user);
+	String evaluateUser(Component component, BaseUser user);
 }

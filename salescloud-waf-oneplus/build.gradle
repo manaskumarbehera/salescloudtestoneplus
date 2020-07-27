@@ -6,7 +6,7 @@ apply plugin: 'idea'
 apply plugin: 'com.github.ben-manes.versions'
 
 group = 'dk.escapetech.oneplus'
-version = '3.2.15'
+version = '3.2.21'
 
 description = """waf"""
 

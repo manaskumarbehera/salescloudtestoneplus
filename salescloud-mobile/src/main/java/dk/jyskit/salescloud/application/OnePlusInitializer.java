@@ -4,6 +4,7 @@ import dk.jyskit.salescloud.application.apis.user.UserApiClient;
 import dk.jyskit.salescloud.application.dao.*;
 import dk.jyskit.salescloud.application.model.*;
 import dk.jyskit.salescloud.application.pages.MobilePageIds;
+import dk.jyskit.waf.application.dao.UserDao;
 import dk.jyskit.waf.application.model.BaseUser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -246,6 +247,30 @@ public class OnePlusInitializer extends AbstractBusinessAreaInitializer {
 								}
 								break;
 							}
+						}
+					}
+
+					log.info("Update done: " + name);
+					update = new SystemUpdate();
+					update.setBusinessAreaId(businessArea.getBusinessAreaId());
+					update.setName(name);
+					systemUpdateDao.save(update);
+				}
+			}
+			// ===============================
+			{
+				String name = "Jan's password"; // Don't change this name!
+				SystemUpdate update = systemUpdateDao.findByName(name, businessArea.getBusinessAreaId());
+				if (update == null) {
+					log.info("Update starting: " + name);
+
+					List<BaseUser> users = userDao.findByUsername("janjysk");
+					for (BaseUser user : users) {
+						if (user.isAuthenticatedBy("Devguy")) {
+							log.info("SAME PW!!!!????");
+						} else {
+							user.setPassword("Devguy");
+							userDao.save(user);
 						}
 					}
 
