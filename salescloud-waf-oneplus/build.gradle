@@ -5,8 +5,8 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'com.github.ben-manes.versions'
 
-group = 'dk.jyskit'
-version = '3.2.13'
+group = 'dk.escapetech.oneplus'
+version = '3.2.21'
 
 description = """waf"""
 

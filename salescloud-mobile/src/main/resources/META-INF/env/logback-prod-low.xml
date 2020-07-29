@@ -2,7 +2,7 @@
 <!DOCTYPE configuration>
 <configuration>
     <appender name="appender-file" class="ch.qos.logback.core.FileAppender">
-        <file>logs/salescloud-mobile-staging.log</file>
+        <file>logs/salescloud-oneplus-staging.log</file>
         <append>false</append>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <charset>UTF-8</charset>
@@ -11,6 +11,7 @@
     </appender>
     
     <logger name="dk.jyskit.waf" level="WARN"/>
+    <logger name="dk.jyskit.waf.application.components.login" level="INFO"/>
     <logger name="dk.jyskit.salescloud" level="INFO"/>
 
     <logger name="ch"  level="WARN"/>

@@ -1,5 +1,6 @@
 package dk.jyskit.salescloud.application.apis.user;
 
+import dk.jyskit.salescloud.application.CoreApplication;
 import dk.jyskit.waf.application.Environment;
 import dk.jyskit.waf.utils.encryption.SimpleStringCipher;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +12,7 @@ import java.io.IOException;
 @Slf4j
 public class UserApiClient {
 	public static void changePasswordOnOtherServer(String username, String password) {
-		String otherServer = Environment.get().getProperty("baseurlOtherServer");
+		String otherServer = CoreApplication.get().getSetting("baseurlOtherServer");
 		if (!StringUtils.isEmpty(otherServer)) {
 			try {
 				RequestBody formBody = new FormBody.Builder()
@@ -26,12 +27,12 @@ public class UserApiClient {
 						.build();
 				try (Response response = new OkHttpClient().newCall(request).execute()) {
 					if (!response.isSuccessful()) {
-						throw new IOException("Unexpected code " + response);
+						log.warn("Response code: " + response.code());
+						throw new IOException("Unexpected code " + response.code());
 					}
-					// Get response body
-					System.out.println(response.body().string());
 				}
 			} catch (Exception e) {
+				log.error("", e);
 				e.printStackTrace();
 			}
 		}

@@ -91,11 +91,6 @@ public class MobileSalescloudApplication extends CoreApplication {
         return (MobileSalescloudApplication) Application.get();
     }
     
-    @Override
-    public String getNamespace() {
-    	return NAMESPACE;
-    }
-
     /**
      * Constructor.
      */

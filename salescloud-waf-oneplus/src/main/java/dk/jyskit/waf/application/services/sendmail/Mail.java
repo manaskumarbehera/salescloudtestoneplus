@@ -17,6 +17,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
+import dk.jyskit.waf.application.Environment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -88,7 +89,7 @@ public class Mail {
 		
 		String namespace = "unknown";
 		try {
-			namespace = JITWicketApplication.get().getNamespace();
+			namespace = Environment.getNamespace();
 		} catch (Exception e) {
 			log.warn("Unknown namespace");
 		}

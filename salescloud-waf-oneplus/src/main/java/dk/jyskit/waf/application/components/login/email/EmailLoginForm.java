@@ -14,6 +14,7 @@ package dk.jyskit.waf.application.components.login.email;
 import java.util.List;
 
 import dk.jyskit.waf.application.services.users.UserEvaluationService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -29,6 +30,7 @@ import dk.jyskit.waf.application.model.BaseUser;
 import dk.jyskit.waf.wicket.components.forms.BaseForm;
 import dk.jyskit.waf.wicket.components.forms.annotations.DefaultFocusBehavior;
 
+@Slf4j
 public class EmailLoginForm extends BaseForm<LoginInfo> {
 	private static final long serialVersionUID = 1L;
 
@@ -43,18 +45,25 @@ public class EmailLoginForm extends BaseForm<LoginInfo> {
 		add(new FeedbackPanel("feedback"));
 		add(new RequiredTextField<String>("email").add(new DefaultFocusBehavior()));
 		add(new PasswordTextField("password"));
+		log.warn("EmailLoginForm");
 	}
 
 	@Override
 	public void onSubmit() {
+		log.info("onSubmit - " + getModelObject().getEmail());
 		List<BaseUser> usersWithEmail = userDao.findByEmail(getModelObject().getEmail());
+		log.info("usersWithName: " + usersWithEmail.size());
 		for (BaseUser user : usersWithEmail) {
 			if (userEvaluationService != null) {
+				log.info("Evaluating user: " + getModelObject().getEmail());
 				String key = userEvaluationService.evaluateUser(getPage(), user);
 				if (!StringUtils.isEmpty(key)) {
+					log.info("Error: " + key);
 					transError(key);
 					return;
 				}
+			} else {
+				log.error("userEvaluationService not found");
 			}
 			// check if user can login and do login
 			if (user.isActive() && user.isAuthenticatedBy(getModelObject().getPassword())) {
@@ -67,6 +76,12 @@ public class EmailLoginForm extends BaseForm<LoginInfo> {
 				// goto home page
 				setResponsePage(JITAuthenticatedWicketApplication.get().getAdminHomePage());
 				return;
+			} else {
+				if (!user.isActive()) {
+					log.warn("User not active: " + getModelObject().getEmail());
+				} else {
+					log.warn("User uses wrong password: " + getModelObject().getEmail());
+				}
 			}
 		}
 		transError("auth.error.userNotFound");

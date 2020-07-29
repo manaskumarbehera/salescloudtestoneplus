@@ -1,6 +1,6 @@
 subprojects {
 	apply plugin: 'java'
-	group = 'dk.jyskit'
+	group = 'dk.escapetech.oneplus'
 	version = '3.0.0'
 
 	sourceCompatibility = 1.8

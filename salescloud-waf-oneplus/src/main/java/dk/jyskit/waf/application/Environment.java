@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import dk.jyskit.waf.application.utils.exceptions.SystemException;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +27,10 @@ import dk.jyskit.waf.utils.guice.Lookup;
  */
 @Slf4j
 public class Environment {
+	// Namespace for environment variables, etc. This is required for running multiple
+	// WAF applications in the same servlet container.
+	public static String NAMESPACE;
+
 	/** can be used to make environment specific log level using logback */
 	private static final String LOG_LEVEL_PREFIX = "log.level.";
 
@@ -173,5 +178,12 @@ public class Environment {
 			}
 		}
 		return false;
+	}
+
+	public static String getNamespace() {
+		if (NAMESPACE == null) {
+			throw new SystemException("NAMESPACE undefined");
+		}
+		return NAMESPACE;
 	}
 }

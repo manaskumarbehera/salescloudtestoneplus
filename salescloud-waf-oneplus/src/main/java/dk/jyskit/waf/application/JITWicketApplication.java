@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Properties;
 
+import dk.jyskit.waf.application.utils.exceptions.SystemException;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.wicket.Application;
@@ -72,7 +73,7 @@ public abstract class JITWicketApplication extends WebApplication {
 		injector.injectMembers(this);
 
 		// Try use normal wicket property
-		String configProp = environment.getProperty(getNamespace() + ".wicket.configuration");
+		String configProp = environment.getProperty(Environment.getNamespace() + ".wicket.configuration");
 		RuntimeConfigurationType configEnum = RuntimeConfigurationType.DEPLOYMENT;
 		if (configProp != null) {
 			try {
@@ -90,7 +91,7 @@ public abstract class JITWicketApplication extends WebApplication {
 		if (Environment.WAF_ENV.equals(key)) {
 			return Environment.get().getProperty(key);
 		}
-		return Environment.get().getProperty(getNamespace() + "." + key);
+		return Environment.get().getProperty(Environment.getNamespace() + "." + key);
 	}
 
     public static JITWicketApplication get() {
@@ -479,12 +480,4 @@ public abstract class JITWicketApplication extends WebApplication {
 
 		return converterLocator;
 	}
-
-	/**
-	 * Namespace for environment variables, etc. This is required for running multiple
-	 * WAF applications in the same servlet container.
-	 * 
-	 * @return
-	 */
-	public abstract String getNamespace();
 }

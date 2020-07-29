@@ -14,11 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
 public class Start {
-	private static final int PORT = 8080;
+	private static final int PORT_1 = 8080;
+	private static final int PORT_2 = 8081;
 
 	/*
 	 * Start the application with the following argument
@@ -40,7 +42,16 @@ public class Start {
 
 		connector.setIdleTimeout(timeout);
 		connector.setSoLingerTime(-1);
-		connector.setPort(PORT);
+
+		int port = PORT_2;
+		URL url = new URL("http://127.0.0.1:" + PORT_1);
+		url.openConnection();
+		try (InputStream reader = url.openStream()) {
+		} catch (Exception e) {
+			port = PORT_1;
+		}
+
+		connector.setPort(port);
 		server.addConnector(connector);
 
 		WebAppContext context = new WebAppContext();
@@ -56,16 +67,14 @@ public class Start {
 		server.setHandler(handlers);
 
 		try {
-			System.out.print(">>> STARTING EMBEDDED JETTY SERVER ON PORT " + PORT);
-
-			try {
-				URL stopUrl = new URL("http://127.0.0.1:" + PORT + "/stop_server");
-				BufferedReader in = new BufferedReader(
-						new InputStreamReader(stopUrl.openStream()));
-			} catch (Exception e) {
-			}
-
-			System.out.println(".");
+//			try {
+//				URL stopUrl = new URL("http://127.0.0.1:" + PORT + "/stop_server");
+//				BufferedReader in = new BufferedReader(
+//						new InputStreamReader(stopUrl.openStream()));
+//			} catch (Exception e) {
+//			}
+//
+//			System.out.println(".");
 
 			server.start();
 			server.join();

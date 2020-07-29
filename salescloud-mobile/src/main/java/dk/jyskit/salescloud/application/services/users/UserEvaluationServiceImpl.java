@@ -4,20 +4,26 @@ import dk.jyskit.salescloud.application.pages.admin.profile.ChangePasswordPage;
 import dk.jyskit.waf.application.Environment;
 import dk.jyskit.waf.application.model.BaseUser;
 import dk.jyskit.waf.application.services.users.UserEvaluationService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
+import org.apache.wicket.Component;
 import org.apache.wicket.Page;
+import org.apache.wicket.RestartResponseException;
+import org.apache.wicket.request.flow.ResetResponseException;
 
 import java.util.Date;
 
+@Slf4j
 public class UserEvaluationServiceImpl implements UserEvaluationService {
-	public String evaluateUser(Page page, BaseUser user) {
+	public String evaluateUser(Component component, BaseUser user) {
+		log.warn("evaluating user " + user.getUsername());
 		if (user.isAuthenticatedBy("Slettet")) {
 			return "auth.error.userNotFound";
 		} else if (user.isAuthenticatedBy("Passiv")) {
 			return "auth.error.userNotFound";
-//		} else if ((user.getPasswordChangedDate() == null) || DateUtils.addMonths(user.getPasswordChangedDate(), 2).before(new Date())) {
-//			page.setResponsePage(ChangePasswordPage.class);
-//			return "auth.error.passwordNeedsChanging";
+		} else if ((user.getPasswordChangedDate() == null) || DateUtils.addMonths(user.getPasswordChangedDate(), 2).before(new Date())) {
+			component.setResponsePage(ChangePasswordPage.class);
+			return "auth.error.passwordNeedsChanging";
 		} else if ((Environment.isOneOf("heroku2"))
 					&& (!"RMO@tdc.dk".equalsIgnoreCase(user.getUsername())
 					&& !"RMO@tdc.dk".equalsIgnoreCase(user.getEmail())

@@ -1,14 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2012 Anton Bessonov.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Creative Commons
- * Attribution 3.0 License which accompanies this distribution,
- * and is available at
- * http://creativecommons.org/licenses/by/3.0/
- * 
- * Contributors:
- *     Anton Bessonov - initial API and implementation
- ******************************************************************************/
 package dk.jyskit.waf.application.components.login.username;
 
 import com.google.inject.Inject;
@@ -52,18 +41,28 @@ public class UsernameLoginForm extends BaseForm<LoginInfo> {
 	}
 
 	@Override
+	protected void onError() {
+		super.onError();
+		log.warn("onError - " + hasError());
+	}
+
+	@Override
 	public void onSubmit() {
+		log.info("onSubmit - " + getModelObject().getUsername());
 		List<BaseUser> usersWithName = userDao.findByUsername(getModelObject().getUsername());
+		log.info("usersWithName: " + usersWithName.size());
 		for (BaseUser user : usersWithName) {
-			if (userEvaluationService != null) {
-				log.info("Evaluating user: " + getModelObject().getUsername());
-				String key = userEvaluationService.evaluateUser(getPage(), user);
-				if (!StringUtils.isEmpty(key)) {
-					log.info("Error: " + key);
-					transError(key);
+			String userEvaluationKey = null;
+			if (userEvaluationService == null) {
+				log.error("userEvaluationService not found");
+			} else {
+				userEvaluationKey = userEvaluationService.evaluateUser(this, user);
+				if (!"auth.error.passwordNeedsChanging".equals(userEvaluationKey) &&
+						!StringUtils.isEmpty(userEvaluationKey)) {
+					transError(userEvaluationKey);
 					return;
 				}
-			} 
+			}
 			// check if user can login and do login
 			if (user.isActive() && user.isAuthenticatedBy(getModelObject().getPassword())) {
 				log.info("" + getModelObject().getUsername() + " - screen width: " + getModelObject().getWidth());
@@ -74,10 +73,19 @@ public class UsernameLoginForm extends BaseForm<LoginInfo> {
 					((BaseUser) user).getBaseRoleList().size();	// eager load role objects
 				}
 
-				// goto home page
-				setResponsePage(JITAuthenticatedWicketApplication.get().getAdminHomePage());
-
+				if ("auth.error.passwordNeedsChanging".equals(userEvaluationKey)) {
+					// setResponsePage has already been called!
+				} else {
+					// goto home page
+					setResponsePage(JITAuthenticatedWicketApplication.get().getAdminHomePage());
+				}
 				return;
+			} else {
+				if (!user.isActive()) {
+					log.warn("User not active: " + getModelObject().getUsername());
+				} else {
+					log.warn("User uses wrong password: " + getModelObject().getUsername());
+				}
 			}
 		}
 		transError("auth.error.userNotFound");
