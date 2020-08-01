@@ -86,12 +86,9 @@ public abstract class JITWicketApplication extends WebApplication {
 		
 		setConfigurationType(configEnum);
 	}
-	
+
 	public String getSetting(String key) {
-		if (Environment.WAF_ENV.equals(key)) {
-			return Environment.get().getProperty(key);
-		}
-		return Environment.get().getProperty(Environment.getNamespace() + "." + key);
+		return Environment.get().getSetting(key);
 	}
 
     public static JITWicketApplication get() {

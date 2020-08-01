@@ -33,7 +33,6 @@ public class UserApiClient {
 				}
 			} catch (Exception e) {
 				log.error("", e);
-				e.printStackTrace();
 			}
 		}
 	}

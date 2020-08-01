@@ -88,14 +88,52 @@ public class OutputButtonsOnePlusPanel extends AbstractOutputButtonsPanel {
 			form.add(new Label("tastebilagsproblem", tastebilagsproblem));
 		}
 
+/*
+Extension MIME Type
+.doc      application/msword
+.dot      application/msword
+
+.docx     application/vnd.openxmlformats-officedocument.wordprocessingml.document
+.dotx     application/vnd.openxmlformats-officedocument.wordprocessingml.template
+.docm     application/vnd.ms-word.document.macroEnabled.12
+.dotm     application/vnd.ms-word.template.macroEnabled.12
+
+.xls      application/vnd.ms-excel
+.xlt      application/vnd.ms-excel
+.xla      application/vnd.ms-excel
+
+.xlsx     application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+.xltx     application/vnd.openxmlformats-officedocument.spreadsheetml.template
+.xlsm     application/vnd.ms-excel.sheet.macroEnabled.12
+.xltm     application/vnd.ms-excel.template.macroEnabled.12
+.xlam     application/vnd.ms-excel.addin.macroEnabled.12
+.xlsb     application/vnd.ms-excel.sheet.binary.macroEnabled.12
+
+.ppt      application/vnd.ms-powerpoint
+.pot      application/vnd.ms-powerpoint
+.pps      application/vnd.ms-powerpoint
+.ppa      application/vnd.ms-powerpoint
+
+.pptx     application/vnd.openxmlformats-officedocument.presentationml.presentation
+.potx     application/vnd.openxmlformats-officedocument.presentationml.template
+.ppsx     application/vnd.openxmlformats-officedocument.presentationml.slideshow
+.ppam     application/vnd.ms-powerpoint.addin.macroEnabled.12
+.pptm     application/vnd.ms-powerpoint.presentation.macroEnabled.12
+.potm     application/vnd.ms-powerpoint.template.macroEnabled.12
+.ppsm     application/vnd.ms-powerpoint.slideshow.macroEnabled.12
+
+.mdb      application/vnd.ms-access
+ */
 		list.add(newPdfLink("Fuldmagt Mobil", "One+ - Fuldmagt mobil - {cvr}{date}.pdf", "documents/one/fuldmagt_mobil.pdf"));
 		list.add(newPdfLink("Fuldmagt Fastnet", "One+ - Fuldmagt fastnet - {cvr}{date}.pdf", "documents/one/fuldmagt_fastnet.pdf"));
 		list.add(newPdfLink("Ejerskifteskema", "One+ - Ejerskifteskema - {cvr}{date}.pdf", "documents/one/overtagelsesblanket.pdf"));
 		if (!MobileSession.get().userIsPartnerEC()) {
-			list.add(newAnyFileLink("Smulskema", "One+ - Smulskema - {cvr}{date}.xlsx", "documents/one/smulskema.xlsx", "application/xls"));
+			list.add(newAnyFileLink("Smulskema", "One+ - Smulskema - {cvr}{date}.xlsx", "documents/one/smulskema.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
 		}
-		list.add(newAnyFileLink("Brugerliste", "One+ - Brugerliste - {cvr}{date}.xlsm", "documents/one/brugerliste.xlsm", "application/xls"));
-		list.add(newAnyFileLink("Aftalepapir", "One+ - Aftalepapir - {cvr}{date}.docm", "documents/one/aftalepapir.docm", "application/vnd.ms-word.document.macroEnabled.12"));
+		list.add(newAnyFileLink("Brugerliste", "One+ - Brugerliste - {cvr}{date}.xlsm", "documents/one/brugerliste.xlsm", "application/vnd.ms-excel.sheet.macroEnabled.12"));
+		list.add(newAnyFileLink("Aftalepapir", "One+ - Aftalepapir - {cvr}{date}.docx", "documents/one/aftalepapir.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
+		list.add(newAnyFileLink("Nummertillæg til aftalepapir", "One+ - Nummertillæg til aftalepapir - {cvr}{date}.xlsx", "documents/one/nummertillaeg_til_aftalepapir.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+//		list.add(newAnyFileLink("Aftalepapir", "One+ - Aftalepapir - {cvr}{date}.docm", "documents/one/aftalepapir.docx", "application/vnd.ms-word.document.macroEnabled.12"));
 		if (MobileSession.get().userIsPartnerEC()) {
 //		list.add(newPdfLink("Installation", "One+ - Installation - {cvr}{date}.pdf", "documents/one/x.pdf"));
 			list.add(newReportLink("Installation", "One+ - Installation - {cvr}{date}.pdf", new PartnerInstallationReport("TDC Erhvervscenter installation One+")));

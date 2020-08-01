@@ -1,5 +1,6 @@
 package dk.jyskit.salescloud.application.services.users;
 
+import dk.jyskit.salescloud.application.MobileSalescloudApplication;
 import dk.jyskit.salescloud.application.pages.admin.profile.ChangePasswordPage;
 import dk.jyskit.waf.application.Environment;
 import dk.jyskit.waf.application.model.BaseUser;
@@ -17,14 +18,18 @@ import java.util.Date;
 public class UserEvaluationServiceImpl implements UserEvaluationService {
 	public String evaluateUser(Component component, BaseUser user) {
 		log.warn("evaluating user " + user.getUsername());
+
+		int maxPasswordAgeInDays = Environment.get().getIntSetting("maxPasswordAgeInDays", 60);
+
 		if (user.isAuthenticatedBy("Slettet")) {
 			return "auth.error.userNotFound";
 		} else if (user.isAuthenticatedBy("Passiv")) {
 			return "auth.error.userNotFound";
-		} else if ((user.getPasswordChangedDate() == null) || DateUtils.addMonths(user.getPasswordChangedDate(), 2).before(new Date())) {
+		} else if ((maxPasswordAgeInDays > 0) &&
+				((user.getPasswordChangedDate() == null) || DateUtils.addDays(user.getPasswordChangedDate(), maxPasswordAgeInDays).before(new Date()))) {
 			component.setResponsePage(ChangePasswordPage.class);
 			return "auth.error.passwordNeedsChanging";
-		} else if ((Environment.isOneOf("heroku2"))
+		} else if ((Environment.isOneOf("heroku-staging"))
 					&& (!"RMO@tdc.dk".equalsIgnoreCase(user.getUsername())
 					&& !"RMO@tdc.dk".equalsIgnoreCase(user.getEmail())
 					&& !"dal@tdcerhvervscenter.dk".equalsIgnoreCase(user.getUsername())

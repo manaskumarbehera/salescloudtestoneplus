@@ -2,6 +2,7 @@ package dk.jyskit.salescloud.application.pages.admin.profile;
 
 import com.google.inject.Inject;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
+import dk.jyskit.salescloud.application.CoreApplication;
 import dk.jyskit.salescloud.application.apis.user.UserApiClient;
 import dk.jyskit.salescloud.application.model.AdminRole;
 import dk.jyskit.salescloud.application.model.SalesmanagerRole;

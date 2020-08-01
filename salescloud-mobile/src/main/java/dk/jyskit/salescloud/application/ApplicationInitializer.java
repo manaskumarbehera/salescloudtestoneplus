@@ -29,7 +29,7 @@ public class ApplicationInitializer implements JITApplicationInitializer {
 //					, new TdcOfficeInitializer()
 					, new OnePlusInitializer()
 				};
-		} else if (Environment.isOneOf("prod-low", "oneplus", "heroku")) {
+		} else if (Environment.isOneOf("prod-low", "oneplus", "heroku", "heroku-staging")) {
 			initializers = new Initializer[] {
 					new UserInitializer()
 //					, new MobileVoiceInitializer()

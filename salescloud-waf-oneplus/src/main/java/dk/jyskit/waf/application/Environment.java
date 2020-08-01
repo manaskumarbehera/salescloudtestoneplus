@@ -87,11 +87,11 @@ public class Environment {
 					// salescloud.javax.persistence.jdbc.password=
 					String s[] = dbUrl.split("@");
 					if (s.length == 2) {
-						properties.put("salescloud.javax.persistence.jdbc.url", "jdbc:mysql://" + s[1].replace(":3306", ""));
+						properties.put(Environment.NAMESPACE + ".javax.persistence.jdbc.url", "jdbc:mysql://" + s[1].replace(":3306", ""));
 						s = s[0].replace("mysql://", "").split(":");
 						if (s.length == 2) {
-							properties.put("salescloud.javax.persistence.jdbc.user", s[0]);
-							properties.put("salescloud.javax.persistence.jdbc.password", s[1]);
+							properties.put(Environment.NAMESPACE + ".javax.persistence.jdbc.user", s[0]);
+							properties.put(Environment.NAMESPACE + ".javax.persistence.jdbc.password", s[1]);
 						}
 					}
 				}
@@ -125,6 +125,65 @@ public class Environment {
 	public String getName() {
 		return name;
 	}
+
+	// --- Namespace based ---
+
+	public String getSetting(String key) {
+		if (Environment.WAF_ENV.equals(key)) {
+			return Environment.get().getProperty(key);
+		}
+		return getProperty(NAMESPACE + "." + key);
+	}
+
+	public int getIntSetting(String key) {
+		String value = getSetting(key);
+		if (StringUtils.isEmpty(value)) {
+			throw new SystemException("Setting not found: " + key);
+		}
+		return Integer.valueOf(value);
+	}
+
+	public int getIntSetting(String key, int defaultValue) {
+		String value = getSetting(key);
+		if (StringUtils.isEmpty(value)) {
+			return defaultValue;
+		}
+		return Integer.valueOf(value);
+	}
+
+	public boolean getBooleanSetting(String key) {
+		String value = getSetting(key);
+		if (StringUtils.isEmpty(value)) {
+			throw new SystemException("Setting not found: " + key);
+		}
+		return Boolean.valueOf(value);
+	}
+
+	public boolean getBooleanSetting(String key, boolean defaultValue) {
+		String value = getSetting(key);
+		if (StringUtils.isEmpty(value)) {
+			return defaultValue;
+		}
+		return Boolean.valueOf(value);
+	}
+
+	public String getStringSetting(String key) {
+		String value = getSetting(key);
+		if (StringUtils.isEmpty(value)) {
+			throw new SystemException("Setting not found: " + key);
+		}
+		return value;
+	}
+
+	public String getStringSetting(String key, String defaultValue) {
+		String value = getSetting(key);
+		if (StringUtils.isEmpty(value)) {
+			return defaultValue;
+		}
+		return value;
+	}
+
+	// --- Non-namespace based ---
 
 	public Boolean getBoolean(String key) {
 		if (isDefined(key)) {
