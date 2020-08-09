@@ -101,7 +101,7 @@ public class Environment {
 				reconfigureLogger();
 			}
 		} catch (IOException e) {
-			log.error("Unable to load JITWU environment", e);
+			log.error("Unable to load WAF environment", e);
 		}
 	}
 

@@ -2,6 +2,7 @@ package dk.jyskit.salescloud.application.pages.admin.useradmin.users;
 
 import java.util.List;
 
+import dk.jyskit.salescloud.application.pages.admin.profile.ChangePasswordHelper;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
@@ -115,12 +116,14 @@ public class EditUserPanel extends AbstractWrappedEditPanel<BaseUser, BaseUserWr
 				userAlreadyHasPassword = true;
 			}
 
+			ChangePasswordHelper cph = new ChangePasswordHelper();
+
 			if (wrappedChild.getPassword().equals("¤Dummy¤¤PassWord¤") && !userAlreadyHasPassword) {
 				passwordField.error(getString("password.needed"));
 				target.add(passwordField.getParent().getParent());
 				return false;
-			} else if (wrappedChild.getPassword().length() < 4) {
-				passwordField.error(getString("password.too_short"));
+			} else if (!cph.isStrongEnough(wrappedChild.getPassword())) {
+				passwordField.error(getString("password.too_weak"));
 				target.add(passwordField.getParent().getParent());
 				return false;
 			} else {

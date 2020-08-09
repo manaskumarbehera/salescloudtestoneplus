@@ -17,6 +17,7 @@ import dk.jyskit.waf.wicket.components.forms.jsr303form.components.buttons.AjaxE
 import dk.jyskit.waf.wicket.components.forms.jsr303form.components.buttons.AjaxSubmitListener;
 import dk.jyskit.waf.wicket.components.forms.jsr303form.labelstrategy.EntityLabelStrategy;
 import dk.jyskit.waf.wicket.security.UserSession;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.TextField;
@@ -60,8 +61,9 @@ public class ChangePasswordPage extends BasePage {
 					String repeat = eph.getRepeatNewPassword();
 
 					if (u.isAuthenticatedBy(old)) {
-						String passwordRegEx = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
-						if (!newPass.matches(passwordRegEx)) {
+						if (StringUtils.equals(old, newPass)) {
+							form.getForm().error(getString("new.pass.same_as_old"));
+						} else if (!eph.isStrongEnough(newPass)) {
 							form.getForm().error(getString("new.pass.too_weak"));
 						} else if (newPass.equals(repeat)) {
 							u.setPassword(newPass);
