@@ -1,5 +1,8 @@
 package dk.jyskit.salescloud.application.pages.sales.content;
 
+import dk.jyskit.salescloud.application.CoreSession;
+import dk.jyskit.salescloud.application.pages.admin.profile.ChangePasswordPage;
+import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -27,11 +30,13 @@ public abstract class ContentPage extends BasePage {
 		handleParameters(parameters);
 		
 		this.pageInfo = pageInfo;
-		
 	}
 	
 	@Override
 	protected void onInitialize() {
+		if (CoreSession.get().isPasswordChangeRequired()) {
+			throw new RestartResponseException(ChangePasswordPage.class);
+		}
 		initPage();
 		
 		WebMarkupContainer withHelp = new WebMarkupContainer("withHelp") {

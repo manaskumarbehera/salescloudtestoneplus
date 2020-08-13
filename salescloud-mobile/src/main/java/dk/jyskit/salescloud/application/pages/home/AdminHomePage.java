@@ -3,6 +3,7 @@ package dk.jyskit.salescloud.application.pages.home;
 import java.util.List;
 
 import dk.jyskit.salescloud.application.apis.user.UserApiClient;
+import dk.jyskit.salescloud.application.pages.admin.profile.ChangePasswordPage;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.RestartResponseException;
@@ -54,6 +55,9 @@ public class AdminHomePage extends BasePage {
 	public AdminHomePage(PageParameters parameters) {
 		super(parameters);
 
+		if (CoreSession.get().isPasswordChangeRequired()) {
+			throw new RestartResponseException(ChangePasswordPage.class);
+		}
 
 //		Thread thread1 = new Thread(new Runnable() {
 //			@Override

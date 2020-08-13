@@ -1,6 +1,7 @@
 package dk.jyskit.salescloud.application.services.users;
 
 import dk.jyskit.salescloud.application.MobileSalescloudApplication;
+import dk.jyskit.salescloud.application.MobileSession;
 import dk.jyskit.salescloud.application.pages.admin.profile.ChangePasswordPage;
 import dk.jyskit.waf.application.Environment;
 import dk.jyskit.waf.application.model.BaseUser;
@@ -28,6 +29,8 @@ public class UserEvaluationServiceImpl implements UserEvaluationService {
 		} else if ((maxPasswordAgeInDays > 0) &&
 				((user.getPasswordChangedDate() == null) || DateUtils.addDays(user.getPasswordChangedDate(), maxPasswordAgeInDays).before(new Date()))) {
 			component.setResponsePage(ChangePasswordPage.class);
+			MobileSession.get().setPasswordChangeRequired(true);
+			log.warn("User " + user.getEmail() + " needs to change password. Date: " + user.getPasswordChangedDate());
 			return "auth.error.passwordNeedsChanging";
 		} else if ((Environment.isOneOf("heroku-staging"))
 					&& (!"RMO@tdc.dk".equalsIgnoreCase(user.getUsername())

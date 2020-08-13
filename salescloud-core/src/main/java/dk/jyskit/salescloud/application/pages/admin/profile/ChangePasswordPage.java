@@ -3,6 +3,7 @@ package dk.jyskit.salescloud.application.pages.admin.profile;
 import com.google.inject.Inject;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
 import dk.jyskit.salescloud.application.CoreApplication;
+import dk.jyskit.salescloud.application.CoreSession;
 import dk.jyskit.salescloud.application.apis.user.UserApiClient;
 import dk.jyskit.salescloud.application.model.AdminRole;
 import dk.jyskit.salescloud.application.model.SalesmanagerRole;
@@ -31,7 +32,6 @@ public class ChangePasswordPage extends BasePage {
 
 	@Inject
 	private UserDao userDao;
-	private BaseUser u;
 
 	private int count = 0;
 	private TextField<?> oldPasswordField;
@@ -39,8 +39,6 @@ public class ChangePasswordPage extends BasePage {
 	public ChangePasswordPage(PageParameters parameters) {
 		super(parameters);
 		
-		u = (BaseUser) UserSession.get().getUser();
-
 		final ChangePasswordHelper eph = new ChangePasswordHelper();
 
 		final Jsr303Form<ChangePasswordHelper> form = new Jsr303Form<ChangePasswordHelper>("jsr303form", eph, false);
@@ -60,6 +58,8 @@ public class ChangePasswordPage extends BasePage {
 					String newPass = eph.getNewPassword();
 					String repeat = eph.getRepeatNewPassword();
 
+					BaseUser u = (BaseUser) UserSession.get().getUser();
+
 					if (u.isAuthenticatedBy(old)) {
 						if (StringUtils.equals(old, newPass)) {
 							form.getForm().error(getString("new.pass.same_as_old"));
@@ -74,7 +74,7 @@ public class ChangePasswordPage extends BasePage {
 							eph.setNewPassword(null);
 							eph.setRepeatNewPassword(null);
 							UserApiClient.changePasswordOnOtherServer(u.getUsername(), newPass);
-							userDao.flush();
+							CoreSession.get().setPasswordChangeRequired(false);
 							setResponsePage(JITAuthenticatedWicketApplication.get().getAdminHomePage());
 						} else {
 							form.getForm().error(getString("new.pass.mismatch"));
