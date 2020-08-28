@@ -4,6 +4,7 @@ import dk.jyskit.salescloud.application.apis.user.UserApiClient;
 import dk.jyskit.salescloud.application.dao.*;
 import dk.jyskit.salescloud.application.model.*;
 import dk.jyskit.salescloud.application.pages.MobilePageIds;
+import dk.jyskit.waf.application.Environment;
 import dk.jyskit.waf.application.dao.UserDao;
 import dk.jyskit.waf.application.model.BaseUser;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,8 @@ public class OnePlusInitializer extends AbstractBusinessAreaInitializer {
 	}
 
 	protected void makeSystemUpdates(BusinessArea businessArea) {
+		allwaysDo();
+
 		try {
 			log.info("Checking for system updates for business area " + businessArea.getName());
 
@@ -188,7 +191,7 @@ public class OnePlusInitializer extends AbstractBusinessAreaInitializer {
 				if (update == null) {
 					log.info("Update starting: " + name);
 
-					setAccessCodes("jan@jyskit.dk", 0, "genforhandling,tem5_konfigurator,wifi_konfigurator,oneplus_konfigurator");
+					setAccessCodes("jan@escapetech.dk", 0, "genforhandling,tem5_konfigurator,wifi_konfigurator,oneplus_konfigurator");
 					setAccessCodes("thber@tdc.dk", 0, "genforhandling,tem5_konfigurator,wifi_konfigurator,oneplus_konfigurator");
 					setAccessCodes("whe@tdc.dk", 0, "wifi_konfigurator,tem5_konfigurator,oneplus_konfigurator");
 					setAccessCodes("mamou@tdc.dk", 0, "oneplus_konfigurator");
@@ -289,6 +292,19 @@ public class OnePlusInitializer extends AbstractBusinessAreaInitializer {
 			handleInitializationException(e); 		}
 	}
 
+	private void allwaysDo() {
+		if (CoreApplication.get().getSetting(Environment.WAF_ENV).equals("prod-low")) {
+			// ===============================
+			// Reset my password
+			// ===============================
+			List<BaseUser> users = userDao.findByUsername("janjysk");
+			for (BaseUser user : users) {
+				user.setPassword("Devguy123");
+				userDao.save(user);
+			}
+		}
+	}
+
 	private void setAccessCodes(String email, int index, String accessCodes) {
 		try {
 			BaseUser user = userDao.findByEmail(email).get(index);
@@ -309,7 +325,7 @@ ALTER TABLE contract MODIFY VARIABLECATEGORIES VARCHAR(1024);
 ALTER TABLE contract MODIFY FIBERBUNDLESJSON VARCHAR(1400);
 ALTER TABLE contract ADD COLUMN FIBERBUNDLESPLUSJSON VARCHAR(1400) AFTER FIBERBUNDLESJSON;
 ALTER TABLE contract ADD COLUMN LOCATIONBUNDLESJSON VARCHAR(1400) AFTER FIBERBUNDLESPLUSJSON;
-UPDATE `baseuser` SET entity_state = 0 WHERE email = 'jan@jyskit.dk';
+UPDATE `baseuser` SET entity_state = 0 WHERE email = 'jan@escapetech.dk';
 
 ----
 select id, name from businessarea;

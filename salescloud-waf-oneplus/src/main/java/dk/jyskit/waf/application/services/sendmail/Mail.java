@@ -201,7 +201,7 @@ public class Mail {
 //		System.setProperty("mail.smtp.host", "mailtrap.io");
 //		System.setProperty("mail.smtp.port", "2525");
 		
-		System.setProperty("unknown.mail.smtp.user", "jan@jyskit.dk");
+		System.setProperty("unknown.mail.smtp.user", "jan@escapetech.dk");
 		System.setProperty("unknown.mail.smtp.password", "29f81d29-9cc7-4600-8c55-bfd994d2db22");
 		System.setProperty("unknown.mail.smtp.auth", "true");
 		System.setProperty("unknown.mail.smtp.host", "smtp.mandrillapp.com");

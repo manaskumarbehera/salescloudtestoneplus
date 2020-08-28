@@ -45,7 +45,7 @@ public class ListBusinessAreasPanel extends AbstractListPanel<BusinessArea,Void>
 	@Override
 	protected BootstrapTableDataProvider<BusinessArea, String> getDataProvider() {
 		if (UserSession.get().getUser().getEmail() != null) {
-			if ((!"jan@jyskit.dk".equalsIgnoreCase(UserSession.get().getUser().getEmail())
+			if ((!"jan@escapetech.dk".equalsIgnoreCase(UserSession.get().getUser().getEmail())
 					&& !"thber@tdc.dk".equalsIgnoreCase(UserSession.get().getUser().getEmail())
 					&& !"whe@tdc.dk".equalsIgnoreCase(UserSession.get().getUser().getEmail()))) {
 				DaoTableDataProvider<BusinessArea, Dao<BusinessArea>> dataProvider =

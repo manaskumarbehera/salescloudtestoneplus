@@ -1764,7 +1764,7 @@ public class MobileContract extends Contract {
 				}
 			}
 			if (discounts.isAllZero()) {
-				discounts = campaignProductRelation.getCampaignDiscountAmounts();
+				discounts = campaignProductRelation.getCampaignDiscountAmounts().clone();
 			}
 			countProductOrBundleAmounts
 					.setCampaignDiscountAmounts(

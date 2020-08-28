@@ -324,7 +324,7 @@ public class MobileSalescloudApplication extends CoreApplication {
 		} else if ("salesperson".equals(autologin)) {
 			List<BaseUser> users = Lookup.lookup(UserDao.class).findAll();
 			for (BaseUser user : users) {
-				if ("jan@jyskit.dk".equalsIgnoreCase(user.getEmail()) && user.hasRole(SalespersonRole.class)) {
+				if ("jan@escapetech.dk".equalsIgnoreCase(user.getEmail()) && user.hasRole(SalespersonRole.class)) {
 					session.setUser(user);
 					session.setActiveRoleClass(SalespersonRole.class);
 					session.setBusinessArea(Lookup.lookup(BusinessAreaDao.class).findAll().get(0));

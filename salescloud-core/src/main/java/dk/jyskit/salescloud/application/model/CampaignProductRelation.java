@@ -135,6 +135,7 @@ public class CampaignProductRelation implements Serializable {
 		cpr.setProduct(product);
 		cpr.setRabataftaleCampaignDiscountMatrix(rabataftaleCampaignDiscountMatrix);
 		cpr.setSortIndex(sortIndex);
+		cpr.setCampaignPriceAmounts(campaignPriceAmounts.clone());
 		cpr.setCampaignDiscountAmounts(campaignDiscountAmounts.clone());
 		cpr.setOutputCodeOverride(outputCodeOverride);
 		cpr.setOutputCodeKvikOverride(outputCodeKvikOverride);

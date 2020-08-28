@@ -1,11 +1,17 @@
 package dk.jyskit.salescloud.application.pages.admin.campaignproducts;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.persistence.Column;
-
+import com.google.inject.Inject;
+import dk.jyskit.salescloud.application.dao.CampaignDao;
+import dk.jyskit.salescloud.application.dao.ProductDao;
+import dk.jyskit.salescloud.application.model.Campaign;
+import dk.jyskit.salescloud.application.model.CampaignProductRelation;
+import dk.jyskit.salescloud.application.model.Product;
+import dk.jyskit.waf.wicket.components.forms.jsr303form.Jsr303Form;
+import dk.jyskit.waf.wicket.components.forms.jsr303form.components.buttons.AjaxEventListener;
+import dk.jyskit.waf.wicket.components.jquery.bootstrapselect.BootstrapSelectOptions;
+import dk.jyskit.waf.wicket.crud.AbstractEditPanel;
+import dk.jyskit.waf.wicket.crud.CrudContext;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
@@ -13,20 +19,11 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
-import com.google.inject.Inject;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-import dk.jyskit.salescloud.application.dao.CampaignDao;
-import dk.jyskit.salescloud.application.dao.ProductDao;
-import dk.jyskit.salescloud.application.model.Campaign;
-import dk.jyskit.salescloud.application.model.CampaignProductRelation;
-import dk.jyskit.salescloud.application.model.MobileProductBundle;
-import dk.jyskit.salescloud.application.model.Product;
-import dk.jyskit.waf.wicket.components.forms.jsr303form.Jsr303Form;
-import dk.jyskit.waf.wicket.components.forms.jsr303form.components.buttons.AjaxEventListener;
-import dk.jyskit.waf.wicket.components.jquery.bootstrapselect.BootstrapSelectOptions;
-import dk.jyskit.waf.wicket.crud.AbstractEditPanel;
-import dk.jyskit.waf.wicket.crud.CrudContext;
-
+@Slf4j
 public class EditProductInCampaignPanel extends AbstractEditPanel<CampaignProductRelation, Campaign> {
 	private static final long serialVersionUID = 1L;
 
@@ -47,7 +44,7 @@ public class EditProductInCampaignPanel extends AbstractEditPanel<CampaignProduc
 	private CheckBox extraRowInOutput;
 
 	private CheckBox extraRowInOffer;
-	
+
 	public EditProductInCampaignPanel(CrudContext context, IModel<CampaignProductRelation> childModel, IModel<Campaign> parentModel) {
 		super(context, childModel, parentModel);
 		if (childModel != null) {
