@@ -1,3 +1,6 @@
+## 1.0.0 (September 03, 2020)
+
+
 ## 0.1.0 (September 03, 2020)
   - Removed lambdaj
   - Fixed problem with disappearing discount
