@@ -84,7 +84,6 @@ dependencies {
 	
 	compile "org.glassfish.web:javax.el:2.2.6"
 	
-	compile("com.googlecode.lambdaj:lambdaj:2.4") {	exclude(module: 'cglib-nodep') }
 	compile "com.google.guava:guava:13.0.1"
 	compile "net.coobird:thumbnailator:0.4.8"
 
