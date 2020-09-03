@@ -1,1 +1,1 @@
-include 'salescloud-waf', 'salescloud-core', 'salescloud-mobile'
+include 'salescloud-waf-oneplus', 'salescloud-core', 'salescloud-mobile'

@@ -94,7 +94,7 @@ public class UserInitializer implements Initializer {
 					}
 					
 					Organisation org = organisationDao.findUniqueByField("organisationId", "25050");
-					String[] admins = new String[] {"jan@jyskit.dk", "thber@tdc.dk", "whe@tdc.dk"};
+					String[] admins = new String[] {"jan@escapetech.dk", "thber@tdc.dk", "whe@tdc.dk"};
 					for (String admin : admins) {
 						List<BaseUser> users = userDao.findByEmail(admin);
 						for (BaseUser user : users) {
@@ -227,19 +227,6 @@ public class UserInitializer implements Initializer {
 	public void initialize() {
 		{
 			BaseUser user = new BaseUser();
-			user.setUsername("admin");
-			user.setPassword("pw");
-			user.setFirstName("Søren");
-			user.setLastName("Sørensen");
-			user.setIdentity("123");
-			
-			user.addRole(new AdminRole());
-			
-			userDao.save(user);
-		}
-		
-		{
-			BaseUser user = new BaseUser();
 			user.setUsername("uadmin");
 			user.setPassword("pw");
 			user.setFirstName("Søren");
@@ -310,7 +297,7 @@ public class UserInitializer implements Initializer {
 		addUser("mewe@tdc.dk","a70383","Mette","Wenneberg","mewe@tdc.dk","","TDC Erhverv A/S", "111", "","agent","","","","");
 		addUser("gat@tdc.dk","a69881","Gitte","Auning","gat@tdc.dk","21476026","TDC Erhverv A/S", "111", "","agent","","","","");
 		addUser("test@tdc.dk","pw","John","Doe","test@tdc.dk","21476026","TDC Erhverv A/S", "26506", "","agent","","","","");
-		addUser("janjysk","Devguy","John","Doe","jan@jyskit.dk","21476026","TDC Erhverv A/S", "26506", "","agent","","","","");
+		addUser("janjysk","Devguy","John","Doe","jan@escapetech.dk","21476026","TDC Erhverv A/S", "26506", "","agent","","","","");
 	}
 	
 	private BaseUser addUser(String userName, String pw, String firstName, String lastName, String email, String phone, String companyName,

@@ -5,7 +5,10 @@ import static dk.jyskit.waf.wicket.utils.BootstrapUtils.navbarPageLink;
 import java.util.ArrayList;
 import java.util.List;
 
+import dk.jyskit.salescloud.application.apis.user.UserApiPasswordPage;
 import dk.jyskit.salescloud.application.pages.accessnew.locations.LocationsPage;
+import dk.jyskit.salescloud.application.pages.imports.ImportsPage;
+import dk.jyskit.salescloud.application.pages.systemutils.SystemUtilsPage;
 import org.apache.wicket.Application;
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
@@ -20,8 +23,6 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.button.ButtonList;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.Navbar;
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesomeIconType;
-import dk.jyskit.salescloud.application.apis.auth.ApiAuthPage;
-import dk.jyskit.salescloud.application.apis.auth.ApiAuthUpdatePage;
 import dk.jyskit.salescloud.application.dao.BusinessAreaDao;
 import dk.jyskit.salescloud.application.dao.ContractDao;
 import dk.jyskit.salescloud.application.model.AccessCodes;
@@ -47,8 +48,7 @@ import dk.jyskit.salescloud.application.pages.contractsettings.MobileContractSet
 import dk.jyskit.salescloud.application.pages.contractsummary.ContractSummaryPage;
 import dk.jyskit.salescloud.application.pages.accessnew.fiber.FiberPage;
 import dk.jyskit.salescloud.application.pages.home.AdminHomePage;
-import dk.jyskit.salescloud.application.pages.makeupdates.RemoveFiberPage;
-import dk.jyskit.salescloud.application.pages.makeupdates.RemoveBusinessAreasPage;
+import dk.jyskit.salescloud.application.pages.systemutils.RemoveBusinessAreasPage;
 import dk.jyskit.salescloud.application.pages.officeadditional.OfficeAdditionalProductsPage;
 import dk.jyskit.salescloud.application.pages.officeimplementation.OfficeImplementationPage;
 import dk.jyskit.salescloud.application.pages.partner.PartnerSettingsPage;
@@ -91,11 +91,6 @@ public class MobileSalescloudApplication extends CoreApplication {
         return (MobileSalescloudApplication) Application.get();
     }
     
-    @Override
-    public String getNamespace() {
-    	return NAMESPACE;
-    }
-
     /**
      * Constructor.
      */
@@ -164,11 +159,14 @@ public class MobileSalescloudApplication extends CoreApplication {
         mountPage("admin", AdminHomePage.class);
         mountPage("removebusinessareas/${ba}", RemoveBusinessAreasPage.class);
 //        mountPage("removefiber", RemoveFiberPage.class);
+        mountPage("system-cmd", SystemUtilsPage.class);
+		mountPage("system-import", ImportsPage.class);
         mountPage("konfiguration/${businessAreaId}/${contract}", ExternalSubscriptionConfigurationPage.class);
         mountPage("implementering/${businessAreaId}/${contract}", ExternalSubscriptionImplementationPage.class);
         // API
-        mountPage("v1/api/auth", ApiAuthPage.class); 
-        mountPage("v1/api/auth/update", ApiAuthUpdatePage.class); 
+		mountPage("v1/api/user/password", UserApiPasswordPage.class);
+//		mountPage("v1/api/auth", ApiAuthPage.class);
+//        mountPage("v1/api/auth/update", ApiAuthUpdatePage.class);
 	}
 
 	public boolean isUseEmailForLogin() {
@@ -251,7 +249,7 @@ public class MobileSalescloudApplication extends CoreApplication {
 					}
 					
 					if (businessArea.hasFeature(FeatureType.PARTNER_SETTINGS)) {
-						if (salesperson.getOrganisation().getType().equals(OrganisationType.PARTNER_CENTER)) {
+						if ((salesperson.getOrganisation() != null) && salesperson.getOrganisation().getType().equals(OrganisationType.PARTNER_CENTER)) {
 							menuItems.add(navbarPageLink(PartnerSettingsPage.class, "menu.sales.partnersettings"));  // .setIconType(FontAwesomeIconType.bullseye));
 						}
 					}
@@ -326,7 +324,7 @@ public class MobileSalescloudApplication extends CoreApplication {
 		} else if ("salesperson".equals(autologin)) {
 			List<BaseUser> users = Lookup.lookup(UserDao.class).findAll();
 			for (BaseUser user : users) {
-				if ("jan@jyskit.dk".equalsIgnoreCase(user.getEmail()) && user.hasRole(SalespersonRole.class)) {
+				if ("jan@escapetech.dk".equalsIgnoreCase(user.getEmail()) && user.hasRole(SalespersonRole.class)) {
 					session.setUser(user);
 					session.setActiveRoleClass(SalespersonRole.class);
 					session.setBusinessArea(Lookup.lookup(BusinessAreaDao.class).findAll().get(0));

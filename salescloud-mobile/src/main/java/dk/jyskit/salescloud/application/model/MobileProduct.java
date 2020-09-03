@@ -471,19 +471,38 @@ public class MobileProduct extends Product implements MobileSortableItem {
 	}
 
 	public boolean isInGroupOrChildGroups(MobileProductGroupEnum productGroupEnum) {
-		MobileProductGroup pg = (MobileProductGroup) getBusinessArea().getProductGroupByUniqueName(productGroupEnum.getKey());
-		if (pg == null) {
-			log.warn("Unknown group: " + productGroupEnum);
-			return false;
-		} else {
-			if (isInGroup(productGroupEnum)) {
-				return true;
-			}
-			for (ProductGroup cpg : pg.getChildProductGroups()) {
-				if (isInGroup(MobileProductGroupEnum.getValueByKey(cpg.getUniqueName()))) {
+		StringBuilder sb = new StringBuilder();
+		try {
+			sb.append(productGroupEnum);
+			sb.append('/');
+			sb.append(productGroupEnum.getKey());
+			MobileProductGroup pg = (MobileProductGroup) getBusinessArea().getProductGroupByUniqueName(productGroupEnum.getKey());
+			if (pg == null) {
+				log.warn("Unknown group: " + productGroupEnum);
+				return false;
+			} else {
+				sb.append("/a");
+				if (isInGroup(productGroupEnum)) {
 					return true;
 				}
+				sb.append("/b");
+				for (ProductGroup cpg : pg.getChildProductGroups()) {
+					sb.append("/");
+					sb.append(cpg.getUniqueName());
+					sb.append("/");
+					sb.append(MobileProductGroupEnum.getValueByKey(cpg.getUniqueName()));
+					MobileProductGroupEnum g = getValueByKey(cpg.getUniqueName());
+					if (g == null) {
+						return false;
+					}
+					if (isInGroup(g)) {
+						return true;
+					}
+				}
 			}
+		} catch (Exception e) {
+			// Problem with product 'YouSee Musik' - PRODUCT_GROUP_XDSL_BUNDLE/xdsl/a/b/xdsl.speed/PRODUCT_GROUP_XDSL_BUNDLE_SPEED/xdsl.manageddevices/null
+			log.error("Problem with product '" + publicName + "' - " + sb.toString());
 		}
 		return false;
 	}

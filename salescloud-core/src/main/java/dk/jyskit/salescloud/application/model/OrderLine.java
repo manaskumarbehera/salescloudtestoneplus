@@ -8,6 +8,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dk.jyskit.salescloud.application.extensionpoints.OrderLineCountModifier;
 import dk.jyskit.waf.application.model.BaseEntity;
 import dk.jyskit.waf.utils.guice.Lookup;
@@ -28,7 +30,7 @@ public class OrderLine extends BaseEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PRODUCT_ID")
 	private Product product;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BUNDLE_ID")
 	private ProductBundle bundle;
@@ -60,7 +62,8 @@ public class OrderLine extends BaseEntity {
 	
 	private boolean customFlag; 		// What "customFlag" represents is application specific
 	private boolean customFlag1; 		// What "customFlag" represents is application specific - partner installation
-	
+
+	@JsonIgnore
 	@NonNull
 	@ManyToOne(optional = false)
 	private Contract contract;
@@ -94,12 +97,14 @@ public class OrderLine extends BaseEntity {
 	}
 	
 	// --------------------------------
-	
+
+	@JsonIgnore
 	@Transient
 	public OrderLineCount getDeferredCount() {
 		return Lookup.lookup(OrderLineCountModifier.class).modifyCount(this);
 	}
-	
+
+	@JsonIgnore
 	@Transient
 	public int getTotalCount() {
 		return countNew + countExisting;
@@ -133,6 +138,7 @@ public class OrderLine extends BaseEntity {
 		return amounts;
 	}
 
+	@JsonIgnore
 	@Transient
 	public Amounts getContractDiscounts() {
 		Amounts discounts = new Amounts();
@@ -158,6 +164,7 @@ public class OrderLine extends BaseEntity {
 		return discounts;
 	}
 
+	@JsonIgnore
 	@Transient
 	public Amounts getCampaignDiscounts() {
 		Amounts discounts = new Amounts();
@@ -191,6 +198,7 @@ public class OrderLine extends BaseEntity {
 	}
 
 	// Return the product group associated with the orderline
+	@JsonIgnore
 	public ProductGroup getProductGroup() {
 		if (product != null) {
 			return product.getProductGroup();
@@ -200,6 +208,7 @@ public class OrderLine extends BaseEntity {
 		}
 	}
 
+	@JsonIgnore
 	@Transient
 	public boolean isInstallationHandledByTdc() {
 		if (bundle == null) {
@@ -207,5 +216,18 @@ public class OrderLine extends BaseEntity {
 		} else {
 			return bundle.isInstallationHandledByTdc(subIndex);
 		}
+	}
+
+	public OrderLine clone() {
+		OrderLine o = new OrderLine();
+		o.setBundle(bundle);
+		o.setContract(contract);
+		o.setCountNew(countNew);
+		o.setCountExisting(countExisting);
+		o.setCustomFlag(customFlag);
+		o.setCustomFlag1(customFlag1);
+		o.setProduct(product);
+		o.setSubIndex(subIndex);
+		return o;
 	}
 }

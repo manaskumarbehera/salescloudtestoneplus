@@ -2,6 +2,9 @@ package dk.jyskit.salescloud.application.pages.home;
 
 import java.util.List;
 
+import dk.jyskit.salescloud.application.apis.user.UserApiClient;
+import dk.jyskit.salescloud.application.pages.admin.profile.ChangePasswordPage;
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.RestartResponseException;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
@@ -51,6 +54,24 @@ public class AdminHomePage extends BasePage {
 
 	public AdminHomePage(PageParameters parameters) {
 		super(parameters);
+
+		if (CoreSession.get().isPasswordChangeRequired()) {
+			throw new RestartResponseException(ChangePasswordPage.class);
+		}
+
+//		Thread thread1 = new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					Thread.sleep(10000);
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
+//				UserApiClient.changePasswordOnOtherServer("janjysk", "Devguy");
+//			}
+//		});
+//		thread1.start();
+
 		
 		BaseUser user = (BaseUser) CoreSession.get().getUser();
 		if (user != null) {
@@ -84,6 +105,22 @@ public class AdminHomePage extends BasePage {
 			addBusinessArea(businessAreas, BusinessAreas.ONE_PLUS);
 
 			add(getBusinessAreaListView("group1", businessAreas));
+
+			WebMarkupContainer otherServerLink1 = new WebMarkupContainer("otherServer1");
+			otherServerLink1.add(AttributeModifier.replace("href", Environment.get().getStringSetting("baseurlOtherServer", "https://works.salescloud-erhverv.dk")));
+			add(otherServerLink1);
+
+			WebMarkupContainer otherServerLink2 = new WebMarkupContainer("otherServer2");
+			otherServerLink2.add(AttributeModifier.replace("href", Environment.get().getStringSetting("baseurlOtherServer", "https://works.salescloud-erhverv.dk")));
+			add(otherServerLink2);
+
+			WebMarkupContainer otherServerLink3 = new WebMarkupContainer("otherServer3");
+			otherServerLink3.add(AttributeModifier.replace("href", Environment.get().getStringSetting("baseurlOtherServer", "https://works.salescloud-erhverv.dk")));
+			add(otherServerLink3);
+
+			WebMarkupContainer otherServerLink4 = new WebMarkupContainer("otherServer4");
+			otherServerLink4.add(AttributeModifier.replace("href", Environment.get().getStringSetting("baseurlOtherServer", "https://works.salescloud-erhverv.dk")));
+			add(otherServerLink4);
 		}
 
 //		{
@@ -117,7 +154,6 @@ public class AdminHomePage extends BasePage {
 //			addBusinessArea(businessAreas, BusinessAreas.SWITCHBOARD);
 //		}
 //		addBusinessArea(businessAreas, BusinessAreas.MOBILE_VOICE);
-
 	}
 
 	private ListView<BusinessArea> getBusinessAreaListView(String id, List<BusinessArea> businessAreas) {

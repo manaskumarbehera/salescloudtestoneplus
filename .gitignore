@@ -1,7 +1,10 @@
 /.gradle
 /.nb-gradle-properties
 /.nb-gradle
+/.idea
 ~$*.xls*
 *.iml
 *.ipr
 *.iws
+*.json
+nohup.out

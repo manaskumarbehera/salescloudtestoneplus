@@ -42,8 +42,9 @@ public abstract class AbstractContractReport implements Provider<String>, Serial
 	@Override
 	public String get() {
         Theme theme = new Theme("themes", "reports");
-        
-        MobileContract contract = MobileSession.get().getContract();
+		theme.setJarContext(this.getClass());
+
+		MobileContract contract = MobileSession.get().getContract();
         
 //		if (contract.getBusinessArea().hasFeature(FeatureType.RABATAFTALE_CONTRACT_DISCOUNT)) {
 //			ContractFinansialInfo info = contract.getContractFinansialInfo();
@@ -161,12 +162,24 @@ public abstract class AbstractContractReport implements Provider<String>, Serial
 				html.set("contract_info_one", "");
 			} else {
 				html.set("contract_info_one", " Forudsætter samtidig indgåelse af " + contract.getContractLength() + "-årig TDC Erhverv Rabataftale for TDC Erhverv One+");
+				html.set("contract_info1_one", " og forudsætter samtidig indgåelse af " + contract.getContractLength() + "-årig TDC Erhverv Rabataftale for TDC Erhverv One+ og mobilt bredbånd");
+			}
+			if (contract.getContractMode().equals(MobileContractMode.NEW_SALE)) {
+				html.set("contractaftale_bullet", "");
+			} else {
+				html.set("contractaftale_bullet", "<li>Aftalen om TDC Erhverv Rabataftale indgås ved nedenstående underskrift og træder i kraft ved modtagelse af ordrebekræftelse på One+ løsningen. Evt. forudgående indplacering i TDC Erhverv rabataftale, vil blive annulleret og erstattet af ny rabat jf. denne aftale.</li>");
 			}
 			if (contract.getContractLengthNetwork() == null || contract.getContractLengthNetwork() == 0) {
 				html.set("contract_info_network", contract.getContractLength() == null || contract.getContractLength() == 0 ? "" : ".");
 			} else {
+				if (contract.getContractLength() == null || contract.getContractLength() == 0) {
+					html.set("contract_info1_network", " og forudsætter samtidig indgåelse af " + contract.getContractLengthNetwork() + "-årig aftale på TDC Erhverv Netværk");
+				} else {
+					html.set("contract_info1_network", " og " + contract.getContractLengthNetwork() + "-årig aftale på TDC Erhverv Netværk");
+				}
 				html.set("contract_info_network", (contract.getContractLength() == null || contract.getContractLength() == 0 ? " Forudsætter samtidig indgåelse af " : " og ")
 						+ contract.getContractLengthNetwork() + "-årig TDC Erhverv Rabataftale for Netværk.");
+				html.set("contract_info2_network", "<li>Aftalen om TDC Erhverv Rabataftale indgås ved nedenstående underskrift og træder i kraft ved modtagelse af ordrebekræftelse på One+ løsningen. Evt. forudgående indplacering i TDC Erhverv rabataftale, vil blive annulleret og erstattet af ny rabat jf. denne aftale.</li>");
 			}
 
 			html.set("is_pools_mode", contract.isPoolsMode());

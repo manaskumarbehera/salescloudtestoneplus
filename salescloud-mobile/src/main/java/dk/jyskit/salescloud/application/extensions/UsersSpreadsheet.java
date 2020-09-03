@@ -87,6 +87,15 @@ public class UsersSpreadsheet implements Provider<Workbook>, Serializable{
 				}
 			}
 		});
+		cols.add(new Col("Status") {
+			Object getValue(BaseUser user) {
+				if (user.getEntityState() == null) {
+					return "";
+				} else {
+					return user.getEntityState().toString();
+				}
+			}
+		});
 		cols.add(new Col("Administrator") {
 			Object getValue(BaseUser user) {
 				if (user.hasRole(AdminRole.class)) {
@@ -209,8 +218,20 @@ public class UsersSpreadsheet implements Provider<Workbook>, Serializable{
 				return user.getEmail();
 			}
 		});
+		cols.add(new Col("Brugernavn") {
+			Object getValue(BaseUser user) {
+				return user.getUsername();
+			}
+		});
+		cols.add(new Col("Speciel adgang") {
+			Object getValue(BaseUser user) {
+				SalespersonRole role = (SalespersonRole) user.getRole(SalespersonRole.class);
+				if (role == null) {
+					return "-";
+				}
+				return role.getAccessCodes();
+			}
+		});
 		return cols;
 	}
-
-	
 }

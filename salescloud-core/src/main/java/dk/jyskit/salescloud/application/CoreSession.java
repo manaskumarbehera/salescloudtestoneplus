@@ -24,6 +24,7 @@ import dk.jyskit.waf.wicket.security.UserSession;
 @Data
 @EqualsAndHashCode(callSuper=true, of={})
 public abstract class CoreSession extends UserSession {
+	protected boolean passwordChangeRequired;
 	protected Long businessAreaEntityId;
 	protected Long contractId;
 	protected Long productGroupId;

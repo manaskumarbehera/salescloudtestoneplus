@@ -53,7 +53,10 @@ public class MobileObjectFactory implements ObjectFactory {
 //		contract.getSeller().setPhone(salesperson.getCompanyInfo().getPhone());
 //		contract.getSeller().setPosition(salesperson.getCompanyInfo().getPosition());
 //		contract.getSeller().setZipCode(salesperson.getCompanyInfo().getZipCode());
-		
+
+		if (salesperson.getOrganisation() == null) {
+			log.warn("This salesperson has no organisation: " + salesperson.getUser().getUsername());
+		}
 		contract.getSeller().setEmail(salesperson.getUser().getEmail());
 		contract.getSeller().setName(salesperson.getUser().getFullName());
 		contract.getSeller().setAddress(salesperson.getOrganisation().getAddress());

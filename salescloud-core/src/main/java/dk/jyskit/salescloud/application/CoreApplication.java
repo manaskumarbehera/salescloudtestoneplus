@@ -21,8 +21,6 @@ import dk.jyskit.waf.application.JITAuthenticatedWicketApplication;
  */
 @Slf4j
 public abstract class CoreApplication extends JITAuthenticatedWicketApplication {
-    public static final String NAMESPACE = "salescloud";
-    
     /**
      * Get Application for current thread.
      *

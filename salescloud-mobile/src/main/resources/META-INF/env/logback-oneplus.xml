@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
 <configuration>
-    <appender name="appender-file" class="ch.qos.logback.core.FileAppender">
+    <appender name="appender-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>/opt/tomcat/logs/oneplus.log</file>
-        <append>false</append>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <charset>UTF-8</charset>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{dd.MM-HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>/opt/tomcat/logs/oneplus.%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>40</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>10MB</maxFileSize>
+        </triggeringPolicy>
     </appender>
 
     <logger name="dk.jyskit.waf" level="WARN"/>

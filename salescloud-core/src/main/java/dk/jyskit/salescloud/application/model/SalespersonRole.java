@@ -12,16 +12,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dk.jyskit.waf.application.model.BaseRole;
 
 @Entity
 public class SalespersonRole extends BaseRole {
 	public final static String ROLE_NAME	= "salesperson";
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ORGANISATION_ID")
 	private Organisation organisation;
 
+	@JsonIgnore
 	@Embedded
 	@Deprecated
 	protected BusinessEntity companyInfo = new BusinessEntity();
@@ -44,9 +47,11 @@ public class SalespersonRole extends BaseRole {
 		roleName = ROLE_NAME;
 	}
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "salesperson", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ContractCategory> contractCategories = new ArrayList<ContractCategory>();
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "salesperson", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Contract> contracts = new ArrayList<Contract>();
 	

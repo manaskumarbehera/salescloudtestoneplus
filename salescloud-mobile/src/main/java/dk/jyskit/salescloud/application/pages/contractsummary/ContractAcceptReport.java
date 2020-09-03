@@ -149,6 +149,7 @@ public class ContractAcceptReport extends AbstractContractReport {
 							for (BundleProductRelation productRelation : bundle.getProducts()) {
 								if ((productRelation.getProduct() != null) &&
 										(((MobileProduct) productRelation.getProduct()).isInGroup(MobileProductGroupEnum.PRODUCT_GROUP_TDC_WORKS_MOBILE_BUNDLE) ||
+//										 ((MobileProduct) productRelation.getProduct()).isInGroup(MobileProductGroupEnum.PRODUCT_GROUP_SWITCHBOARD_INCLUDED) ||
 										 ((MobileProduct) productRelation.getProduct()).isInGroup(MobileProductGroupEnum.PRODUCT_GROUP_STANDARD_BUNDLE))) {
 									mainProduct = productRelation.getProduct();
 									break;
@@ -165,6 +166,7 @@ public class ContractAcceptReport extends AbstractContractReport {
 					Product product = orderLine.getProduct();
 					if (product != null && orderLine.getTotalCount() > 0) {
 						if (((MobileProduct) product).isInGroup(MobileProductGroupEnum.PRODUCT_GROUP_TDC_WORKS_MOBILE_BUNDLE) ||
+//							((MobileProduct) product).isInGroup(MobileProductGroupEnum.PRODUCT_GROUP_SWITCHBOARD_INCLUDED) ||
 								((MobileProduct) product).isInGroup(MobileProductGroupEnum.PRODUCT_GROUP_STANDARD_BUNDLE)) {
 							Amounts amountsWithCampaignDiscount 	= product.getAmounts(count, true, false, contract);
 							Amounts amountsWithoutCampaignDiscount 	= product.getAmounts(count, false, false, contract);

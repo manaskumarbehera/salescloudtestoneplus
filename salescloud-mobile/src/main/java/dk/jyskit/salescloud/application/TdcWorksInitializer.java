@@ -411,6 +411,7 @@ public class TdcWorksInitializer extends CopyInitializer {
 		rel.setCampaign(campaign);
 		rel.setProduct(group.getProductByProductId(productId));
 //		rel.setRabataftaleCampaignDiscountMatrix("13%,14%,16%,17%,19%,20%#25%,28%,31%,34%,37%,39%#27%,30%,33%,36%,39%,42%");
+		rel.setCampaignPriceAmounts(new Amounts());
 		rel.setCampaignDiscountAmounts(new Amounts());
 		campaign.addCampaignProductRelation(rel);
 	}
@@ -433,7 +434,7 @@ public class TdcWorksInitializer extends CopyInitializer {
 						//	| larsa@tdc.dk  | larsa@tdc.dk  | tem5_konfigurator                                  |
 						//	| HEKAU@tdc.dk  | hekau@tdc.dk  | wifi_konfigurator,tem5_konfigurator                |
 						//	| thber@tdc.dk  | thber@tdc.dk  | genforhandling,tem5_konfigurator,wifi_konfigurator |
-						//	| jan@jyskit.dk | jan@jyskit.dk | genforhandling,tem5_konfigurator,wifi_konfigurator |
+						//	| jan@escapetech.dk | jan@escapetech.dk | genforhandling,tem5_konfigurator,wifi_konfigurator |
 						//	| whe@tdc.dk    | whe@tdc.dk    | wifi_konfigurator,tem5_konfigurator                |
 						//	| mhasl@tdc.dk  | NULL          | genforhandling,tem5_konfigurator,wifi_konfigurator |
 						//	| arsk@tdc.dk   | NULL          | genforhandling                                     |
@@ -446,7 +447,7 @@ public class TdcWorksInitializer extends CopyInitializer {
 							setAccessCodes("larsa@tdc.dk", 0, "tem5_konfigurator");
 							setAccessCodes("HEKAU@tdc.dk", 0, "wifi_konfigurator,tem5_konfigurator");
 							setAccessCodes("thber@tdc.dk", 0, "genforhandling,tem5_konfigurator,wifi_konfigurator");
-							setAccessCodes("jan@jyskit.dk", 0, "genforhandling,tem5_konfigurator,wifi_konfigurator");
+							setAccessCodes("jan@escapetech.dk", 0, "genforhandling,tem5_konfigurator,wifi_konfigurator");
 							setAccessCodes("whe@tdc.dk", 0, "wifi_konfigurator,tem5_konfigurator");
 							setAccessCodes("mhasl@tdc.dk", 0, "genforhandling,tem5_konfigurator,wifi_konfigurator");
 							setAccessCodes("mhasl@tdc.dk", 1, "genforhandling,tem5_konfigurator");

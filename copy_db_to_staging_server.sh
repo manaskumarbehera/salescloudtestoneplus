@@ -1,1 +1,1 @@
-scp /home/jan/Downloads/scprod\ \($1\).sql jetty@jyskit.dk:/tmp
+scp /home/jan/Downloads/db.zip jetty@escapetech.dk:/tmp

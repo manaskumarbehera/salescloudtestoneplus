@@ -15,21 +15,25 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 public class LocationBundleData implements Serializable {
-	public static final String TEXT_INSTALLATION_NONE			= "Ingen";
-	public static final String TEXT_INSTALLATION_TDC			= "TDC";
-	public static final String TEXT_INSTALLATION_PARTNER		= "TDC Erhvervscenter";
+	public static final String TEXT_INSTALLATION_NONE				= "Ingen";
+	public static final String TEXT_INSTALLATION_TDC				= "TDC";
+	public static final String TEXT_INSTALLATION_PARTNER			= "TDC Erhvervscenter";
+	public static final String TEXT_INSTALLATION_ONSITE_REMOTE_TDC	= "Onsite + TDC Remote";	// OK?
 
 	public static final int INSTALLATION_NONE 					= 0;
 	public static final int INSTALLATION_TDC 					= 1;
 	public static final int INSTALLATION_PARTNER				= 2;
+	public static final int INSTALLATION_ONSITE_REMOTE_TDC		= 3;	// OK?
 
 	public static final String TEXT_HARDWARE_NONE				= "Ingen";
 	public static final String TEXT_HARDWARE_TDC				= "TDC";
 	public static final String TEXT_HARDWARE_PARTNER			= "TDC Erhvervscenter";
+	public static final String TEXT_HARDWARE_ONSITE_REMOTE_TDC	= "Onsite + TDC Remote";	// OK?
 
 	public static final int HARDWARE_NONE 						= 0;
 	public static final int HARDWARE_TDC 						= 1;
 	public static final int HARDWARE_PARTNER					= 2;
+	public static final int HARDWARE_ONSITE_REMOTE_TDC 			= 3;	// OK?
 
 	@SerializedName("ar") private String addressRoad;
 	@SerializedName("az") private String addressZipCode;
@@ -58,6 +62,9 @@ public class LocationBundleData implements Serializable {
 		if (INSTALLATION_PARTNER == code) {
 			return TEXT_INSTALLATION_PARTNER;
 		}
+		if (INSTALLATION_ONSITE_REMOTE_TDC == code) {
+			return TEXT_INSTALLATION_ONSITE_REMOTE_TDC;
+		}
 		return null;
 	}
 
@@ -72,12 +79,15 @@ public class LocationBundleData implements Serializable {
 		if (TEXT_INSTALLATION_PARTNER.equals(text)) {
 			return INSTALLATION_PARTNER;
 		}
+		if (TEXT_INSTALLATION_ONSITE_REMOTE_TDC.equals(text)) {
+			return INSTALLATION_ONSITE_REMOTE_TDC;
+		}
 		return -1;
 	}
 
 	@Transient
 	public boolean isTDCInstallationProvider() {
-		return INSTALLATION_TDC == installationProvider;
+		return (INSTALLATION_TDC == installationProvider) || (INSTALLATION_ONSITE_REMOTE_TDC == installationProvider);
 	}
 
 	@Transient
@@ -90,6 +100,9 @@ public class LocationBundleData implements Serializable {
 		}
 		if (HARDWARE_PARTNER == code) {
 			return TEXT_HARDWARE_PARTNER;
+		}
+		if (HARDWARE_ONSITE_REMOTE_TDC == code) {
+			return TEXT_HARDWARE_ONSITE_REMOTE_TDC;
 		}
 		return null;
 	}
@@ -105,11 +118,14 @@ public class LocationBundleData implements Serializable {
 		if (TEXT_HARDWARE_PARTNER.equals(text)) {
 			return HARDWARE_PARTNER;
 		}
+		if (TEXT_HARDWARE_ONSITE_REMOTE_TDC.equals(text)) {
+			return HARDWARE_ONSITE_REMOTE_TDC;
+		}
 		return -1;
 	}
 
 	@Transient
 	public boolean isTDCHardwareProvider() {
-		return HARDWARE_TDC == hardwareProvider;
+		return (HARDWARE_TDC == hardwareProvider) || (HARDWARE_ONSITE_REMOTE_TDC == hardwareProvider);
 	}
 }

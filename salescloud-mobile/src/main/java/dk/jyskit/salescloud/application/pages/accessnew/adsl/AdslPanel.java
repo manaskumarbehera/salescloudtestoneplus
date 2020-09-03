@@ -369,8 +369,8 @@ public class AdslPanel extends BasicLocationPanel {
 		bundle.setServiceEntityId((Long) values.get(makeKey(KEY_SERVICE, bi)));
 		bundle.setTechPhone((String) values.get(makeKey(KEY_TECH_PHONE, bi)));
 
-		locationBundle.setInstallationProvider(LocationBundleData.getInstallationProviderAsCode((String) values.get(makeKey(KEY_INSTALLATION_PROVIDER, bi))));
-		locationBundle.setHardwareProvider(LocationBundleData.getHardwareProviderAsCode((String) values.get(makeKey(KEY_HARDWARE_PROVIDER, bi))));
+//		locationBundle.setInstallationProvider(LocationBundleData.getInstallationProviderAsCode((String) values.get(makeKey(KEY_INSTALLATION_PROVIDER, bi))));
+//		locationBundle.setHardwareProvider(LocationBundleData.getHardwareProviderAsCode((String) values.get(makeKey(KEY_HARDWARE_PROVIDER, bi))));
 
 		// ---------------------------------
 		// Check if CDM output is allowed

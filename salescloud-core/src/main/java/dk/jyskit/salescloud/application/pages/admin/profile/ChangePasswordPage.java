@@ -1,13 +1,10 @@
 package dk.jyskit.salescloud.application.pages.admin.profile;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
-import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.request.mapper.parameter.PageParameters;
-
 import com.google.inject.Inject;
-
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
+import dk.jyskit.salescloud.application.CoreApplication;
+import dk.jyskit.salescloud.application.CoreSession;
+import dk.jyskit.salescloud.application.apis.user.UserApiClient;
 import dk.jyskit.salescloud.application.model.AdminRole;
 import dk.jyskit.salescloud.application.model.SalesmanagerRole;
 import dk.jyskit.salescloud.application.model.SalespersonRole;
@@ -21,6 +18,13 @@ import dk.jyskit.waf.wicket.components.forms.jsr303form.components.buttons.AjaxE
 import dk.jyskit.waf.wicket.components.forms.jsr303form.components.buttons.AjaxSubmitListener;
 import dk.jyskit.waf.wicket.components.forms.jsr303form.labelstrategy.EntityLabelStrategy;
 import dk.jyskit.waf.wicket.security.UserSession;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+
+import java.util.Date;
 
 @AuthorizeInstantiation({ AdminRole.ROLE_NAME, SalespersonRole.ROLE_NAME, SalesmanagerRole.ROLE_NAME, UserManagerRole.ROLE_NAME })
 public class ChangePasswordPage extends BasePage {
@@ -28,7 +32,6 @@ public class ChangePasswordPage extends BasePage {
 
 	@Inject
 	private UserDao userDao;
-	private BaseUser u;
 
 	private int count = 0;
 	private TextField<?> oldPasswordField;
@@ -36,8 +39,6 @@ public class ChangePasswordPage extends BasePage {
 	public ChangePasswordPage(PageParameters parameters) {
 		super(parameters);
 		
-		u = (BaseUser) UserSession.get().getUser();
-
 		final ChangePasswordHelper eph = new ChangePasswordHelper();
 
 		final Jsr303Form<ChangePasswordHelper> form = new Jsr303Form<ChangePasswordHelper>("jsr303form", eph, false);
@@ -57,17 +58,23 @@ public class ChangePasswordPage extends BasePage {
 					String newPass = eph.getNewPassword();
 					String repeat = eph.getRepeatNewPassword();
 
+					BaseUser u = (BaseUser) UserSession.get().getUser();
+
 					if (u.isAuthenticatedBy(old)) {
-						if (newPass.length() < 4) {
-							form.getForm().error(getString("new.pass.too_short"));
+						if (StringUtils.equals(old, newPass)) {
+							form.getForm().error(getString("new.pass.same_as_old"));
+						} else if (!eph.isStrongEnough(newPass)) {
+							form.getForm().error(getString("new.pass.too_weak"));
 						} else if (newPass.equals(repeat)) {
 							u.setPassword(newPass);
+							u.setPasswordChangedDate(new Date());
 							u = userDao.save(u);
 							form.getForm().info(getString("new.pass.saved"));
 							eph.setOldPassword(null);
 							eph.setNewPassword(null);
 							eph.setRepeatNewPassword(null);
-							userDao.flush();
+							UserApiClient.changePasswordOnOtherServer(u.getUsername(), newPass);
+							CoreSession.get().setPasswordChangeRequired(false);
 							setResponsePage(JITAuthenticatedWicketApplication.get().getAdminHomePage());
 						} else {
 							form.getForm().error(getString("new.pass.mismatch"));

@@ -4,12 +4,11 @@ apply plugin: 'maven'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'war'
-apply plugin: 'jetty'
 
-group = 'dk.jyskit'
+group = 'dk.escapetech.oneplus'
 version = '3.0.0'
 
-description = """salescloud-mobile"""
+description = """salescloud-oneplus"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8 
@@ -25,19 +24,24 @@ dependencies {
 	testCompile "org.hamcrest:hamcrest-all:1.1"
 	testCompile "org.mockito:mockito-core:1.9.0"
 	
-	compile "dk.jyskit:salescloud-core:3.0.+"
+	compile "dk.escapetech.oneplus:salescloud-core:3.0.0"
 	
 	compile group: 'commons-validator', name: 'commons-validator', version: '1.6'
-	
+//	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.1'
+
+	compile 'com.alibaba:fastjson:1.2.70'
+	compile 'com.jsoniter:jsoniter:0.9.19'
+
 	compile "org.apache.ftpserver:ftpserver-core:1.0.6"
 
 	compile "net.bull.javamelody:javamelody-core:1.73.1"
 
-	providedCompile "org.projectlombok:lombok:1.18.8"
-
 	providedCompile "org.eclipse.jetty:jetty-server:9.2.4.v20141103"
 	providedCompile "org.eclipse.jetty:jetty-webapp:9.2.4.v20141103"
 	providedCompile "org.eclipse.jetty:jetty-util:9.2.4.v20141103"
+
+	providedCompile "org.projectlombok:lombok:1.18.+"
+	annotationProcessor 'org.projectlombok:lombok:1.18.+'
 }
 
 sourceSets {

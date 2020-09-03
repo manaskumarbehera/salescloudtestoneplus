@@ -1749,11 +1749,32 @@ public class MobileContract extends Contract {
 				countProductOrBundleAmounts.setCampaignDiscountAmounts(new Amounts());
 			}
 		} else {
+			Amounts discounts = new Amounts();
+			if (getBusinessArea().hasFeature(FeatureType.RABATAFTALE_CAMPAIGN_DISCOUNT)) {
+				if ((campaignProductRelation.getCampaignPriceAmounts() == null) ||
+						campaignProductRelation.getCampaignPriceAmounts().isAllZero()) {
+					discounts = getRabataftaleCampaignDiscounts(product.getPrice().clone(),
+							campaignProductRelation.getRabataftaleCampaignDiscountMatrix(), new Amounts(), false);
+				} else {
+					// The campaign discount is calculated to be the discount required to get to the fixed campaign price
+					discounts = product.getPrice().clone()
+							.subtract(product.getContractDiscounts(this,
+								countProductOrBundleAmounts.getBaseAmounts(), countProductOrBundleAmounts.getBaseAmounts()))
+							.subtract(campaignProductRelation.getCampaignPriceAmounts());
+				}
+			}
+			if (discounts.isAllZero()) {
+				discounts = campaignProductRelation.getCampaignDiscountAmounts().clone();
+			}
 			countProductOrBundleAmounts
 					.setCampaignDiscountAmounts(
-							handleInstallationType(
-									campaignProductRelation.getCampaignDiscountAmounts(),
-									product.getProductGroup())); // Durikke! - bruges det??
+							handleInstallationType(discounts, product.getProductGroup())); // Durikke! - bruges det??
+
+//			countProductOrBundleAmounts
+//					.setCampaignDiscountAmounts(
+//							handleInstallationType(
+//									campaignProductRelation.getCampaignDiscountAmounts(),
+//									product.getProductGroup())); // Durikke! - bruges det??
 		}
 
 		Amounts a = product.getAmounts(countProductOrBundleAmounts.getCount(), false, true, this);
@@ -2144,13 +2165,25 @@ public class MobileContract extends Contract {
 									&& (((MobileProductBundle) countProductOrBundleAmount.getProductBundleSafely()).getBundleType().equals(HARDWARE_BUNDLE))) {
 								// Ignore this
 							} else {
-								addToCdmList(list, totals, String.valueOf(countProductOrBundleAmount.getCount().getCountNew()), code, text,
-										countProductOrBundleAmount
-												.getAmountsAfterCampaignAndContractDiscounts().getNonRecurringFees(),
-										countProductOrBundleAmount.getAmountsAfterCampaignAndContractDiscounts()
-												.getRecurringFee() * countProductOrBundleAmount.getCount().getCountNew()
-												/ countProductOrBundleAmount.getCount().getCountTotal(),
-										notes + "N");
+								if (MobileSession.get().isBusinessAreaOnePlus()
+										&& countProductOrBundleAmount.getProductSafely() != null
+										&& StringUtils.equals("Mobile Only", countProductOrBundleAmount.getProductSafely().getInternalName())) {
+									addToCdmListEvenIfZero(list, totals, String.valueOf(countProductOrBundleAmount.getCount().getCountNew()),
+											code, text, countProductOrBundleAmount
+													.getAmountsAfterCampaignAndContractDiscounts().getNonRecurringFees(),
+											countProductOrBundleAmount.getAmountsAfterCampaignAndContractDiscounts()
+													.getRecurringFee() * countProductOrBundleAmount.getCount().getCountNew()
+													/ countProductOrBundleAmount.getCount().getCountTotal(),
+											notes + "N");
+								} else {
+									addToCdmList(list, totals, String.valueOf(countProductOrBundleAmount.getCount().getCountNew()), code, text,
+											countProductOrBundleAmount
+													.getAmountsAfterCampaignAndContractDiscounts().getNonRecurringFees(),
+											countProductOrBundleAmount.getAmountsAfterCampaignAndContractDiscounts()
+													.getRecurringFee() * countProductOrBundleAmount.getCount().getCountNew()
+													/ countProductOrBundleAmount.getCount().getCountTotal(),
+											notes + "N");
+								}
 							}
 						}
 					}

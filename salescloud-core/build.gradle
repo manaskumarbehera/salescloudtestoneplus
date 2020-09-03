@@ -4,7 +4,7 @@ apply plugin: 'maven'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-group = 'dk.jyskit'
+group = 'dk.escapetech.oneplus'
 version = '3.0.0'
 
 description = """salescloud-core"""
@@ -12,25 +12,31 @@ description = """salescloud-core"""
 sourceCompatibility = 1.8
 targetCompatibility = 1.8 
 
-repositories {  
-	jcenter()  
+repositories {
 	mavenLocal()
+	maven { url "https://repo.maven.apache.org/maven2" }
+	maven { url "https://jitpack.io" }
+	maven { url "https://plugins.gradle.org/m2/" } 
 }
 
 dependencies {
-	compile group: 'dk.jyskit', name: 'salescloud-waf-oneplus',  version: '3.2.+'
+	compile group: 'dk.escapetech.oneplus', name: 'salescloud-waf-oneplus',  version: '3.2.+'
 	compile "commons-codec:commons-codec:1.7"
 	compile "org.apache.commons:commons-lang3:3.1"
 	compile "javax.validation:validation-api:1.0.0.GA"
 	compile "com.google.code.gson:gson:2.2.2"
 	compile "com.github.rjeschke:txtmark:0.11"
-    compile "com.x5dev:chunk-templates:3.5.0"
-    
-    compile "com.googlecode.wicked-charts:wicked-charts-wicket6:1.5.0"
+	compile "com.x5dev:chunk-templates:3.5.0"
+	compile "com.squareup.okhttp3:okhttp:4.2.2"
+
+	compile "com.googlecode.wicked-charts:wicked-charts-wicket6:1.5.0"
  	
 	testCompile "junit:junit:4.11"
 	testCompile "org.hamcrest:hamcrest-all:1.1"
 	testCompile "org.mockito:mockito-core:1.9.0"
+	
+	compile "org.projectlombok:lombok:1.18.+"
+	annotationProcessor 'org.projectlombok:lombok:1.18.+'  
 }
 
 configurations {

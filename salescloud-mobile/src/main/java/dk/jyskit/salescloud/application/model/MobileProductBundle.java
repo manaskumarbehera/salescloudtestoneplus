@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import dk.jyskit.salescloud.application.MobileSession;
 import dk.jyskit.salescloud.application.dao.MobileProductBundleDao;
@@ -95,6 +96,7 @@ public class MobileProductBundle extends ProductBundle implements MobileSortable
 //	}
 
 	@Transient
+	@JsonIgnore
 	public boolean isInstallationHandledByTDC() {
 		MobileContract contract = MobileSession.get().getContract();
 		if (contract.getBusinessArea().isOnePlus()) {
@@ -117,6 +119,7 @@ public class MobileProductBundle extends ProductBundle implements MobileSortable
 		return true;
 	}
 
+	@JsonIgnore
 	@Transient
 	public boolean isInstallationHandledByTDCErhvervscenter() {
 		return !isInstallationHandledByTDC();
@@ -132,6 +135,7 @@ public class MobileProductBundle extends ProductBundle implements MobileSortable
 	}
 
 	@Transient
+	@JsonIgnore
 	public boolean isMixBundle() {
 		return isContractBundle();
 	}
@@ -139,14 +143,16 @@ public class MobileProductBundle extends ProductBundle implements MobileSortable
 	// --------------------------------
 	
 	@Transient
+	@JsonIgnore
 	public String getTextForSorting() {
 		if (StringUtils.isEmpty(getPublicName())) {
 			return "ID: " + getProductId();
 		}
 		return getPublicName();
 	}
-	
-	@Transient 
+
+	@JsonIgnore
+	@Transient
 	public List<Provision> getProvisions(OrderLine orderLine) {
 		// Only ONE product in a bundle can specify provisions
 		
@@ -282,6 +288,7 @@ public class MobileProductBundle extends ProductBundle implements MobileSortable
 				.anyMatch(predicate);
 	}
 
+	@JsonIgnore
 	@Transient
 	public Optional<MobileProduct> getAnyProduct(Predicate<? super MobileProduct> predicate) {
 		return products.stream()
@@ -290,6 +297,7 @@ public class MobileProductBundle extends ProductBundle implements MobileSortable
 				.findAny();
 	}
 
+	@JsonIgnore
 	@Transient
 	public List<MobileProduct> getProducts(Predicate<? super MobileProduct> predicate) {
 		return products.stream()
@@ -298,6 +306,7 @@ public class MobileProductBundle extends ProductBundle implements MobileSortable
 				.collect(Collectors.toList());
 	}
 
+	@JsonIgnore
 	@Transient
 	public boolean isNetworkProductBundle() {
 		return false;	// There are no network bundles

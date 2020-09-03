@@ -97,4 +97,13 @@ public class SwitchboardIpsaDiscountScheme extends DiscountScheme {
 			return new Amounts(0, 0, 0);
 		}
 	}
+
+	// --------------------------------
+
+	public DiscountScheme clone() {
+		SwitchboardIpsaDiscountScheme discountScheme = new SwitchboardIpsaDiscountScheme();
+		discountScheme.setName(getName());
+		discountScheme.setDiscountPercentages(discountPercentages);
+		return discountScheme;
+	}
 }

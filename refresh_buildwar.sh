@@ -1,6 +1,6 @@
-cd /home/jan/dev/java/projects/jyskit/salescloud/salescloud-waf
-gradle clean cleanEclipse eclipse --refresh-dependencies install
-cd /home/jan/dev/java/projects/jyskit/salescloud/salescloud-core
-gradle clean cleanEclipse eclipse --refresh-dependencies install
-cd /home/jan/dev/java/projects/jyskit/salescloud/salescloud-mobile
-gradle clean cleanEclipse eclipse --refresh-dependencies war
+cd /home/jan/dev/java/projects/jyskit/tdc/salescloud-oneplus/salescloud-waf-oneplus
+../gradlew clean cleanEclipse eclipse cleanIdea idea --refresh-dependencies install
+cd /home/jan/dev/java/projects/jyskit/tdc/salescloud-oneplus/salescloud-core
+../gradlew clean cleanEclipse eclipse cleanIdea idea --refresh-dependencies install
+cd /home/jan/dev/java/projects/jyskit/tdc/salescloud-oneplus/salescloud-mobile
+../gradlew clean cleanEclipse eclipse cleanIdea idea --refresh-dependencies war
