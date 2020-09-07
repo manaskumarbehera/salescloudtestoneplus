@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-	compile group: 'dk.escapetech.oneplus', name: 'salescloud-waf-oneplus',  version: '3.2.+'
+	//compile group: 'dk.escapetech.oneplus', name: 'salescloud-waf-oneplus',  version: '3.2.+'
 	compile "commons-codec:commons-codec:1.7"
 	compile "org.apache.commons:commons-lang3:3.1"
 	compile "javax.validation:validation-api:1.0.0.GA"

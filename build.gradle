@@ -21,10 +21,14 @@ project(':salescloud-waf-oneplus') {
 }
 
 project(':salescloud-core') {
+	dependencies {
+		compile project(':salescloud-waf-oneplus')
+	}
 }
 
 project(':salescloud-mobile') {
 	dependencies {
+		compile project(':salescloud-waf-oneplus')
 		compile project(':salescloud-core')
 	}
 }
