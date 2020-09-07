@@ -32,6 +32,8 @@ dependencies {
 	compile 'com.alibaba:fastjson:1.2.70'
 	compile 'com.jsoniter:jsoniter:0.9.19'
 
+	compile 'com.github.jsimone:webapp-runner:8.5.47.2'
+
 	compile "org.apache.ftpserver:ftpserver-core:1.0.6"
 
 	compile "net.bull.javamelody:javamelody-core:1.73.1"
@@ -79,3 +81,17 @@ eclipse {
         }
     }
 }
+
+task stage() {
+	dependsOn clean, war
+}
+war.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+	into "$buildDir/server"
+	from(configurations.compile) {
+		include "webapp-runner*"
+	}
+}
+
+stage.dependsOn(copyToLib)
