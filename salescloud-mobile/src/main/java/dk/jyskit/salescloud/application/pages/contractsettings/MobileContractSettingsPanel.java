@@ -140,6 +140,19 @@ public class MobileContractSettingsPanel extends Panel {
 						}
 					}
 				}
+				else if ("squad".equalsIgnoreCase(strings[0].trim())) {    // deprecated
+					SalespersonRole salesperson = MobileSession.get().getSalespersonRole();
+					if (salesperson != null) {
+						String[] values = StringUtils.split(strings[1], ',');
+						for (String value : values) {
+							value = value.trim().toLowerCase();
+							if (value.equals(salesperson.getDivision())) {
+								match = true;
+							}
+						}
+					}
+				}
+
 				if (!match) {
 					iterator.remove();
 				}
