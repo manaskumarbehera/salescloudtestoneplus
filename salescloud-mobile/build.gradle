@@ -46,6 +46,7 @@ dependencies {
 }
 
 sourceSets {
+	test
 	main {
 		java {
 			srcDirs = ['src/main/java']
