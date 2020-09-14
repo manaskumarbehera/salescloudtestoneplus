@@ -145,7 +145,7 @@ public class MobileContractSettingsPanel extends Panel {
 					if (salesperson != null) {
 						String[] values = StringUtils.split(strings[1], ',');
 						for (String value : values) {
-							value = value.trim().toLowerCase();
+							//value = value.trim().toLowerCase();
 							if (value.equals(salesperson.getDivision())) {
 								match = true;
 							}
